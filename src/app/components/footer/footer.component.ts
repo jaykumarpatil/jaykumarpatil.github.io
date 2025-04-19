@@ -13,7 +13,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           <div class="footer-info">
             <h3>{{ portfolioDataService.profile.name }}</h3>
             <p>{{ portfolioDataService.profile.title }}</p>
-            <p>{{ portfolioDataService.profile.email }} | {{ portfolioDataService.profile.phone }}</p>
+            <p>{{ portfolioDataService.profile.email }}</p>
           </div>
           
           <div class="social-links">
