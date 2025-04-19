@@ -1,8 +1,3 @@
-// Continuing from footer.component.ts
-
-// File: src/app/components/animated-progress-bar/animated-progress-bar.component.ts
-
-// File: src/app/pages/home/home.component.ts
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -531,5 +526,9 @@ export class HomeComponent implements OnInit {
   constructor(public portfolioDataService: PortfolioDataService) {}
   
   ngOnInit() {
-    this.technicalCategories = this.portfolioDataService.getTechnicalCategories();
+    this.technicalCategories = this.portfolioDataService.skills.map(category => ({
+      name: category.category,
+      skills: category.items.map(item => item.name)
+    }));
   }
+}

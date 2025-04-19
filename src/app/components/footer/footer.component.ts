@@ -1,10 +1,11 @@
-import { Component, NgIf } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [NgIf],
+  imports: [CommonModule],
   template: `
     <footer>
       <div class="container">
