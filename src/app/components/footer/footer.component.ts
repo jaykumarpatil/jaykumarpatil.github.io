@@ -53,8 +53,8 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     
     :host-context(.dark-mode) footer {
-      background-color: #1a1a1a;
-      border-top: 1px solid #333;
+      background-color: rgba(15, 23, 42, 0.95);
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
     }
     
     .container {
@@ -107,21 +107,24 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       background-color: #f1f5f9;
       color: #475569;
       transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
     }
     
     :host-context(.dark-mode) .social-links a {
-      background-color: #333;
+      background-color: rgba(30, 41, 59, 0.7);
       color: #94a3b8;
+      border: 1px solid rgba(59, 130, 246, 0.2);
     }
     
     .social-links a:hover {
       background-color: #2563eb;
       color: white;
-      transform: translateY(-3px);
+      transform: translateY(-3px) rotate(8deg);
     }
     
     :host-context(.dark-mode) .social-links a:hover {
       background-color: #3b82f6;
+      border-color: #3b82f6;
     }
     
     .copyright {

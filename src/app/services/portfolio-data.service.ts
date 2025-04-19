@@ -5,7 +5,6 @@ export interface Profile {
   name: string;
   title: string;
   email: string;
-  phone: string;
   summary: string;
   location: string;
   profileImage: string;
@@ -60,7 +59,6 @@ export class PortfolioDataService {
     name: 'Jay Kumar Patil',
     title: 'Technical Lead | DevOps | Cloud Specialist',
     email: 'jaykumarpatil3004@gmail.com',
-    phone: '+ 91- 8982558010',
     summary: 'An achievement-driven high energy technocrat offering over 10 years of experience in designing & delivering Software Solutions and driving continuous improvement to processes, systems, workflow and customer responsiveness.',
     location: 'Vidisha, Madhya Pradesh, India',
     profileImage: 'assets/images/profile.png',

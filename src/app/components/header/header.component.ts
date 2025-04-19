@@ -68,7 +68,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     
     :host-context(.dark-mode) header {
-      background-color: rgba(18, 18, 18, 0.95);
+      background-color: rgba(15, 23, 42, 0.95);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
     
@@ -122,8 +122,10 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       text-decoration: none;
       color: #334155;
       font-weight: 500;
-      transition: color 0.3s ease, transform 0.2s ease;
+      transition: all 0.3s ease;
       position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
     }
     
     :host-context(.dark-mode) .nav-links a {
@@ -132,11 +134,13 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     
     .nav-links a:hover {
       color: #2563eb;
+      background-color: rgba(37, 99, 235, 0.1);
       transform: translateY(-2px);
     }
     
     :host-context(.dark-mode) .nav-links a:hover {
       color: #3b82f6;
+      background-color: rgba(59, 130, 246, 0.1);
     }
     
     .nav-links a.active {

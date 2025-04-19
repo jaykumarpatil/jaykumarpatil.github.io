@@ -17,10 +17,6 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
               <p>{{ portfolioDataService.profile.email }}</p>
             </div>
             <div class="info-item">
-              <h3>Phone</h3>
-              <p>{{ portfolioDataService.profile.phone }}</p>
-            </div>
-            <div class="info-item">
               <h3>Location</h3>
               <p>{{ portfolioDataService.profile.location }}</p>
             </div>

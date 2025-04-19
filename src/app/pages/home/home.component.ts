@@ -123,11 +123,11 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       display: flex;
       align-items: center;
       background: linear-gradient(135deg, rgba(219, 234, 254, 0.5) 0%, rgba(239, 246, 255, 0.7) 100%);
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
     }
     
     :host-context(.dark-mode) .hero {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.9) 100%);
     }
     
     .hero-content {
@@ -348,7 +348,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     
     :host-context(.dark-mode) .highlight-card {
-      background-color: #1e293b;
+      background-color: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(59, 130, 246, 0.2);
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     }
     
@@ -412,11 +414,11 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     .skills-overview {
       padding: 5rem 0;
       background-color: #f8fafc;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
     }
     
     :host-context(.dark-mode) .skills-overview {
-      background-color: #1a1a1a;
+      background-color: rgba(15, 23, 42, 0.95);
     }
     
     .skills-grid {
@@ -435,8 +437,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     
     :host-context(.dark-mode) .skill-category {
-      background-color: #1e293b;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      background-color: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(59, 130, 246, 0.2);
     }
     
     .skill-category:hover {
