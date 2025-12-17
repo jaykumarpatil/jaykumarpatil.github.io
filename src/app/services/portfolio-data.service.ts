@@ -63,7 +63,7 @@ export class PortfolioDataService {
     location: 'Vidisha, Madhya Pradesh, India',
     profileImage: 'assets/images/profile.png',
     socialLinks: {
-      linkedin: 'https://linkedin.com/in/jaykumarpatil',
+      linkedin: 'https://linkedin.com/in/jaykumarpatil3004',
       github: 'https://github.com/jaykumarpatil',
       blog: 'https://apachehadoop3.blogspot.com'
     }
