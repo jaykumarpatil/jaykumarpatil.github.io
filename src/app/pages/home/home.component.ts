@@ -73,9 +73,11 @@ import { SeoService } from '../../services/seo.service';
           </div>
         </div>
       </div>
-      
-      <!-- Bottom Row: Floating Elements + Scroll Indicator -->
-      <div class="bottom-row" aria-hidden="true">
+    </section>
+
+    <!-- Bottom Indicators Section -->
+    <section class="bottom-indicators" aria-hidden="true">
+      <div class="bottom-row">
         <div class="float-element">
           <svg class="float-icon" width="20" height="20"><use href="#icon-zap"></use></svg>
           <span>10+ Years</span>
@@ -378,14 +380,22 @@ import { SeoService } from '../../services/seo.service';
     }
     
     /* Floating Elements */
+    .bottom-indicators {
+      padding: var(--space-lg) 0 var(--space-2xl);
+    }
+
     .bottom-row {
-      position: absolute;
-      bottom: var(--space-2xl);
-      left: 50%;
-      transform: translateX(-50%);
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: var(--space-xl);
+    }
+
+    @media (max-width: 1024px) {
+      .bottom-row {
+        justify-content: flex-end;
+        padding-right: var(--space-lg);
+      }
     }
     
     .float-element {
@@ -718,8 +728,6 @@ import { SeoService } from '../../services/seo.service';
       
       .about-layout { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
-      
-      .bottom-row .float-element { display: none; }
     }
     
     @media (max-width: 640px) {

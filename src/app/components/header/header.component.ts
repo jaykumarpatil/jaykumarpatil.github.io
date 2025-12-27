@@ -14,7 +14,8 @@ import { RouterModule, Router } from '@angular/router';
     <header 
       class="nav-hub" 
       [class.scrolled]="isScrolled()"
-      [class.hidden]="isHidden()"
+      [class.hidden]="isHidden() && !menuOpen()"
+      [class.menu-active]="menuOpen()"
       role="banner"
       aria-label="Main navigation">
       
@@ -110,6 +111,16 @@ import { RouterModule, Router } from '@angular/router';
             [attr.aria-current]="isActive('/contact') ? 'page' : null">
             <svg class="pill-icon" width="20" height="20" aria-hidden="true"><use href="#icon-contact"></use></svg>
             <span class="pill-text">Contact</span>
+          </a>
+          <a 
+            href="assets/resume/jay-kumar-patil-resume.pdf"
+            target="_blank"
+            rel="noopener"
+            class="nav-pill resume-pill"
+            role="listitem"
+            download>
+            <svg class="pill-icon" width="20" height="20" aria-hidden="true"><use href="#icon-download"></use></svg>
+            <span class="pill-text">Resume</span>
           </a>
         </div>
 
@@ -260,6 +271,19 @@ import { RouterModule, Router } from '@angular/router';
             <span class="link-text">Contact</span>
             <svg class="link-arrow" width="20" height="20" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
           </a>
+          <a 
+            href="assets/resume/jay-kumar-patil-resume.pdf"
+            target="_blank"
+            rel="noopener"
+            class="mobile-link resume-link"
+            style="animation-delay: 350ms"
+            (click)="closeMenu()"
+            [attr.tabindex]="menuOpen() ? 0 : -1"
+            download>
+            <svg class="link-icon" width="24" height="24" aria-hidden="true"><use href="#icon-download"></use></svg>
+            <span class="link-text">Download Resume</span>
+            <svg class="link-arrow" width="20" height="20" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+          </a>
         </nav>
 
         <div class="mobile-footer">
@@ -311,13 +335,20 @@ import { RouterModule, Router } from '@angular/router';
     /* Navigation Hub - Floating Glass Design */
     .nav-hub {
       position: fixed;
-      top: var(--space-md);
+      top: var(--space-sm);
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - var(--space-md) * 2);
+      width: calc(100% - var(--space-sm) * 2);
       max-width: 1400px;
       z-index: 1000;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (min-width: 640px) {
+      .nav-hub {
+        top: var(--space-md);
+        width: calc(100% - var(--space-md) * 2);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -327,19 +358,29 @@ import { RouterModule, Router } from '@angular/router';
     }
 
     .nav-hub.scrolled {
-      top: var(--space-sm);
+      top: var(--space-xs);
+    }
+
+    @media (min-width: 640px) {
+      .nav-hub.scrolled {
+        top: var(--space-sm);
+      }
     }
 
     .nav-hub.hidden {
       transform: translateX(-50%) translateY(-120%);
     }
 
+    .nav-hub.menu-active {
+      z-index: 1001;
+    }
+
     .nav-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
@@ -347,17 +388,31 @@ import { RouterModule, Router } from '@angular/router';
       overflow: hidden;
     }
 
+    @media (min-width: 640px) {
+      .nav-container {
+        padding: var(--space-sm) var(--space-md);
+        gap: var(--space-sm);
+      }
+    }
+
     /* Brand */
     .brand {
       display: flex;
       align-items: center;
-      gap: var(--space-sm);
+      gap: var(--space-xs);
       text-decoration: none;
       color: var(--color-neutral);
       min-height: var(--touch-target);
       padding: var(--space-xs);
       border-radius: var(--radius-lg);
       transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 640px) {
+      .brand {
+        gap: var(--space-sm);
+      }
     }
 
     .brand:hover {
@@ -370,10 +425,18 @@ import { RouterModule, Router } from '@angular/router';
     }
 
     .brand-icon {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       color: var(--color-success);
       transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 640px) {
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+      }
     }
 
     .brand:hover .brand-icon {
@@ -385,17 +448,29 @@ import { RouterModule, Router } from '@angular/router';
     }
 
     .brand-text {
-      display: flex;
+      display: none;
       flex-direction: column;
       line-height: 1.2;
       white-space: nowrap;
     }
 
+    @media (min-width: 480px) {
+      .brand-text {
+        display: flex;
+      }
+    }
+
     .brand-name {
-      font-size: var(--text-base);
+      font-size: var(--text-sm);
       font-weight: 700;
       letter-spacing: -0.02em;
       white-space: nowrap;
+    }
+
+    @media (min-width: 640px) {
+      .brand-name {
+        font-size: var(--text-base);
+      }
     }
 
     .brand-role {
@@ -449,6 +524,16 @@ import { RouterModule, Router } from '@angular/router';
     .nav-pill.active {
       color: var(--bg-base);
       background: var(--color-success);
+    }
+
+    .nav-pill.resume-pill {
+      border: 1px solid var(--border-default);
+      background: var(--bg-elevated);
+    }
+
+    .nav-pill.resume-pill:hover {
+      border-color: var(--color-success);
+      color: var(--color-success);
     }
 
     .pill-icon {
@@ -614,22 +699,32 @@ import { RouterModule, Router } from '@angular/router';
     /* Mobile Menu Overlay */
     .mobile-menu {
       position: fixed;
-      inset: 0;
-      background: #050507;
-      z-index: -1;
+      top: 70px;
+      left: 0;
+      right: 0;
+      height: 0;
+      background: var(--bg-base);
+      z-index: 998;
       opacity: 0;
       visibility: hidden;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 100px var(--space-lg) var(--space-xl);
+      justify-content: flex-start;
+      padding-top: var(--space-md);
+      padding-left: var(--space-md);
+      padding-right: var(--space-md);
+      padding-bottom: var(--space-md);
+      overflow: hidden;
     }
 
     .mobile-menu.open {
-      z-index: 999;
+      height: calc(100vh - 70px);
+      height: calc(100dvh - 70px);
       opacity: 1;
       visibility: visible;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     @media (min-width: 900px) {
@@ -641,21 +736,21 @@ import { RouterModule, Router } from '@angular/router';
     .mobile-nav {
       display: flex;
       flex-direction: column;
-      gap: var(--space-sm);
+      gap: 8px;
     }
 
     .mobile-link {
       display: flex;
       align-items: center;
-      gap: var(--space-md);
-      padding: var(--space-md) var(--space-lg);
-      min-height: 60px;
+      gap: var(--space-sm);
+      padding: 12px var(--space-md);
+      min-height: 48px;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       text-decoration: none;
       color: var(--color-neutral);
-      font-size: var(--text-lg);
+      font-size: var(--text-sm);
       font-weight: 500;
       transform: translateY(20px);
       opacity: 0;
@@ -684,17 +779,29 @@ import { RouterModule, Router } from '@angular/router';
       border-color: var(--color-success);
     }
 
+    .mobile-link.resume-link {
+      background: var(--bg-elevated);
+      border-color: var(--color-success);
+      color: var(--color-success);
+    }
+
+    .mobile-link.resume-link:hover {
+      background: var(--color-success);
+      color: var(--bg-base);
+    }
+
     .link-icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
     }
 
     .link-icon svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       flex-shrink: 0;
     }
 
@@ -705,8 +812,8 @@ import { RouterModule, Router } from '@angular/router';
     .link-arrow {
       opacity: 0.5;
       transition: transform 0.2s ease;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       flex-shrink: 0;
     }
 
@@ -718,34 +825,35 @@ import { RouterModule, Router } from '@angular/router';
     /* Mobile Footer */
     .mobile-footer {
       margin-top: auto;
-      padding-top: var(--space-xl);
+      padding-top: var(--space-md);
       text-align: center;
+      flex-shrink: 0;
     }
 
     .social-links {
       display: flex;
       justify-content: center;
-      gap: var(--space-md);
-      margin-bottom: var(--space-md);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
     }
 
     .social-link {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 56px;
-      height: 56px;
+      width: 44px;
+      height: 44px;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      color: var(--text-primary);
+      border-radius: var(--radius-md);
+      color: var(--color-subtle);
       text-decoration: none;
       transition: all 0.2s ease;
     }
 
     .social-link svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
     }
 
     .social-link:hover,
@@ -839,20 +947,47 @@ export class HeaderComponent {
         root.style.setProperty('--color-neutral', '#f8fafc');
         root.style.setProperty('--color-subtle', '#a1a1aa');
         root.style.setProperty('--color-muted', '#52525b');
+        root.style.setProperty('--color-success', '#c8f542');
+        root.style.setProperty('--color-creative', '#22d3ee');
         root.style.setProperty('--border-subtle', '1px solid rgba(255, 255, 255, 0.04)');
         root.style.setProperty('--border-default', '1px solid rgba(255, 255, 255, 0.08)');
+        root.style.setProperty('--text-primary', '#f8fafc');
+        root.style.setProperty('--text-secondary', '#a1a1aa');
+        root.style.setProperty('--text-tertiary', '#71717a');
+        root.style.setProperty('--elevation-2', '0 4px 24px rgba(0, 0, 0, 0.4)');
+        root.style.setProperty('--elevation-3', '0 8px 32px rgba(0, 0, 0, 0.5)');
+        root.style.setProperty('--gradient-surface', 'linear-gradient(180deg, rgba(5, 5, 7, 0) 0%, rgba(16, 16, 22, 0.5) 100%)');
       } else {
-        // Light mode
-        root.style.setProperty('--bg-base', '#fafafa');
+        // Light mode - Optimized for readability
+        // Backgrounds: Soft off-white to reduce glare
+        root.style.setProperty('--bg-base', '#f5f5f7');
         root.style.setProperty('--bg-elevated', '#ffffff');
-        root.style.setProperty('--bg-surface', '#f4f4f5');
-        root.style.setProperty('--bg-overlay', 'rgba(255, 255, 255, 0.9)');
-        root.style.setProperty('--bg-glass', 'rgba(255, 255, 255, 0.7)');
-        root.style.setProperty('--color-neutral', '#18181b');
-        root.style.setProperty('--color-subtle', '#52525b');
-        root.style.setProperty('--color-muted', '#a1a1aa');
-        root.style.setProperty('--border-subtle', '1px solid rgba(0, 0, 0, 0.04)');
-        root.style.setProperty('--border-default', '1px solid rgba(0, 0, 0, 0.08)');
+        root.style.setProperty('--bg-surface', '#ebebef');
+        root.style.setProperty('--bg-overlay', 'rgba(245, 245, 247, 0.92)');
+        root.style.setProperty('--bg-glass', 'rgba(255, 255, 255, 0.75)');
+        
+        // Text: Dark gray instead of pure black for comfort
+        root.style.setProperty('--color-neutral', '#1a1a1f');
+        root.style.setProperty('--color-subtle', '#4a4a52');
+        root.style.setProperty('--color-muted', '#71717a');
+        
+        // Accent colors: Desaturated for light mode
+        root.style.setProperty('--color-success', '#6b8c23');
+        root.style.setProperty('--color-creative', '#0891b2');
+        
+        // Borders: Subtle shadows for depth hierarchy
+        root.style.setProperty('--border-subtle', '1px solid rgba(0, 0, 0, 0.06)');
+        root.style.setProperty('--border-default', '1px solid rgba(0, 0, 0, 0.1)');
+        
+        // Text hierarchy
+        root.style.setProperty('--text-primary', '#1a1a1f');
+        root.style.setProperty('--text-secondary', '#4a4a52');
+        root.style.setProperty('--text-tertiary', '#71717a');
+        
+        // Shadows for depth (light mode uses shadows, not lightening)
+        root.style.setProperty('--elevation-2', '0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04)');
+        root.style.setProperty('--elevation-3', '0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06)');
+        root.style.setProperty('--gradient-surface', 'linear-gradient(180deg, rgba(245, 245, 247, 0) 0%, rgba(235, 235, 239, 0.5) 100%)');
       }
     }
   }

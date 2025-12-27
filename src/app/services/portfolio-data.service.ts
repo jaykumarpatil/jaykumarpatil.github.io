@@ -86,7 +86,7 @@ export class PortfolioDataService {
     name: 'Jay Kumar Patil',
     title: 'Senior Engineering Lead – DevOps & Cloud Specialist',
     email: 'jaykumarpatil3004@gmail.com',
-    phone: '+91-8982558010',
+    phone: '', // Hidden for privacy
     summary: 'Achievement-driven engineering lead with 10+ years in designing & delivering scalable cloud-native systems, DevOps automation, CI/CD pipelines, and performance optimization for high-traffic environments.',
     shortGoal: 'I help organizations design resilient, observable, and high-performance systems at scale.',
     location: 'Vidisha / Indore, India',

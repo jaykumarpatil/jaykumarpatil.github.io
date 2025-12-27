@@ -210,10 +210,10 @@ import { RouterModule } from '@angular/router';
 
     .social-list {
       display: flex;
-      gap: var(--spacing-sm);
+      gap: var(--space-sm);
       list-style: none;
       padding: 0;
-      margin: 0;
+      margin: var(--space-xs) 0 0 0;
     }
 
     .social-link {
@@ -312,20 +312,26 @@ import { RouterModule } from '@angular/router';
     .expertise-list {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--spacing-sm);
+      gap: var(--space-xs);
       list-style: none;
       padding: 0;
-      margin: 0;
+      margin: var(--space-xs) 0 0 0;
     }
 
     .expertise-tag {
-      padding: var(--spacing-xs) var(--spacing-md);
+      padding: var(--space-xs) var(--space-sm);
       background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-default);
       border-radius: var(--radius-full);
       font-size: var(--text-xs);
-      color: var(--text-secondary);
+      color: var(--color-subtle);
       white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .expertise-tag:hover {
+      border-color: var(--color-success);
+      color: var(--color-neutral);
     }
 
     /* CTA Column */
