@@ -1,18 +1,25 @@
 import { Injectable, signal } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
 
 export interface Profile {
   name: string;
   title: string;
   email: string;
+  phone: string;
   summary: string;
+  shortGoal: string;
   location: string;
   profileImage: string;
+  resumeUrl: string;
   socialLinks: {
     linkedin?: string;
     github?: string;
     blog?: string;
   };
+}
+
+export interface ValueBullet {
+  icon: string;
+  text: string;
 }
 
 export interface Education {
@@ -38,7 +45,9 @@ export interface Project {
   teamSize: number;
   period: string;
   technology: string;
+  impactSummary: string;
   responsibilities: string[];
+  tags: string[];
 }
 
 export interface Skill {
@@ -51,23 +60,50 @@ export interface SkillItem {
   proficiency: number;
 }
 
+export interface Interest {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface JourneyStep {
+  period: string;
+  title: string;
+  description: string;
+}
+
+export interface Achievement {
+  icon: string;
+  metric: string;
+  description: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioDataService {
   private profileSignal = signal<Profile>({
     name: 'Jay Kumar Patil',
-    title: 'Technical Lead | DevOps | Cloud Specialist',
+    title: 'Senior Engineering Lead – DevOps & Cloud Specialist',
     email: 'jaykumarpatil3004@gmail.com',
-    summary: 'An achievement-driven high energy technocrat offering over 10 years of experience in designing & delivering Software Solutions and driving continuous improvement to processes, systems, workflow and customer responsiveness.',
-    location: 'Vidisha, Madhya Pradesh, India',
-    profileImage: 'assets/images/profile.png',
+    phone: '+91-8982558010',
+    summary: 'Achievement-driven engineering lead with 10+ years in designing & delivering scalable cloud-native systems, DevOps automation, CI/CD pipelines, and performance optimization for high-traffic environments.',
+    shortGoal: 'I help organizations design resilient, observable, and high-performance systems at scale.',
+    location: 'Vidisha / Indore, India',
+    profileImage: 'assets/images/profile.svg',
+    resumeUrl: 'assets/resume/jay-kumar-patil-resume.pdf',
     socialLinks: {
       linkedin: 'https://linkedin.com/in/jaykumarpatil3004',
       github: 'https://github.com/jaykumarpatil',
       blog: 'https://apachehadoop3.blogspot.com'
     }
   });
+
+  private valueBulletsSignal = signal<ValueBullet[]>([
+    { icon: '🔧', text: 'DevOps & CI/CD · Jenkins · Docker · Kubernetes' },
+    { icon: '☁️', text: 'Cloud-native · AWS · Azure' },
+    { icon: '🚀', text: 'Microservices · Spring Boot · Kafka · Observability' }
+  ]);
 
   private educationSignal = signal<Education[]>([
     {
@@ -93,9 +129,9 @@ export class PortfolioDataService {
       location: 'Indore',
       period: 'March 2023 – Present',
       achievements: [
-        'Enhanced search performance by reducing response time from 0.8 seconds to 0.2 seconds, achieving a 75% improvement and significantly boosting user experience.',
-        'Reduced data size by 68% through effective data compression and optimization techniques, leading to faster data processing and decreasing storage costs.',
-        'Established comprehensive monitoring using Micrometer and Grafana, enabling real-time performance metrics and reducing troubleshooting time by 40%.'
+        'Enhanced search performance by reducing response time from 0.8s to 0.2s, achieving a 75% improvement.',
+        'Reduced data size by 68% through compression and optimization techniques.',
+        'Established comprehensive monitoring using Micrometer and Grafana, reducing troubleshooting time by 40%.'
       ]
     },
     {
@@ -104,9 +140,9 @@ export class PortfolioDataService {
       location: 'Bangalore',
       period: 'September 2021 – February 2023',
       achievements: [
-        'Engineered scalable systems capable of handling millions of requests per second, ensuring high availability and robust performance under peak traffic conditions.',
-        'Architected and implemented an enterprise-level CI/CD framework for over 10 microservices, enhancing deployment efficiency by 45%.',
-        'Led the development of cloud-native microservices using Spring Boot, Spring Cloud, and Kubernetes, increasing application scalability by 25%.',
+        'Engineered scalable systems handling millions of requests per second with high availability.',
+        'Architected CI/CD framework for 10+ microservices, enhancing deployment efficiency by 45%.',
+        'Led cloud-native microservices development with Spring Boot, Spring Cloud, and Kubernetes.',
         'Integrated Istio Service Mesh for advanced traffic management, security, and observability.'
       ]
     },
@@ -116,11 +152,10 @@ export class PortfolioDataService {
       location: 'Indore',
       period: 'March 2018 – September 2021',
       achievements: [
-        'Optimized system performance by integrating modern technologies, improving efficiency by 35% and enhancing mobile platform usability.',
-        'Orchestrated large-scale deployments using Docker, Kafka, RabbitMQ, and Redis, ensuring zero downtime and seamless scalability.',
+        'Optimized system performance by integrating modern technologies, improving efficiency by 35%.',
+        'Orchestrated large-scale deployments using Docker, Kafka, RabbitMQ, and Redis with zero downtime.',
         'Developed automated CI/CD pipelines with Jenkins, reducing deployment time by 50%.',
-        'Implemented application monitoring using Micrometer and Grafana, improving observability and proactive issue detection.',
-        'Collaborated cross-functionally to align development with business objectives, increasing client satisfaction by 15%.'
+        'Implemented application monitoring using Micrometer and Grafana for proactive issue detection.'
       ]
     },
     {
@@ -129,10 +164,9 @@ export class PortfolioDataService {
       location: 'Ahmedabad',
       period: 'March 2017 – March 2018',
       achievements: [
-        'Implemented RESTful APIs with Spring Data and HATEOAS, enhancing client-server communication.',
+        'Implemented RESTful APIs with Spring Data and HATEOAS.',
         'Optimized batch processing using Spring Batch, reducing execution time by 25%.',
-        'Enhanced security features with Spring Security, ensuring data integrity and privacy.',
-        'Introduced performance monitoring with Micrometer, facilitating better resource management.'
+        'Enhanced security features with Spring Security.'
       ]
     },
     {
@@ -141,81 +175,90 @@ export class PortfolioDataService {
       location: 'Pune',
       period: 'December 2014 – March 2017',
       achievements: [
-        'Managed concurrent programming and session management using Redis and Spring Session, improving responsiveness and reliability.',
+        'Managed concurrent programming and session management using Redis and Spring Session.',
         'Upgraded cloud infrastructure, improving network efficiency by 15%.',
-        'Monitored system performance using Grafana, aiding proactive infrastructure management.'
+        'Monitored system performance using Grafana for proactive infrastructure management.'
       ]
     }
   ]);
 
   private projectsSignal = signal<Project[]>([
     {
-      name: 'Chubb\'s & ThermoFisher',
-      client: 'Chubb\'s & ThermoFisher',
-      organization: 'Persistent System, Indore',
+      name: 'Performance Optimization Initiative',
+      client: 'Chubb & ThermoFisher',
+      organization: 'Persistent Systems',
       teamSize: 12,
-      period: '1 year 8 Month',
-      technology: 'Spring Framework & Spring Projects',
+      period: '1 year 8 months',
+      technology: 'Spring Boot, Kafka, MongoDB, Apache Airflow',
+      impactSummary: 'Reduced search latency by 75% and data size by 68%, significantly improving user experience.',
       responsibilities: [
         'Integrated Apache Airflow, replacing Lucid work.',
-        'Streamlined data processes by consolidating multiple languages into one with i8n support.',
-        'Migrated 22 applications from Spring Boot to Quarks.',
-        'Developed ETL processes utilizing Kafka and other data sources to enhance data integration with MongoDB.'
-      ]
+        'Streamlined data processes with i18n support.',
+        'Migrated 22 applications from Spring Boot to Quarkus.',
+        'Developed ETL processes with Kafka for MongoDB integration.'
+      ],
+      tags: ['Performance', 'ETL', 'Kafka', 'MongoDB']
     },
     {
-      name: 'Cisco Cross Work Network Automation and Cisco Prime Access Registrar (CPAR)',
+      name: 'Microservices Transformation Initiative',
       client: 'Cisco',
-      organization: 'HCL Technologies, Bangalore',
+      organization: 'HCL Technologies',
       teamSize: 8,
       period: '8 months',
-      technology: 'Spring Framework & Spring Projects',
+      technology: 'Spring Cloud, Kubernetes, Kafka, Istio',
+      impactSummary: 'Built systems handling millions of requests/sec with 45% improved deployment efficiency.',
       responsibilities: [
-        'Developing strong skills for performing migration from Struts to Spring Cloud.',
-        'Working on security features to protect REST APIs from various types of attacks.',
-        'Organizing and conducting efficient large-scale software deployments using Kubernetes, Kafka, RabbitMQ, including testing features and correcting code with Jenkins pipeline.',
-        'Involved in defining customer requirements to develop clear specifications for creating well-organized project plans.'
-      ]
+        'Migration from Struts to Spring Cloud.',
+        'Implemented security features for REST API protection.',
+        'Large-scale deployments using Kubernetes and Kafka.',
+        'CI/CD pipeline automation with Jenkins.'
+      ],
+      tags: ['Microservices', 'Kubernetes', 'CI/CD', 'Istio']
     },
     {
-      name: 'Oriental Trading Company',
-      client: 'www.orientaltrading.com',
-      organization: 'RWS, Indore',
+      name: 'CI/CD Pipeline Automation',
+      client: 'Multi-client',
+      organization: 'RWS Moravia',
       teamSize: 4,
-      period: '3+ Year',
-      technology: 'Spring Framework & Spring Projects',
+      period: '3+ years',
+      technology: 'Jenkins, Docker, Kafka, RabbitMQ, Redis',
+      impactSummary: 'Reduced deployment time by 50% with zero-downtime releases.',
       responsibilities: [
-        'Implemented latest technologies on existing modules by introducing a web CMS to enhance performance, responsiveness, and usability on mobile platforms.',
-        'Led the large-scale software deployments using Docker, Kafka, RabbitMQ, and Redis as the backbone, including testing features and correcting code with Jenkins pipeline.',
-        'Involved in defining customer requirements to develop clear specifications for creating well-organized project plans.'
-      ]
+        'Implemented web CMS for enhanced mobile platform usability.',
+        'Led large-scale deployments using Docker and Redis.',
+        'Automated CI/CD pipelines with Jenkins.'
+      ],
+      tags: ['DevOps', 'Docker', 'Jenkins', 'CI/CD']
     },
     {
       name: 'Avid Secure – Cloud Security',
       client: 'www.avidsecure.io',
-      organization: 'Lumium, Ahmedabad',
+      organization: 'Lumium',
       teamSize: 2,
-      period: '7 Months',
-      technology: 'Spring Framework & Spring Projects',
+      period: '7 months',
+      technology: 'Spring Data, HATEOAS, Spring Batch, AWS',
+      impactSummary: 'Built security monitoring to detect brute force attacks on AWS infrastructure.',
       responsibilities: [
-        'Efficiently & effectively worked on REST communication',
-        'Performed on Spring Data and HATEOAS to retrieve reporting alerts data',
-        'Executed Spring Scheduled Batch Processing to find the brute force attack on AWS Server',
-        'Worked on customer\'s requirements and gathered the same to design project plans'
-      ]
+        'Worked on REST communication architecture.',
+        'Used Spring Data and HATEOAS for reporting alerts.',
+        'Implemented Spring Batch for brute force attack detection.'
+      ],
+      tags: ['Security', 'AWS', 'Spring Batch', 'REST']
     },
     {
-      name: 'Cloud Ocular V5.4 –Server Network Configuration Tool',
-      client: 'ITC INFOTECH',
-      organization: 'ITC INFOTECH, Bangalore',
+      name: 'Cloud Ocular V5.4',
+      client: 'ITC Infotech',
+      organization: 'ITC Infotech',
       teamSize: 15,
-      period: '6 Months',
-      technology: 'Spring Framework & Spring Projects',
+      period: '6 months',
+      technology: 'Spring WebFlux, Spring Security, Redis',
+      impactSummary: 'Server network configuration tool with non-blocking architecture.',
       responsibilities: [
-        'Performed Concurrent Spring Programming for Non-Blocking Request & Response. Initially started with spring reactor then update with spring web flux',
-        'Gained exposure in managing Spring Data and HATEOAS; upgraded & maintained the Cloud Network data',
-        'Extensively worked on Spring Security for session management by Redis'
-      ]
+        'Concurrent Spring Programming with Spring WebFlux.',
+        'Managed cloud network data with Spring Data.',
+        'Session management using Redis.'
+      ],
+      tags: ['Reactive', 'WebFlux', 'Redis', 'Cloud']
     }
   ]);
 
@@ -235,48 +278,122 @@ export class PortfolioDataService {
       items: [
         { name: 'AWS', proficiency: 90 },
         { name: 'Azure', proficiency: 75 },
-        { name: 'Cloud-Native Applications', proficiency: 85 }
+        { name: 'Cloud-Native Apps', proficiency: 85 }
       ]
     },
     {
-      category: 'Microservices Development',
+      category: 'Microservices',
       items: [
         { name: 'Spring Boot', proficiency: 95 },
         { name: 'Spring Cloud', proficiency: 90 },
-        { name: 'Kafka', proficiency: 85 }
+        { name: 'Kafka', proficiency: 85 },
+        { name: 'RabbitMQ', proficiency: 80 }
       ]
     },
     {
-      category: 'Programming Languages',
+      category: 'Monitoring & Observability',
       items: [
-        { name: 'Java', proficiency: 95 },
-        { name: 'TypeScript', proficiency: 80 },
-        { name: 'YAML', proficiency: 85 }
+        { name: 'Micrometer', proficiency: 90 },
+        { name: 'Grafana', proficiency: 85 },
+        { name: 'Prometheus', proficiency: 80 }
       ]
     },
     {
       category: 'Databases',
       items: [
-        { name: 'Postgres', proficiency: 85 },
+        { name: 'PostgreSQL', proficiency: 85 },
         { name: 'MongoDB', proficiency: 90 },
-        { name: 'Oracle 12c', proficiency: 75 },
         { name: 'Redis', proficiency: 80 },
         { name: 'Elasticsearch', proficiency: 85 },
-        { name: 'Solr', proficiency: 75 }
+        { name: 'Oracle', proficiency: 75 }
+      ]
+    },
+    {
+      category: 'Programming',
+      items: [
+        { name: 'Java', proficiency: 95 },
+        { name: 'TypeScript', proficiency: 80 },
+        { name: 'Python', proficiency: 70 }
       ]
     }
   ]);
 
-  // Expose signals as observables for components
-  profile$ = toObservable(this.profileSignal);
-  education$ = toObservable(this.educationSignal);
-  experience$ = toObservable(this.experienceSignal);
-  projects$ = toObservable(this.projectsSignal);
-  skills$ = toObservable(this.skillsSignal);
+  private interestsSignal = signal<Interest[]>([
+    {
+      icon: '⚡',
+      title: 'Performance Tuning',
+      description: 'Low-latency systems and optimization'
+    },
+    {
+      icon: '☁️',
+      title: 'Cloud Architecture',
+      description: 'Cloud-native design & observability'
+    },
+    {
+      icon: '🔄',
+      title: 'Microservices Migration',
+      description: 'CI/CD automation and modernization'
+    },
+    {
+      icon: '👥',
+      title: 'Team Leadership',
+      description: 'Agile delivery and mentoring'
+    }
+  ]);
+
+  private journeySignal = signal<JourneyStep[]>([
+    {
+      period: '2014–2017',
+      title: 'Software Engineer',
+      description: 'Ad Hoc Services, then Lumium – built REST APIs, batch processing, and security.'
+    },
+    {
+      period: '2018–2021',
+      title: 'Sr. Software Engineer',
+      description: 'RWS – optimized e-commerce systems and containerized deployments.'
+    },
+    {
+      period: '2021–2023',
+      title: 'Technical Lead',
+      description: 'HCL – led microservices & CI/CD for large-scale Cisco projects.'
+    },
+    {
+      period: '2023–Present',
+      title: 'Senior Engineering Lead',
+      description: 'Persistent – driving performance optimization, data platform, and observability.'
+    }
+  ]);
+
+  private achievementsSignal = signal<Achievement[]>([
+    {
+      icon: '🚀',
+      metric: '75%',
+      description: 'Faster search response (0.8s → 0.2s)'
+    },
+    {
+      icon: '📉',
+      metric: '68%',
+      description: 'Data size reduction via optimization'
+    },
+    {
+      icon: '⚡',
+      metric: 'Millions',
+      description: 'Requests per second handled'
+    },
+    {
+      icon: '⏱️',
+      metric: '40%',
+      description: 'Reduced troubleshooting time'
+    }
+  ]);
 
   // Getter methods for direct signal access
   get profile() {
     return this.profileSignal();
+  }
+
+  get valueBullets() {
+    return this.valueBulletsSignal();
   }
 
   get education() {
@@ -293,5 +410,17 @@ export class PortfolioDataService {
 
   get skills() {
     return this.skillsSignal();
+  }
+
+  get interests() {
+    return this.interestsSignal();
+  }
+
+  get journey() {
+    return this.journeySignal();
+  }
+
+  get achievements() {
+    return this.achievementsSignal();
   }
 }

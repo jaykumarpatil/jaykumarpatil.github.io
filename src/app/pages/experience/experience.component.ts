@@ -7,146 +7,186 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section class="experience-section">
+    <section class="experience">
       <div class="container">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="timeline">
-          <div class="timeline-item" *ngFor="let exp of portfolioDataService.experience">
-            <div class="timeline-content">
-              <div class="experience-header">
-                <h3>{{ exp.title }}</h3>
-                <span class="company">{{ exp.company }}</span>
-                <span class="period">{{ exp.period }}</span>
-                <span class="location">{{ exp.location }}</span>
+        <h1 class="page-title animate-fade-in">Work <span class="text-gradient">Experience</span></h1>
+        <div class="experience-list">
+          @for (exp of portfolioDataService.experience; track exp.company; let i = $index) {
+            <div class="experience-card animate-fade-in" [style.animation-delay.ms]="i * 100">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <h2>{{ exp.company }}</h2>
+                  <span class="exp-location">{{ exp.location }}</span>
+                </div>
+                <div class="exp-meta">
+                  <span class="exp-role">{{ exp.title }}</span>
+                  <span class="exp-period">{{ exp.period }}</span>
+                </div>
               </div>
-              <ul class="achievements">
-                <li *ngFor="let achievement of exp.achievements">
-                  {{ achievement }}
-                </li>
+              <ul class="exp-achievements">
+                @for (achievement of exp.achievements; track achievement) {
+                  <li>{{ achievement }}</li>
+                }
               </ul>
             </div>
+          }
+        </div>
+        <div class="achievements-section animate-fade-in">
+          <h2 class="section-subtitle">Key Achievements</h2>
+          <div class="achievements-grid">
+            @for (achievement of portfolioDataService.achievements; track achievement.metric) {
+              <div class="achievement-card">
+                <div class="achievement-icon">{{ achievement.icon }}</div>
+                <div class="achievement-metric">{{ achievement.metric }}</div>
+                <p>{{ achievement.description }}</p>
+              </div>
+            }
           </div>
         </div>
       </div>
     </section>
   `,
   styles: [`
-    .experience-section {
-      padding: 80px 0;
-      background-color: #ffffff;
+    .experience { 
+      padding-block: var(--space-3xl) var(--space-section);
+      min-height: 100vh;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+    .container { 
+      max-width: 900px;
+      margin-inline: auto;
+      padding-inline: var(--container-padding);
     }
-
-    .section-title {
+    .page-title { 
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2xl);
       text-align: center;
-      margin-bottom: 50px;
-      font-size: 2.5rem;
-      color: #333;
+      color: var(--color-neutral);
     }
-
-    .timeline {
-      position: relative;
-      max-width: 1000px;
-      margin: 0 auto;
+    .text-gradient { 
+      background: var(--gradient-home);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: #2563eb;
+    .experience-list { 
+      display: grid;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
     }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 40px;
-      padding-left: 30px;
+    .experience-card { 
+      background: var(--bg-glass);
+      border: var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      transition: all var(--duration-normal) var(--ease-out);
+      animation: fadeInUp 0.6s var(--ease-out) forwards;
+      opacity: 0;
+      backdrop-filter: blur(20px);
     }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -4px;
-      top: 0;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #2563eb;
-      border: 2px solid #fff;
+    .experience-card:hover { 
+      border-color: rgba(200, 245, 66, 0.3);
+      transform: translateY(-5px);
+      box-shadow: var(--elevation-3);
     }
-
-    .timeline-content {
-      background: #f8f9fa;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .exp-header { 
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--border-subtle);
     }
-
-    .experience-header {
-      margin-bottom: 20px;
+    .exp-company h2 { 
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-neutral);
+      margin-bottom: var(--space-xs);
     }
-
-    .experience-header h3 {
-      color: #2563eb;
-      font-size: 1.5rem;
-      margin: 0 0 10px 0;
+    .exp-location { 
+      font-size: var(--text-sm);
+      color: var(--color-muted);
     }
-
-    .company {
+    .exp-meta { text-align: right; }
+    .exp-role { 
       display: block;
-      font-size: 1.2rem;
-      color: #333;
-      margin-bottom: 5px;
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-creative);
+      margin-bottom: var(--space-xs);
     }
-
-    .period, .location {
-      display: inline-block;
-      font-size: 0.9rem;
-      color: #666;
-      margin-right: 15px;
+    .exp-period { 
+      font-size: var(--text-sm);
+      color: var(--color-success);
     }
-
-    .achievements {
-      list-style-type: none;
-      padding: 0;
+    .exp-achievements { 
       margin: 0;
+      padding-left: var(--space-lg);
+      color: var(--color-subtle);
+      line-height: var(--leading-relaxed);
     }
-
-    .achievements li {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 10px;
-      line-height: 1.6;
-      color: #444;
+    .exp-achievements li { margin-bottom: var(--space-xs); }
+    .exp-achievements li::marker { color: var(--color-success); }
+    .section-subtitle { 
+      font-size: var(--text-3xl);
+      font-weight: 600;
+      color: var(--color-creative);
+      margin-bottom: var(--space-xl);
+      text-align: center;
     }
-
-    .achievements li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: #2563eb;
+    .achievements-grid { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
     }
-
-    @media (max-width: 768px) {
-      .timeline::before {
-        left: 15px;
-      }
-
-      .timeline-item {
-        padding-left: 45px;
-      }
-
-      .timeline-item::before {
-        left: 11px;
-      }
+    .achievement-card { 
+      background: var(--bg-glass);
+      border: 1px solid rgba(200, 245, 66, 0.15);
+      border-radius: var(--radius-xl);
+      padding: var(--space-lg);
+      text-align: center;
+      transition: all var(--duration-normal) var(--ease-out);
+      backdrop-filter: blur(20px);
+    }
+    .achievement-card:hover { 
+      border-color: rgba(200, 245, 66, 0.4);
+      transform: translateY(-5px);
+      box-shadow: var(--elevation-3);
+    }
+    .achievement-icon { 
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-xs);
+    }
+    .achievement-metric { 
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      background: var(--gradient-home);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-xs);
+    }
+    .achievement-card p { 
+      color: var(--color-subtle);
+      font-size: var(--text-sm);
+      line-height: var(--leading-normal);
+    }
+    .animate-fade-in { 
+      animation: fadeInUp 0.6s var(--ease-out) forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInUp { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    @media (max-width: 600px) {
+      .exp-header { flex-direction: column; }
+      .exp-meta { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-fade-in, .experience-card { animation: none; opacity: 1; }
     }
   `]
 })

@@ -1,19 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-animated-progress-bar',
   standalone: true,
   imports: [CommonModule],
-  animations: [
-    trigger('progressAnimation', [
-      transition(':enter', [
-        style({ width: '0%' }),
-        animate('1s ease-out', style({ width: '{{value}}%' }))
-      ])
-    ])
-  ],
   template: `
     <div class="progress-container">
       <div class="progress-label">
@@ -22,8 +13,9 @@ import { animate, style, transition, trigger } from '@angular/animations';
       </div>
       <div class="progress-bar">
         <div 
+          #progressFill
           class="progress-fill" 
-          [@progressAnimation]="{value: value, params: {value: value}}"
+          [style.width.%]="animatedValue"
           [style.background-color]="getColorForValue(value)">
         </div>
       </div>
@@ -67,9 +59,18 @@ import { animate, style, transition, trigger } from '@angular/animations';
     }
   `]
 })
-export class AnimatedProgressBarComponent {
+export class AnimatedProgressBarComponent implements AfterViewInit {
   @Input() name = '';
   @Input() value = 0;
+  
+  animatedValue = 0;
+  
+  ngAfterViewInit() {
+    // Trigger animation after view init
+    setTimeout(() => {
+      this.animatedValue = this.value;
+    }, 100);
+  }
   
   getColorForValue(value: number): string {
     if (value >= 90) {

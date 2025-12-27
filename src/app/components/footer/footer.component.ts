@@ -1,154 +1,484 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PortfolioDataService } from '../../services/portfolio-data.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-info">
-            <h3>{{ portfolioDataService.profile.name }}</h3>
-            <p>{{ portfolioDataService.profile.title }}</p>
-            <p>{{ portfolioDataService.profile.email }}</p>
-          </div>
+    <footer class="footer" role="contentinfo" aria-label="Site footer">
+      <div class="footer-container">
+        
+        <!-- Main Footer Content -->
+        <div class="footer-grid">
           
-          <div class="social-links">
-            <a *ngIf="portfolioDataService.profile.socialLinks.linkedin" [href]="portfolioDataService.profile.socialLinks.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
+          <!-- Brand Column -->
+          <div class="footer-brand">
+            <a routerLink="/" class="brand-link" aria-label="Jay Kumar Patil - Home">
+              <span class="brand-icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="40" height="40" rx="10" fill="currentColor"/>
+                  <path d="M12 12h4v12c0 2-1 4-4 4" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M20 12h4c3 0 5 2 5 5s-2 5-5 5h-4V12z" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="brand-text">Jay Kumar Patil</span>
             </a>
-            <a *ngIf="portfolioDataService.profile.socialLinks.github" [href]="portfolioDataService.profile.socialLinks.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-              </svg>
-            </a>
-            <a *ngIf="portfolioDataService.profile.socialLinks.blog" [href]="portfolioDataService.profile.socialLinks.blog" target="_blank" rel="noopener noreferrer" aria-label="Blog">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-              </svg>
+            <p class="brand-tagline">
+              Principal AI/ML Engineer crafting intelligent systems that transform how businesses operate.
+            </p>
+            
+            <!-- Social Links -->
+            <nav class="social-nav" aria-label="Social media links">
+              <ul class="social-list" role="list">
+                <li>
+                  <a 
+                    href="https://github.com/jaykumarpatil" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="social-link"
+                    aria-label="GitHub Profile">
+                    <svg width="24" height="24" aria-hidden="true"><use href="#icon-github"></use></svg>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.linkedin.com/in/jaykumarpatil/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="social-link"
+                    aria-label="LinkedIn Profile">
+                    <svg width="24" height="24" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="mailto:hello@jaykumarpatil.com" 
+                    class="social-link"
+                    aria-label="Email Jay Kumar Patil">
+                    <svg width="24" height="24" aria-hidden="true"><use href="#icon-mail"></use></svg>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Quick Links -->
+          <nav class="footer-nav" aria-label="Quick links">
+            <h3 class="nav-title">Navigate</h3>
+            <ul class="nav-list" role="list">
+              @for (link of quickLinks; track link.path) {
+                <li>
+                  <a [routerLink]="link.path" class="nav-link">
+                    <svg class="link-icon" width="18" height="18" aria-hidden="true"><use [attr.href]="'#' + link.icon"></use></svg>
+                    {{ link.label }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </nav>
+
+          <!-- Expertise -->
+          <div class="footer-expertise">
+            <h3 class="nav-title">Expertise</h3>
+            <ul class="expertise-list" role="list">
+              @for (skill of expertise; track skill) {
+                <li class="expertise-tag">{{ skill }}</li>
+              }
+            </ul>
+          </div>
+
+          <!-- Contact CTA -->
+          <div class="footer-cta">
+            <h3 class="cta-title">Let's Build Something Amazing</h3>
+            <p class="cta-text">
+              Looking for an AI engineer to transform your ideas into intelligent solutions?
+            </p>
+            <a routerLink="/contact" class="cta-button">
+              <span>Get In Touch</span>
+              <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
             </a>
           </div>
         </div>
-        <div class="copyright">
-          <p>&copy; {{ currentYear }} {{ portfolioDataService.profile.name }}. All rights reserved.</p>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <div class="bottom-content">
+            <p class="copyright">
+              © {{ currentYear }} Jay Kumar Patil. Crafted with 
+              <span aria-label="love" class="heart">❤️</span> 
+              using Angular {{ angularVersion }}
+            </p>
+            <div class="bottom-links">
+              <span class="status-indicator" aria-label="Currently available for work">
+                <span class="status-dot" aria-hidden="true"></span>
+                Available for opportunities
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
   `,
   styles: [`
-    footer {
-      background-color: #f8fafc;
-      padding: 2rem 0;
-      margin-top: 2rem;
-      border-top: 1px solid #e2e8f0;
-      transition: all 0.3s ease;
+    .footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      margin-top: auto;
     }
-    
-    :host-context(.dark-mode) footer {
-      background-color: rgba(15, 23, 42, 0.95);
-      border-top: 1px solid rgba(59, 130, 246, 0.2);
-    }
-    
-    .container {
-      max-width: 1200px;
+
+    .footer-container {
+      max-width: var(--container-max);
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: var(--space-3xl) var(--space-lg) var(--space-xl);
     }
-    
-    .footer-content {
+
+    /* Footer Grid - 2026 Asymmetric Layout */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+      margin-bottom: var(--space-2xl);
+    }
+
+    @media (min-width: 640px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+        gap: var(--space-xl);
+      }
+    }
+
+    /* Brand Column */
+    .footer-brand {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .brand-link {
+      display: flex;
       align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--color-neutral);
+      width: fit-content;
+      padding: var(--space-xs);
+      margin: calc(var(--space-xs) * -1);
+      border-radius: var(--radius-lg);
+      transition: all 0.2s ease;
     }
-    
-    .footer-info h3 {
-      margin: 0 0 0.5rem;
-      color: #1e293b;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
+
+    .brand-link:hover {
+      background: var(--bg-elevated);
     }
-    
-    :host-context(.dark-mode) .footer-info h3 {
-      color: #e2e8f0;
+
+    .brand-link:focus-visible {
+      outline: 3px solid var(--border-focus);
+      outline-offset: 2px;
     }
-    
-    .footer-info p {
-      margin: 0.25rem 0;
-      color: #64748b;
-      transition: color 0.3s ease;
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      color: var(--color-success);
     }
-    
-    :host-context(.dark-mode) .footer-info p {
-      color: #94a3b8;
+
+    .brand-text {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
-    
-    .social-links {
+
+    .brand-tagline {
+      font-size: var(--text-sm);
+      color: var(--color-subtle);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    /* Social Navigation */
+    .social-nav {
+      margin-top: var(--spacing-sm);
+    }
+
+    .social-list {
       display: flex;
-      gap: 1rem;
+      gap: var(--spacing-sm);
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
-    
-    .social-links a {
+
+    .social-link {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: #f1f5f9;
-      color: #475569;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(8px);
+      width: var(--touch-target);
+      height: var(--touch-target);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
     }
-    
-    :host-context(.dark-mode) .social-links a {
-      background-color: rgba(30, 41, 59, 0.7);
-      color: #94a3b8;
-      border: 1px solid rgba(59, 130, 246, 0.2);
+
+    .social-link svg {
+      width: 20px;
+      height: 20px;
     }
-    
-    .social-links a:hover {
-      background-color: #2563eb;
-      color: white;
-      transform: translateY(-3px) rotate(8deg);
+
+    .social-link:hover {
+      color: var(--color-success);
+      border-color: var(--color-success);
+      transform: translateY(-2px);
     }
-    
-    :host-context(.dark-mode) .social-links a:hover {
-      background-color: #3b82f6;
-      border-color: #3b82f6;
+
+    .social-link:focus-visible {
+      outline: 3px solid var(--border-focus);
+      outline-offset: 2px;
     }
-    
-    .copyright {
+
+    /* Footer Navigation */
+    .footer-nav,
+    .footer-expertise {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .nav-title {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-xs) 0;
+      min-height: var(--touch-target);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--color-success);
+    }
+
+    .nav-link:focus-visible {
+      outline: 3px solid var(--border-focus);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    .link-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .link-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Expertise Tags */
+    .expertise-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .expertise-tag {
+      padding: var(--spacing-xs) var(--spacing-md);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    /* CTA Column */
+    .footer-cta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      padding: var(--spacing-lg);
+      background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+    }
+
+    .cta-title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .cta-text {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-lg);
+      min-height: var(--touch-target);
+      width: fit-content;
+      background: var(--color-success);
+      color: var(--bg-base);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(200, 245, 66, 0.3);
+    }
+
+    .cta-button:focus-visible {
+      outline: 3px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+
+    /* Footer Bottom */
+    .footer-bottom {
+      padding-top: var(--spacing-xl);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .bottom-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      align-items: center;
       text-align: center;
-      color: #64748b;
-      font-size: 0.9rem;
-      transition: color 0.3s ease;
     }
-    
-    :host-context(.dark-mode) .copyright {
-      color: #94a3b8;
+
+    @media (min-width: 768px) {
+      .bottom-content {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
     }
-    
-    @media (max-width: 768px) {
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
+
+    .copyright {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+      margin: 0;
+    }
+
+    .heart {
+      display: inline-block;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .heart {
+        animation: none;
+      }
+    }
+
+    .bottom-links {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      font-size: var(--text-xs);
+      color: var(--color-success);
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-success);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .status-dot {
+        animation: none;
       }
     }
   `]
 })
 export class FooterComponent {
   currentYear = new Date().getFullYear();
-  
-  constructor(public portfolioDataService: PortfolioDataService) {}
+  angularVersion = '21';
+
+  quickLinks = [
+    { path: '/', label: 'Home', icon: 'icon-home' },
+    { path: '/about', label: 'About', icon: 'icon-about' },
+    { path: '/experience', label: 'Experience', icon: 'icon-experience' },
+    { path: '/projects', label: 'Projects', icon: 'icon-projects' },
+    { path: '/skills', label: 'Skills', icon: 'icon-skills' },
+    { path: '/contact', label: 'Contact', icon: 'icon-contact' }
+  ];
+
+  expertise = [
+    'Machine Learning',
+    'Deep Learning',
+    'NLP',
+    'Computer Vision',
+    'MLOps',
+    'Python',
+    'TensorFlow',
+    'PyTorch'
+  ];
 }

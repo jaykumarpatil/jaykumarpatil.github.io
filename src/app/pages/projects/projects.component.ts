@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 
@@ -8,132 +7,181 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section class="projects-section">
+    <section class="projects">
       <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid" [@listAnimation]>
-          <div class="project-card" *ngFor="let project of portfolioDataService.projects">
-            <h3>{{ project.name }}</h3>
-            <div class="project-meta">
-              <span class="client">{{ project.client }}</span>
-              <span class="organization">{{ project.organization }}</span>
-              <span class="team-size">Team Size: {{ project.teamSize }}</span>
-              <span class="period">{{ project.period }}</span>
+        <h1 class="page-title animate-fade-in">My <span class="text-gradient">Projects</span></h1>
+        <div class="projects-grid">
+          @for (project of portfolioDataService.projects; track project.name; let i = $index) {
+            <div class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100">
+              <div class="project-header">
+                <h2>{{ project.name }}</h2>
+                <span class="project-period">{{ project.period }}</span>
+              </div>
+              <div class="project-meta">
+                <span class="project-client">{{ project.client }}</span>
+                <span class="project-org">{{ project.organization }}</span>
+              </div>
+              <p class="project-description">{{ project.impactSummary }}</p>
+              <div class="project-tech">
+                <span class="tech-label">Tech Stack:</span>
+                <span class="tech-value">{{ project.technology }}</span>
+              </div>
+              <ul class="project-responsibilities">
+                @for (resp of project.responsibilities; track resp) {
+                  <li>{{ resp }}</li>
+                }
+              </ul>
+              <div class="project-tags">
+                @for (tag of project.tags; track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+              <div class="project-footer">
+                <span class="team-size">Team: {{ project.teamSize }} members</span>
+              </div>
             </div>
-            <div class="project-tech">{{ project.technology }}</div>
-            <ul class="responsibilities">
-              <li *ngFor="let responsibility of project.responsibilities">
-                {{ responsibility }}
-              </li>
-            </ul>
-          </div>
+          }
         </div>
       </div>
     </section>
   `,
   styles: [`
-    .projects-section {
-      padding: 80px 0;
-      background-color: #f8f9fa;
+    .projects { 
+      padding-block: var(--space-3xl) var(--space-section);
+      min-height: 100vh;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+    .container { 
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--container-padding);
     }
-
-    .section-title {
+    .page-title { 
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2xl);
       text-align: center;
-      margin-bottom: 50px;
-      font-size: 2.5rem;
-      color: #333;
+      color: var(--color-neutral);
     }
-
-    .projects-grid {
+    .text-gradient { 
+      background: var(--gradient-home);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .projects-grid { 
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: var(--space-xl);
     }
-
-    .project-card {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
-      transition: transform 250ms cubic-bezier(.2,.8,.2,1), box-shadow 250ms ease, opacity 250ms ease;
-      will-change: transform, opacity;
+    .project-card { 
+      background: var(--bg-glass);
+      border: var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      transition: all var(--duration-normal) var(--ease-out);
+      animation: fadeInUp 0.6s var(--ease-out) forwards;
+      opacity: 0;
+      backdrop-filter: blur(20px);
     }
-
-    .project-card h3 {
-      color: #2563eb;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
+    .project-card:hover { 
+      border-color: rgba(200, 245, 66, 0.3);
+      transform: translateY(-8px);
+      box-shadow: var(--elevation-4);
     }
-
-    .project-meta {
+    .project-header { 
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-md);
+      margin-bottom: var(--space-sm);
+    }
+    .project-header h2 { 
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-neutral);
+      line-height: var(--leading-snug);
+    }
+    .project-period { 
+      font-size: var(--text-xs);
+      color: var(--color-success);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .project-meta { 
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-md);
+      font-size: var(--text-sm);
+    }
+    .project-client { 
+      color: var(--color-creative);
+      font-weight: 500;
+    }
+    .project-org { color: var(--color-muted); }
+    .project-description { 
+      color: var(--color-subtle);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-md);
+    }
+    .project-tech { 
+      margin-bottom: var(--space-md);
+      font-size: var(--text-sm);
+    }
+    .tech-label { 
+      color: var(--color-muted);
+      margin-right: var(--space-xs);
+    }
+    .tech-value { color: var(--color-neutral); }
+    .project-responsibilities { 
+      margin: 0 0 var(--space-md);
+      padding-left: var(--space-lg);
+      color: var(--color-subtle);
+      font-size: var(--text-sm);
+      line-height: var(--leading-normal);
+    }
+    .project-responsibilities li { margin-bottom: var(--space-xs); }
+    .project-responsibilities li::marker { color: var(--color-creative); }
+    .project-tags { 
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 15px;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-md);
     }
-
-    .project-meta span {
-      font-size: 0.9rem;
-      color: #666;
-      padding-right: 10px;
-      border-right: 1px solid #ddd;
-    }
-
-    .project-meta span:last-child {
-      border-right: none;
-    }
-
-    .project-tech {
+    .tag { 
+      background: rgba(200, 245, 66, 0.1);
+      color: var(--color-success);
+      padding: 4px var(--space-sm);
+      border-radius: var(--radius-md);
+      font-size: var(--text-xs);
       font-weight: 500;
-      color: #2563eb;
-      margin-bottom: 15px;
     }
-
-    .responsibilities {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
+    .project-footer { 
+      margin-top: auto;
+      padding-top: var(--space-md);
+      border-top: var(--border-subtle);
     }
-
-    .responsibilities li {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 10px;
-      line-height: 1.6;
-      color: #444;
+    .team-size { 
+      font-size: var(--text-sm);
+      color: var(--color-muted);
     }
-
-    .responsibilities li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: #2563eb;
+    .animate-fade-in { 
+      animation: fadeInUp 0.6s var(--ease-out) forwards;
+      opacity: 0;
     }
-
-    .project-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(37,99,235,0.12);
+    @keyframes fadeInUp { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    @media (max-width: 400px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-fade-in, .project-card { animation: none; opacity: 1; }
     }
   `]
-,
-  animations: [
-    trigger('listAnimation', [
-      transition(':enter', [
-        query('.project-card', [
-          style({ opacity: 0, transform: 'translateY(20px)' }),
-          stagger(100, [
-            animate('500ms cubic-bezier(.2,.8,.2,1)', style({ opacity: 1, transform: 'translateY(0)' }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ]
 })
 export class ProjectsComponent {
   constructor(public portfolioDataService: PortfolioDataService) {}
