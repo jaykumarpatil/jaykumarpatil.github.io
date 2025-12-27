@@ -79,7 +79,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           <div class="interests-grid">
             @for (interest of portfolioDataService.interests; track interest.title) {
               <div class="interest-item">
-                <span class="interest-icon">{{ interest.icon }}</span>
+                <span class="interest-icon">
+                  <svg viewBox="0 0 24 24" width="24" height="24"><use [attr.href]="interest.icon"></use></svg>
+                </span>
                 <div class="interest-content">
                   <h4>{{ interest.title }}</h4>
                   <p>{{ interest.description }}</p>
@@ -312,7 +314,21 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border-color: rgba(200, 245, 66, 0.4);
       transform: translateY(-3px);
     }
-    .interest-icon { font-size: var(--text-3xl); }
+    .interest-icon { 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(200, 245, 66, 0.15), rgba(34, 211, 238, 0.1));
+      border-radius: var(--radius-lg);
+      flex-shrink: 0;
+    }
+    .interest-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--color-success);
+    }
     .interest-content h4 { 
       font-size: var(--text-base);
       font-weight: 600;

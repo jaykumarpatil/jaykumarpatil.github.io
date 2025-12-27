@@ -322,22 +322,22 @@ export class PortfolioDataService {
 
   private interestsSignal = signal<Interest[]>([
     {
-      icon: '⚡',
+      icon: '#icon-zap',
       title: 'Performance Tuning',
       description: 'Low-latency systems and optimization'
     },
     {
-      icon: '☁️',
+      icon: '#icon-cloud',
       title: 'Cloud Architecture',
       description: 'Cloud-native design & observability'
     },
     {
-      icon: '🔄',
+      icon: '#icon-rocket',
       title: 'Microservices Migration',
       description: 'CI/CD automation and modernization'
     },
     {
-      icon: '👥',
+      icon: '#icon-about',
       title: 'Team Leadership',
       description: 'Agile delivery and mentoring'
     }

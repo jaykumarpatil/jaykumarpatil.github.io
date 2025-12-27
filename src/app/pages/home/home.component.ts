@@ -71,22 +71,22 @@ import { SeoService } from '../../services/seo.service';
             </div>
             <div class="profile-accent"></div>
           </div>
-          
-          <!-- Floating Elements -->
-          <div class="float-element float-1 animate-float">
-            <svg class="float-icon" width="20" height="20" aria-hidden="true"><use href="#icon-bolt"></use></svg>
-            <span>10+ Years</span>
-          </div>
-          <div class="float-element float-2 animate-float" style="animation-delay: 1s">
-            <svg class="float-icon" width="20" height="20" aria-hidden="true"><use href="#icon-globe"></use></svg>
-            <span>Enterprise</span>
-          </div>
         </div>
       </div>
       
-      <!-- Scroll Indicator -->
-      <div class="scroll-cue" aria-hidden="true">
-        <div class="scroll-line"></div>
+      <!-- Bottom Row: Floating Elements + Scroll Indicator -->
+      <div class="bottom-row" aria-hidden="true">
+        <div class="float-element">
+          <svg class="float-icon" width="20" height="20"><use href="#icon-zap"></use></svg>
+          <span>10+ Years</span>
+        </div>
+        <div class="scroll-cue">
+          <div class="scroll-line"></div>
+        </div>
+        <div class="float-element">
+          <svg class="float-icon" width="20" height="20"><use href="#icon-globe"></use></svg>
+          <span>Enterprise</span>
+        </div>
       </div>
     </section>
 
@@ -378,8 +378,17 @@ import { SeoService } from '../../services/seo.service';
     }
     
     /* Floating Elements */
-    .float-element {
+    .bottom-row {
       position: absolute;
+      bottom: var(--space-2xl);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+    }
+    
+    .float-element {
       display: flex;
       align-items: center;
       gap: var(--space-xs);
@@ -392,9 +401,6 @@ import { SeoService } from '../../services/seo.service';
       font-weight: 500;
       color: var(--color-neutral);
     }
-    
-    .float-1 { top: 15%; left: -20%; }
-    .float-2 { bottom: 20%; right: -15%; }
     
     .float-icon {
       display: flex;
@@ -412,10 +418,9 @@ import { SeoService } from '../../services/seo.service';
     
     /* Scroll Cue */
     .scroll-cue {
-      position: absolute;
-      bottom: var(--space-2xl);
-      left: 50%;
-      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .scroll-line {
@@ -714,7 +719,7 @@ import { SeoService } from '../../services/seo.service';
       .about-layout { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
       
-      .float-element { display: none; }
+      .bottom-row .float-element { display: none; }
     }
     
     @media (max-width: 640px) {
