@@ -34,7 +34,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
             <div class="bullets-list">
               @for (bullet of portfolioDataService.valueBullets; track bullet.text) {
                 <div class="bullet-item">
-                  <span class="bullet-icon">{{ bullet.icon }}</span>
+                  <span class="bullet-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="28" height="28"><use [attr.href]="bullet.icon"></use></svg>
+                  </span>
                   <span class="bullet-text">{{ bullet.text }}</span>
                 </div>
               }
@@ -176,7 +178,21 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border-color: rgba(200, 245, 66, 0.3);
       transform: translateX(5px);
     }
-    .bullet-icon { font-size: var(--text-2xl); }
+    .bullet-icon { 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(200, 245, 66, 0.1);
+      border-radius: var(--radius-lg);
+      flex-shrink: 0;
+      color: var(--color-success);
+    }
+    .bullet-icon svg {
+      width: 24px;
+      height: 24px;
+    }
     .bullet-text { 
       color: var(--color-neutral);
       font-size: var(--text-base);
@@ -232,8 +248,8 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       content: '';
       position: absolute;
       left: 6px;
-      top: 0;
-      bottom: 0;
+      top: calc(var(--space-lg) + 10px);
+      bottom: var(--space-xl);
       width: 2px;
       background: var(--gradient-home);
     }
@@ -244,7 +260,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     .timeline-marker { 
       position: absolute;
       left: calc(var(--space-xl) * -1);
-      top: 0;
+      top: calc(var(--space-lg) + 3px);
       width: 14px;
       height: 14px;
       background: var(--color-success);

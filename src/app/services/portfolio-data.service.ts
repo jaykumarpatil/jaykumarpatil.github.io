@@ -90,7 +90,7 @@ export class PortfolioDataService {
     summary: 'Achievement-driven engineering lead with 10+ years in designing & delivering scalable cloud-native systems, DevOps automation, CI/CD pipelines, and performance optimization for high-traffic environments.',
     shortGoal: 'I help organizations design resilient, observable, and high-performance systems at scale.',
     location: 'Vidisha / Indore, India',
-    profileImage: 'assets/images/profile.svg',
+    profileImage: 'assets/images/profile.png',
     resumeUrl: 'assets/resume/jay-kumar-patil-resume.pdf',
     socialLinks: {
       linkedin: 'https://linkedin.com/in/jaykumarpatil3004',
@@ -100,9 +100,9 @@ export class PortfolioDataService {
   });
 
   private valueBulletsSignal = signal<ValueBullet[]>([
-    { icon: '🔧', text: 'DevOps & CI/CD · Jenkins · Docker · Kubernetes' },
-    { icon: '☁️', text: 'Cloud-native · AWS · Azure' },
-    { icon: '🚀', text: 'Microservices · Spring Boot · Kafka · Observability' }
+    { icon: '#icon-wrench', text: 'DevOps & CI/CD · Jenkins · Docker · Kubernetes' },
+    { icon: '#icon-cloud', text: 'Cloud-native · AWS · Azure' },
+    { icon: '#icon-rocket', text: 'Microservices · Spring Boot · Kafka · Observability' }
   ]);
 
   private educationSignal = signal<Education[]>([
@@ -264,21 +264,11 @@ export class PortfolioDataService {
 
   private skillsSignal = signal<Skill[]>([
     {
-      category: 'DevOps & CI/CD',
+      category: 'Programming',
       items: [
-        { name: 'Jenkins', proficiency: 95 },
-        { name: 'Docker', proficiency: 90 },
-        { name: 'Kubernetes', proficiency: 85 },
-        { name: 'GitOps', proficiency: 80 },
-        { name: 'GitHub Actions', proficiency: 85 }
-      ]
-    },
-    {
-      category: 'Cloud Technologies',
-      items: [
-        { name: 'AWS', proficiency: 90 },
-        { name: 'Azure', proficiency: 75 },
-        { name: 'Cloud-Native Apps', proficiency: 85 }
+        { name: 'Java', proficiency: 95 },
+        { name: 'TypeScript', proficiency: 70 },
+        { name: 'Python', proficiency: 80 }
       ]
     },
     {
@@ -290,6 +280,25 @@ export class PortfolioDataService {
         { name: 'RabbitMQ', proficiency: 80 }
       ]
     },
+    {
+      category: 'DevOps & CI/CD',
+      items: [
+        { name: 'Jenkins', proficiency: 70 },
+        { name: 'Docker', proficiency: 90 },
+        { name: 'Kubernetes', proficiency: 85 },
+        { name: 'GitOps', proficiency: 85 },
+        { name: 'GitHub Actions', proficiency: 85 }
+      ]
+    },
+    {
+      category: 'Cloud Technologies',
+      items: [
+        { name: 'AWS', proficiency: 90 },
+        { name: 'Azure', proficiency: 75 },
+        { name: 'Cloud-Native Apps', proficiency: 85 }
+      ]
+    },
+
     {
       category: 'Monitoring & Observability',
       items: [
@@ -307,15 +316,8 @@ export class PortfolioDataService {
         { name: 'Elasticsearch', proficiency: 85 },
         { name: 'Oracle', proficiency: 75 }
       ]
-    },
-    {
-      category: 'Programming',
-      items: [
-        { name: 'Java', proficiency: 95 },
-        { name: 'TypeScript', proficiency: 80 },
-        { name: 'Python', proficiency: 70 }
-      ]
     }
+
   ]);
 
   private interestsSignal = signal<Interest[]>([
@@ -342,15 +344,11 @@ export class PortfolioDataService {
   ]);
 
   private journeySignal = signal<JourneyStep[]>([
+
     {
-      period: '2014–2017',
-      title: 'Software Engineer',
-      description: 'Ad Hoc Services, then Lumium – built REST APIs, batch processing, and security.'
-    },
-    {
-      period: '2018–2021',
-      title: 'Sr. Software Engineer',
-      description: 'RWS – optimized e-commerce systems and containerized deployments.'
+      period: '2023–Present',
+      title: 'Senior Engineering Lead',
+      description: 'Persistent – driving performance optimization, data platform, and observability.'
     },
     {
       period: '2021–2023',
@@ -358,9 +356,14 @@ export class PortfolioDataService {
       description: 'HCL – led microservices & CI/CD for large-scale Cisco projects.'
     },
     {
-      period: '2023–Present',
-      title: 'Senior Engineering Lead',
-      description: 'Persistent – driving performance optimization, data platform, and observability.'
+      period: '2018–2021',
+      title: 'Sr. Software Engineer',
+      description: 'RWS – optimized e-commerce systems and containerized deployments.'
+    },
+    {
+      period: '2014–2017',
+      title: 'Software Engineer',
+      description: 'Ad Hoc Services, then Lumium – built REST APIs, batch processing, and security.'
     }
   ]);
 

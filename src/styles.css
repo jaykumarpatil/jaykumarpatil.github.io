@@ -334,13 +334,14 @@ section {
 /* Primary Button - Positive outcomes */
 .btn-primary {
   background: var(--color-success);
-  color: var(--bg-base);
+  color: #050507;
   box-shadow: var(--glow-success);
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 0 60px rgba(200, 245, 66, 0.4);
+  color: #050507;
 }
 
 .btn-primary:active:not(:disabled) {

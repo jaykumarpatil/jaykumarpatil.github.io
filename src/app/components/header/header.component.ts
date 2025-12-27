@@ -28,8 +28,9 @@ import { RouterModule, Router } from '@angular/router';
           <span class="brand-icon" aria-hidden="true">
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="40" height="40" rx="10" fill="currentColor" class="brand-bg"/>
-              <path d="M12 12h4v12c0 2-1 4-4 4" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M20 12h4c3 0 5 2 5 5s-2 5-5 5h-4V12z" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 12h4v12c0 2-1 4-4 4" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M18 12h4c3 0 5 2 5 5s-2 5-5 5h-4V12z" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 22v6" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           </span>
           <span class="brand-text">
@@ -138,7 +139,7 @@ import { RouterModule, Router } from '@angular/router';
             class="cta-btn"
             (click)="closeMenu()">
             <span>Let's Talk</span>
-            <svg class="cta-icon" width="20" height="20" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+            <svg class="cta-icon" width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
           </a>
 
           <!-- Mobile Menu Toggle -->
@@ -313,8 +314,8 @@ import { RouterModule, Router } from '@angular/router';
       top: var(--space-md);
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - var(--space-lg) * 2);
-      max-width: 1200px;
+      width: calc(100% - var(--space-md) * 2);
+      max-width: 1400px;
       z-index: 1000;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -337,14 +338,13 @@ import { RouterModule, Router } from '@angular/router';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-md);
+      gap: var(--space-sm);
       padding: var(--space-sm) var(--space-md);
-      background: var(--bg-glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       box-shadow: var(--elevation-2);
+      overflow: hidden;
     }
 
     /* Brand */
@@ -388,18 +388,21 @@ import { RouterModule, Router } from '@angular/router';
       display: flex;
       flex-direction: column;
       line-height: 1.2;
+      white-space: nowrap;
     }
 
     .brand-name {
       font-size: var(--text-base);
       font-weight: 700;
       letter-spacing: -0.02em;
+      white-space: nowrap;
     }
 
     .brand-role {
       font-size: var(--text-xs);
       color: var(--text-tertiary);
       font-weight: 500;
+      white-space: nowrap;
     }
 
     /* Navigation Pills - Desktop */
@@ -480,6 +483,7 @@ import { RouterModule, Router } from '@angular/router';
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       font-size: var(--text-lg);
+      color: var(--color-neutral);
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -487,6 +491,7 @@ import { RouterModule, Router } from '@angular/router';
     .action-btn:hover {
       background: var(--bg-elevated);
       border-color: var(--color-success);
+      color: var(--color-success);
     }
 
     .action-btn:focus-visible {
@@ -498,15 +503,17 @@ import { RouterModule, Router } from '@angular/router';
       display: none;
       align-items: center;
       gap: var(--space-xs);
-      padding: var(--space-sm) var(--space-lg);
-      min-height: var(--touch-target);
+      padding: var(--space-xs) var(--space-md);
+      min-height: 40px;
       background: var(--color-success);
-      color: var(--bg-base);
+      color: #050507;
       font-size: var(--text-sm);
       font-weight: 600;
       text-decoration: none;
       border-radius: var(--radius-md);
       transition: all 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     @media (min-width: 640px) {
@@ -515,14 +522,33 @@ import { RouterModule, Router } from '@angular/router';
       }
     }
 
+    @media (min-width: 1024px) {
+      .cta-btn {
+        padding: var(--space-sm) var(--space-lg);
+      }
+    }
+
     .cta-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 20px rgba(200, 245, 66, 0.3);
+      color: #050507;
     }
 
     .cta-btn:focus-visible {
       outline: 3px solid var(--border-focus);
       outline-offset: 2px;
+    }
+
+    .cta-icon {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .cta-icon {
+        display: block;
+        width: 16px;
+        height: 16px;
+      }
     }
 
     /* Mobile Menu Toggle */
@@ -561,7 +587,7 @@ import { RouterModule, Router } from '@angular/router';
       left: 0;
       width: 100%;
       height: 2px;
-      background: var(--text-primary);
+      background: var(--color-neutral);
       border-radius: 2px;
       transition: all 0.3s ease;
     }
@@ -589,7 +615,7 @@ import { RouterModule, Router } from '@angular/router';
     .mobile-menu {
       position: fixed;
       inset: 0;
-      background: var(--bg-base);
+      background: #050507;
       z-index: -1;
       opacity: 0;
       visibility: hidden;
@@ -597,7 +623,7 @@ import { RouterModule, Router } from '@angular/router';
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 100px var(--spacing-lg) var(--spacing-xl);
+      padding: 100px var(--space-lg) var(--space-xl);
     }
 
     .mobile-menu.open {
@@ -801,8 +827,34 @@ export class HeaderComponent {
 
   toggleTheme(): void {
     this.isDarkMode.update(v => !v);
-    // Theme toggle would update CSS custom properties
-    // This is a placeholder for future implementation
+    if (isPlatformBrowser(this.platformId)) {
+      const root = document.documentElement;
+      if (this.isDarkMode()) {
+        // Dark mode
+        root.style.setProperty('--bg-base', '#050507');
+        root.style.setProperty('--bg-elevated', '#0a0a0f');
+        root.style.setProperty('--bg-surface', '#101016');
+        root.style.setProperty('--bg-overlay', 'rgba(16, 16, 22, 0.85)');
+        root.style.setProperty('--bg-glass', 'rgba(16, 16, 22, 0.6)');
+        root.style.setProperty('--color-neutral', '#f8fafc');
+        root.style.setProperty('--color-subtle', '#a1a1aa');
+        root.style.setProperty('--color-muted', '#52525b');
+        root.style.setProperty('--border-subtle', '1px solid rgba(255, 255, 255, 0.04)');
+        root.style.setProperty('--border-default', '1px solid rgba(255, 255, 255, 0.08)');
+      } else {
+        // Light mode
+        root.style.setProperty('--bg-base', '#fafafa');
+        root.style.setProperty('--bg-elevated', '#ffffff');
+        root.style.setProperty('--bg-surface', '#f4f4f5');
+        root.style.setProperty('--bg-overlay', 'rgba(255, 255, 255, 0.9)');
+        root.style.setProperty('--bg-glass', 'rgba(255, 255, 255, 0.7)');
+        root.style.setProperty('--color-neutral', '#18181b');
+        root.style.setProperty('--color-subtle', '#52525b');
+        root.style.setProperty('--color-muted', '#a1a1aa');
+        root.style.setProperty('--border-subtle', '1px solid rgba(0, 0, 0, 0.04)');
+        root.style.setProperty('--border-default', '1px solid rgba(0, 0, 0, 0.08)');
+      }
+    }
   }
 
   private router = inject(Router);

@@ -95,7 +95,7 @@ import { RouterModule } from '@angular/router';
             <p class="cta-text">
               Looking for an AI engineer to transform your ideas into intelligent solutions?
             </p>
-            <a routerLink="/contact" class="cta-button">
+            <a routerLink="/contact" class="btn btn-primary cta-button">
               <span>Get In Touch</span>
               <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
             </a>
@@ -300,6 +300,7 @@ import { RouterModule } from '@angular/router';
       width: 18px;
       height: 18px;
       flex-shrink: 0;
+      margin-right: var(--space-xs);
     }
 
     .link-icon svg {
@@ -331,24 +332,24 @@ import { RouterModule } from '@angular/router';
     .footer-cta {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-md);
-      padding: var(--spacing-lg);
-      background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
-      border: 1px solid var(--border-subtle);
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      background: var(--bg-surface);
+      border: 1px solid rgba(200, 245, 66, 0.15);
       border-radius: var(--radius-xl);
     }
 
     .cta-title {
       font-size: var(--text-lg);
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--color-neutral);
       margin: 0;
       line-height: 1.3;
     }
 
     .cta-text {
       font-size: var(--text-sm);
-      color: var(--text-secondary);
+      color: var(--color-subtle);
       line-height: 1.6;
       margin: 0;
     }
@@ -356,12 +357,13 @@ import { RouterModule } from '@angular/router';
     .cta-button {
       display: inline-flex;
       align-items: center;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-sm) var(--spacing-lg);
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-xl);
+      margin-top: var(--space-sm);
       min-height: var(--touch-target);
       width: fit-content;
       background: var(--color-success);
-      color: var(--bg-base);
+      color: #050507;
       font-size: var(--text-sm);
       font-weight: 600;
       text-decoration: none;
@@ -372,6 +374,7 @@ import { RouterModule } from '@angular/router';
     .cta-button:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 20px rgba(200, 245, 66, 0.3);
+      color: #050507;
     }
 
     .cta-button:focus-visible {

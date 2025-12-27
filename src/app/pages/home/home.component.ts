@@ -106,23 +106,10 @@ import { SeoService } from '../../services/seo.service';
             
             <!-- Value Propositions as Cards -->
             <div class="value-grid" role="list">
-              @for (bullet of portfolioDataService.valueBullets; track bullet.text; let i = $index) {
+              @for (bullet of portfolioDataService.valueBullets; track bullet.text) {
                 <article class="value-card" role="listitem">
                   <div class="value-icon" aria-hidden="true">
-                    @switch (i) {
-                      @case (0) {
-                        <svg viewBox="0 0 24 24"><use href="#icon-monitor"></use></svg>
-                      }
-                      @case (1) {
-                        <svg viewBox="0 0 24 24"><use href="#icon-cloud"></use></svg>
-                      }
-                      @case (2) {
-                        <svg viewBox="0 0 24 24"><use href="#icon-settings"></use></svg>
-                      }
-                      @default {
-                        <svg viewBox="0 0 24 24"><use href="#icon-bolt"></use></svg>
-                      }
-                    }
+                    <svg viewBox="0 0 24 24"><use [attr.href]="bullet.icon"></use></svg>
                   </div>
                   <div class="value-body">
                     <p>{{ bullet.text }}</p>
@@ -653,10 +640,12 @@ import { SeoService } from '../../services/seo.service';
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(5, 5, 7, 0.85);
+      background: rgba(5, 5, 7, 0.9);
+      border-radius: var(--radius-2xl);
       opacity: 0;
       pointer-events: none;
       transition: opacity var(--duration-normal) var(--ease-out);
+      z-index: 10;
     }
     
     .project-card:hover .project-hover-cta,
@@ -665,12 +654,13 @@ import { SeoService } from '../../services/seo.service';
     }
     
     .cta-text {
-      padding: 10px var(--space-lg);
+      padding: 12px var(--space-xl);
       background: var(--color-success);
-      color: var(--bg-base);
+      color: #050507;
       font-size: var(--text-sm);
       font-weight: 600;
       border-radius: var(--radius-full);
+      box-shadow: 0 4px 20px rgba(200, 245, 66, 0.4);
     }
     
     .section-footer {

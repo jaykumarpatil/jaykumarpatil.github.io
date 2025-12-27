@@ -16,22 +16,30 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
         <div class="contact-content">
           <div class="contact-info animate-fade-in delay-200">
             <div class="info-card">
-              <div class="info-icon">📧</div>
+              <div class="info-icon">
+                <svg class="icon"><use href="#icon-mail"></use></svg>
+              </div>
               <h3>Email</h3>
               <a [href]="'mailto:' + portfolioDataService.profile.email">{{ portfolioDataService.profile.email }}</a>
             </div>
             <div class="info-card">
-              <div class="info-icon">📍</div>
+              <div class="info-icon">
+                <svg class="icon"><use href="#icon-map-pin"></use></svg>
+              </div>
               <h3>Location</h3>
               <p>{{ portfolioDataService.profile.location }}</p>
             </div>
             <div class="info-card">
-              <div class="info-icon">💼</div>
+              <div class="info-icon">
+                <svg class="icon"><use href="#icon-linkedin"></use></svg>
+              </div>
               <h3>LinkedIn</h3>
               <a [href]="portfolioDataService.profile.socialLinks.linkedin" target="_blank" rel="noopener">Connect on LinkedIn</a>
             </div>
             <div class="info-card">
-              <div class="info-icon">💻</div>
+              <div class="info-icon">
+                <svg class="icon"><use href="#icon-github"></use></svg>
+              </div>
               <h3>GitHub</h3>
               <a [href]="portfolioDataService.profile.socialLinks.github" target="_blank" rel="noopener">View GitHub Profile</a>
             </div>
@@ -103,8 +111,19 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       box-shadow: var(--elevation-3);
     }
     .info-icon { 
-      font-size: var(--text-3xl);
-      margin-bottom: var(--space-md);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-md);
+      background: linear-gradient(135deg, rgba(200, 245, 66, 0.15), rgba(34, 211, 238, 0.1));
+      border-radius: var(--radius-lg);
+    }
+    .info-icon .icon {
+      width: 24px;
+      height: 24px;
+      stroke: var(--color-success);
     }
     .info-card h3 { 
       font-size: var(--text-base);

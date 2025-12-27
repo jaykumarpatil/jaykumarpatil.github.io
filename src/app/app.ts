@@ -33,6 +33,8 @@ import { SvgSpritesComponent } from './shared/icons/svg-sprites.component';
     
     main {
       flex: 1;
+      /* Add top padding to account for fixed navigation height */
+      padding-top: calc(var(--space-md) + 72px);
     }
 
     .route-content {
