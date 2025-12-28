@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SvgSpritesComponent } from './shared/icons/svg-sprites.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { SvgSpritesComponent } from './shared/icons/svg-sprites.component';
 
 @Component({
   selector: 'app-root',

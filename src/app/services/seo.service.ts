@@ -25,7 +25,7 @@ export class SeoService {
   private readonly baseTitle = 'Jay Kumar Patil | Senior Engineering Lead';
   private readonly baseDescription = 'Achievement-driven engineering lead with 10+ years in designing & delivering scalable cloud-native systems, DevOps automation, CI/CD pipelines, and performance optimization.';
   private readonly baseUrl = 'https://jaykumarpatil.github.io';
-  private readonly defaultImage = 'https://jaykumarpatil.github.io/public/images/og-image.png';
+  private readonly defaultImage = 'https://jaykumarpatil.com/images/og-image.png';
 
   constructor(
     private titleService: Title,

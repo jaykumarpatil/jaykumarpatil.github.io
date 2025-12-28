@@ -90,8 +90,8 @@ export class PortfolioDataService {
     summary: 'Achievement-driven engineering lead with 10+ years in designing & delivering scalable cloud-native systems, DevOps automation, CI/CD pipelines, and performance optimization for high-traffic environments.',
     shortGoal: 'I help organizations design resilient, observable, and high-performance systems at scale.',
     location: 'Vidisha / Indore, India',
-    profileImage: 'public/images/profile.png',
-    resumeUrl: 'public/resume/jay-kumar-patil-resume.pdf',
+    profileImage: 'images/profile.png',
+    resumeUrl: 'resume/jay-kumar-patil-resume.pdf',
     socialLinks: {
       linkedin: 'https://linkedin.com/in/jaykumarpatil3004',
       github: 'https://github.com/jaykumarpatil',

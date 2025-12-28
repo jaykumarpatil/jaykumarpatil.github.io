@@ -421,7 +421,7 @@ export class ArticlesComponent implements OnInit {
     this.seoService.setTitle('Articles - Technical Insights & Best Practices');
     this.seoService.setDescription('Technical articles, tutorials, and insights on DevOps, Cloud Architecture, Microservices, and Enterprise Software Development by Jay Kumar Patil.');
     this.seoService.setKeywords('technical blog, DevOps articles, cloud architecture, microservices, Kafka, Kubernetes, Spring Boot, Big Data, Hadoop');
-    this.seoService.updateCanonicalUrl('https://jaykumarpatil.github.io/articles');
+    this.seoService.updateCanonicalUrl('https://jaykumarpatil.com/articles');
   }
 
   formatDate(dateString: string): string {
