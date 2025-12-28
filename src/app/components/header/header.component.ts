@@ -113,7 +113,7 @@ import { RouterModule, Router } from '@angular/router';
             <span class="pill-text">Contact</span>
           </a>
           <a 
-            href="assets/resume/jay-kumar-patil-resume.pdf"
+            href="public/resume/jay-kumar-patil-resume.pdf"
             target="_blank"
             rel="noopener"
             class="nav-pill resume-pill"
@@ -272,7 +272,7 @@ import { RouterModule, Router } from '@angular/router';
             <svg class="link-arrow" width="20" height="20" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
           </a>
           <a 
-            href="assets/resume/jay-kumar-patil-resume.pdf"
+            href="public/resume/jay-kumar-patil-resume.pdf"
             target="_blank"
             rel="noopener"
             class="mobile-link resume-link"

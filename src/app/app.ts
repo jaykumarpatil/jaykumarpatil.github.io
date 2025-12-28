@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -53,4 +53,6 @@ import { SvgSpritesComponent } from './shared/icons/svg-sprites.component';
     }
   `]
 })
-export class App {}
+export class App {
+  protected readonly title = signal('jaykumarpatil');
+}
