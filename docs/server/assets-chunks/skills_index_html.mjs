@@ -40,7 +40,10 @@ export default `<!DOCTYPE html><html lang="en" data-beasties-container><head>
   <!-- Theme Color -->
   <meta name="theme-color" content="#0a0a0f">
   <meta name="msapplication-TileColor" content="#0a0a0f">
-  
+
+  <meta name="google-site-verification" content="MZ1RYNzi7pUIcxb_MBqywg_iEvFMDaudvQH0MgMlpnY">
+  <meta name="google-site-verification" content="v_6cEfCZcupJ7F-CQ99P6QviPh_EpY90qwJHkP-YUSE">
+
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
@@ -78,4 +81,4 @@ export default `<!DOCTYPE html><html lang="en" data-beasties-container><head>
 <link rel="modulepreload" href="chunk-ZKFOX5P2.js">
 
 
-<script id="ng-state" type="application/json">{"__nghData__":[{},{"t":{"59":"t0","60":"t1"},"c":{"59":[{"i":"t0","r":1}],"60":[]}},{"t":{"8":"t16"},"c":{"8":[{"i":"t16","r":1,"t":{"5":"t17"},"c":{"5":[{"i":"t17","r":1,"x":3}]}},{"i":"t16","r":1,"t":{"5":"t17"},"c":{"5":[{"i":"t17","r":1,"x":4}]}},{"i":"t16","r":1,"t":{"5":"t17"},"c":{"5":[{"i":"t17","r":1,"x":5}]}},{"i":"t16","r":1,"t":{"5":"t17"},"c":{"5":[{"i":"t17","r":1,"x":3}]},"x":2},{"i":"t16","r":1,"t":{"5":"t17"},"c":{"5":[{"i":"t17","r":1,"x":5}]}}]}},{"t":{"34":"t11","40":"t12"},"c":{"34":[{"i":"t11","r":1,"x":6}],"40":[{"i":"t12","r":1,"x":8}]}},{"c":{"5":[{"i":"c4146673250","r":1}]}}]}</script></body></html>`;
+<script id="ng-state" type="application/json">{"__nghData__":[{},{"t":{"59":"t0","60":"t1"},"c":{"59":[{"i":"t0","r":1}],"60":[]}},{"t":{"8":"t8"},"c":{"8":[{"i":"t8","r":1,"t":{"5":"t9"},"c":{"5":[{"i":"t9","r":1,"x":3}]}},{"i":"t8","r":1,"t":{"5":"t9"},"c":{"5":[{"i":"t9","r":1,"x":4}]}},{"i":"t8","r":1,"t":{"5":"t9"},"c":{"5":[{"i":"t9","r":1,"x":5}]}},{"i":"t8","r":1,"t":{"5":"t9"},"c":{"5":[{"i":"t9","r":1,"x":3}]},"x":2},{"i":"t8","r":1,"t":{"5":"t9"},"c":{"5":[{"i":"t9","r":1,"x":5}]}}]}},{"t":{"34":"t6","40":"t7"},"c":{"34":[{"i":"t6","r":1,"x":6}],"40":[{"i":"t7","r":1,"x":8}]}},{"c":{"5":[{"i":"c4146673250","r":1}]}}]}</script></body></html>`;

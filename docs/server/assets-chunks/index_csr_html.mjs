@@ -42,7 +42,10 @@ export default `<!doctype html>
   <!-- Theme Color -->
   <meta name="theme-color" content="#0a0a0f">
   <meta name="msapplication-TileColor" content="#0a0a0f">
-  
+
+  <meta name="google-site-verification" content="MZ1RYNzi7pUIcxb_MBqywg_iEvFMDaudvQH0MgMlpnY">
+  <meta name="google-site-verification" content="v_6cEfCZcupJ7F-CQ99P6QviPh_EpY90qwJHkP-YUSE">
+
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
