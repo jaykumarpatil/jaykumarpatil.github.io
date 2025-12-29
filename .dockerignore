@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+.angular
+
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test
+coverage
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Docs
+docs
+README.md
