@@ -18,9 +18,10 @@ import { RouterModule } from '@angular/router';
             <a routerLink="/" class="brand-link" aria-label="Jay Kumar Patil - Home">
               <span class="brand-icon" aria-hidden="true">
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="40" height="40" rx="10" fill="currentColor"/>
-                  <path d="M12 12h4v12c0 2-1 4-4 4" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round"/>
-                  <path d="M20 12h4c3 0 5 2 5 5s-2 5-5 5h-4V12z" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect width="40" height="40" rx="10" fill="currentColor" class="brand-bg"/>
+                  <path d="M10 12h4v12c0 2-1 4-4 4" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M18 12h4c3 0 5 2 5 5s-2 5-5 5h-4V12z" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M18 22v6" stroke="var(--bg-base)" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
               </span>
               <span class="brand-text">Jay Kumar Patil</span>

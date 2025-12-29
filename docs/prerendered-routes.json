@@ -1,0 +1,11 @@
+{
+  "routes": {
+    "/": {},
+    "/about": {},
+    "/articles": {},
+    "/contact": {},
+    "/experience": {},
+    "/projects": {},
+    "/skills": {}
+  }
+}

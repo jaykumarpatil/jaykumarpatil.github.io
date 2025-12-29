@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'jaykumarpatil-ssr',
-      script: 'dist/jaykumarpatil/server/server.mjs',
+      script: 'docs/server/server.mjs',
       instances: 1,
       exec_mode: 'fork',
       env: {
