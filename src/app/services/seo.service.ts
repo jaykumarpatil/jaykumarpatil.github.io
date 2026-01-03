@@ -66,7 +66,7 @@ export class SeoService {
   updateCanonicalUrl(url?: string): void {
     const canonicalUrl = url || `${this.baseUrl}${this.router.url}`;
     let link: HTMLLinkElement | null = this.document.querySelector('link[rel="canonical"]');
-    
+
     if (!link) {
       link = this.document.createElement('link');
       link.setAttribute('rel', 'canonical');
@@ -100,7 +100,7 @@ export class SeoService {
 
   setJsonLd(data: object): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    
+
     let script = this.document.querySelector('script[type="application/ld+json"]');
     if (!script) {
       script = this.document.createElement('script');
@@ -136,7 +136,7 @@ export class SeoService {
         addressCountry: 'India'
       },
       sameAs: [
-        'https://linkedin.com/in/jaykumarpatil3004',
+        'https://linkedin.com/in/jay-kumar-patil',
         'https://github.com/jaykumarpatil',
         'https://apachehadoop3.blogspot.com'
       ],

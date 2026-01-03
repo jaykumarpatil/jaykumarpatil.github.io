@@ -104,7 +104,7 @@ export class PortfolioDataService {
     profileImage: 'images/profile.png',
     resumeUrl: 'resume/jay-kumar-patil-resume.pdf',
     socialLinks: {
-      linkedin: 'https://linkedin.com/in/jaykumarpatil3004',
+      linkedin: 'https://linkedin.com/in/jay-kumar-patil',
       github: 'https://github.com/jaykumarpatil',
       blog: 'https://apachehadoop3.blogspot.com'
     }

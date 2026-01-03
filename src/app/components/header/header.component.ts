@@ -296,7 +296,7 @@ import { RouterModule, Router } from '@angular/router';
                [attr.tabindex]="menuOpen() ? 0 : -1">
               <svg width="24" height="24" aria-hidden="true"><use href="#icon-github"></use></svg>
             </a>
-            <a href="https://www.linkedin.com/in/jaykumarpatil3004/" 
+            <a href="https://www.linkedin.com/in/jay-kumar-patil/" 
                target="_blank" 
                rel="noopener noreferrer"
                class="social-link"
