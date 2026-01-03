@@ -14,7 +14,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
         <p class="page-subtitle animate-fade-in">I deliver high-impact solutions for global enterprises through technical leadership and collaboration.</p>
         <div class="projects-grid">
           @for (project of portfolioDataService.projects; track project.slug; let i = $index) {
-            <a class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100" [routerLink]="['/projects', project.slug]">
+            <div class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100">
               <div class="project-header">
                 <h2>{{ project.name }}</h2>
                 <span class="project-period">{{ project.period }}</span>
@@ -24,23 +24,19 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
                 <span class="project-org">{{ project.organization }}</span>
               </div>
               <p class="project-description">{{ project.impactSummary }}</p>
-              <div class="project-tech">
-                <span class="tech-label">Tech Stack:</span>
-                <span class="tech-value">{{ project.technology }}</span>
-              </div>
               <div class="project-tags">
-                @for (tag of project.tags; track tag) {
-                  <span class="tag">{{ tag }}</span>
+                @for (tech of project.technology; track tech) {
+                  <span class="tag">{{ tech }}</span>
                 }
               </div>
               <div class="project-footer">
                 <span class="team-size">Team: {{ project.teamSize }} members</span>
-                <span class="btn-pill btn-pill-forward">
-                  <span>View</span>
-                  <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
-                </span>
+                <a [routerLink]="['/projects', project.slug]" class="btn-pill btn-pill-forward">
+                  <span>View Case Study</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
               </div>
-            </a>
+            </div>
           }
         </div>
       </div>
@@ -93,9 +89,6 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       animation: fadeInUp 0.6s var(--ease-out) forwards;
       opacity: 0;
       backdrop-filter: blur(20px);
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
     }
     .project-card:hover { 
       border-color: rgba(var(--rgb-success), 0.3);

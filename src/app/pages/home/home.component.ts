@@ -109,14 +109,21 @@ import { SeoService } from '../../services/seo.service';
             <!-- Value Propositions as Cards -->
             <div class="value-grid" role="list">
               @for (bullet of portfolioDataService.valueBullets; track bullet.text) {
-                <div class="value-card" role="listitem">
+                <a routerLink="/blog" class="value-card hover-card" role="listitem">
                   <div class="value-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><use [attr.href]="bullet.icon"></use></svg>
                   </div>
                   <div class="value-body">
                     <p>{{ bullet.text }}</p>
                   </div>
-                </div>
+                  <div class="hover-overlay" aria-hidden="true">
+                    <span class="hover-overlay-title">Want to know how?</span>
+                    <span class="hover-overlay-cta">
+                      Visit Blog
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </span>
+                  </div>
+                </a>
               }
             </div>
             
@@ -469,6 +476,7 @@ import { SeoService } from '../../services/seo.service';
     }
     
     .value-card {
+      position: relative;
       display: flex;
       gap: var(--space-md);
       padding: var(--space-lg);
@@ -476,11 +484,16 @@ import { SeoService } from '../../services/seo.service';
       border: var(--border-subtle);
       border-radius: var(--radius-xl);
       transition: all var(--duration-normal) var(--ease-out);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      overflow: hidden;
     }
     
     .value-card:hover {
-      border-color: rgba(var(--rgb-success), 0.2);
-      transform: translateX(6px);
+      border-color: rgba(var(--rgb-success), 0.4);
+      transform: translateY(-4px);
+      box-shadow: var(--elevation-3), var(--glow-success);
     }
     
     .value-icon {
@@ -504,6 +517,61 @@ import { SeoService } from '../../services/seo.service';
       font-size: var(--text-sm);
       color: var(--color-subtle);
       line-height: 1.6;
+      transition: opacity var(--duration-normal) var(--ease-out);
+    }
+
+    /* Value Card Hover Overlay */
+    .value-hover-cta {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      background: rgba(var(--rgb-success), 0.95);
+      border-radius: var(--radius-xl);
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all var(--duration-normal) var(--ease-out);
+      pointer-events: none;
+    }
+
+    .value-card:hover .value-hover-cta,
+    .value-card:focus-visible .value-hover-cta {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hover-text {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: white;
+    }
+
+    .hover-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 8px 16px;
+      background: white;
+      color: var(--color-success);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      transition: all var(--duration-quick) var(--ease-out);
+    }
+
+    .value-card:hover .hover-link {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .hover-link svg {
+      transition: transform var(--duration-quick) var(--ease-out);
+    }
+
+    .value-card:hover .hover-link svg {
+      transform: translate(2px, -2px);
     }
     
     /* Link CTA */

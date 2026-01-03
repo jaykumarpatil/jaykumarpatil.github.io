@@ -513,6 +513,7 @@ section {
   border-radius: var(--radius-full);
   transition: all var(--duration-quick) var(--ease-out);
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-pill:hover {
@@ -570,6 +571,98 @@ section {
 .card-interactive:focus-visible {
   outline: var(--border-focus);
   outline-offset: 2px;
+}
+
+/* ===== Hover Overlay System ===== */
+/* Base card with hover overlay support */
+.hover-card {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.hover-card:hover {
+  border-color: rgba(var(--rgb-success), 0.4);
+  transform: translateY(-4px);
+  box-shadow: var(--elevation-3), var(--glow-success);
+}
+
+/* Hover Overlay - appears on hover */
+.hover-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  background: rgba(var(--rgb-success), 0.95);
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all var(--duration-normal) var(--ease-out);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hover-card:hover .hover-overlay,
+.hover-card:focus-visible .hover-overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hover Overlay Text */
+.hover-overlay-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: white;
+}
+
+/* Hover Overlay CTA Button */
+.hover-overlay-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 8px 16px;
+  background: white;
+  color: var(--color-success);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  transition: all var(--duration-quick) var(--ease-out);
+  text-decoration: none;
+}
+
+.hover-card:hover .hover-overlay-cta {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hover-overlay-cta svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--duration-quick) var(--ease-out);
+}
+
+.hover-card:hover .hover-overlay-cta svg {
+  transform: translate(2px, -2px);
+}
+
+/* Alternative: Subtle Hover Overlay (semi-transparent) */
+.hover-overlay-subtle {
+  background: var(--bg-overlay);
+  backdrop-filter: blur(8px);
+}
+
+/* Alternative: View CTA in center */
+.hover-overlay-view {
+  background: var(--bg-overlay);
+}
+
+.hover-overlay-view .hover-overlay-cta {
+  padding: 12px var(--space-xl);
+  background: var(--color-success);
+  color: white;
+  box-shadow: 0 4px 20px rgba(var(--rgb-success), 0.4);
 }
 
 /* ===== Tags & Badges (Atoms) ===== */

@@ -48,7 +48,7 @@ export interface Project {
   organization: string;
   teamSize: number;
   period: string;
-  technology: string;
+  technology: string[];
   impactSummary: string;
   responsibilities: string[];
   tags: string[];
@@ -207,7 +207,7 @@ export class PortfolioDataService {
       organization: 'Persistent Systems',
       teamSize: 12,
       period: '1 year 8 months',
-      technology: 'Spring Boot, Kafka, MongoDB, Apache Airflow',
+      technology: ['Spring Boot', 'Kafka', 'MongoDB', 'Apache Airflow'],
       impactSummary: 'I cut search times by 75% and reduced data size by 68% to create a better user experience.',
       responsibilities: [
         'I integrated new workflow tools to replace slow legacy systems.',
@@ -240,7 +240,7 @@ export class PortfolioDataService {
       organization: 'HCL Technologies',
       teamSize: 8,
       period: '8 months',
-      technology: 'Spring Cloud, Kubernetes, Kafka, Istio',
+      technology: ['Spring Cloud', 'Kubernetes', 'Kafka', 'Istio'],
       impactSummary: 'I built systems that handle millions of daily users and made updates 45% faster.',
       responsibilities: [
         'I moved the system from old tech to a modern cloud-based setup.',
@@ -273,7 +273,7 @@ export class PortfolioDataService {
       organization: 'RWS Moravia',
       teamSize: 4,
       period: '3+ years',
-      technology: 'Jenkins, Docker, Kafka, RabbitMQ, Redis',
+      technology: ['Jenkins', 'Docker', 'Kafka', 'RabbitMQ', 'Redis'],
       impactSummary: 'I cut release times by 50% and ensured we never had to take the site down for updates.',
       responsibilities: [
         'I built a new content system to improve mobile app usability.',
@@ -304,7 +304,7 @@ export class PortfolioDataService {
       organization: 'Lumium',
       teamSize: 2,
       period: '7 months',
-      technology: 'Spring Data, HATEOAS, Spring Batch, AWS',
+      technology: ['Spring Data', 'HATEOAS', 'Spring Batch', 'AWS'],
       impactSummary: 'I built a security tool that detects and stops attacks on cloud infrastructure.',
       responsibilities: [
         'I designed how different parts of the app talk to each other securely.',
@@ -321,7 +321,7 @@ export class PortfolioDataService {
       organization: 'ITC Infotech',
       teamSize: 15,
       period: '6 months',
-      technology: 'Spring WebFlux, Spring Security, Redis',
+      technology: ['Spring WebFlux', 'Spring Security', 'Redis'],
       impactSummary: 'I created a tool to configure and monitor server networks in real-time.',
       responsibilities: [
         'I used reactive tools to handle many network tasks at once.',
