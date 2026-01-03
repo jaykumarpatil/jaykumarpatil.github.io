@@ -10,11 +10,11 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   template: `
     <section class="projects">
       <div class="container">
-        <h1 class="page-title animate-fade-in">My <span class="text-gradient">Projects</span></h1>
-        <p class="page-subtitle animate-fade-in">Delivering high-impact solutions across enterprise clients with cross-functional teams</p>
+        <h1 class="page-title animate-fade-in">Featured <span class="text-gradient">Case Studies</span></h1>
+        <p class="page-subtitle animate-fade-in">I deliver high-impact solutions for global enterprises through technical leadership and collaboration.</p>
         <div class="projects-grid">
           @for (project of portfolioDataService.projects; track project.slug; let i = $index) {
-            <div class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100">
+            <a class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100" [routerLink]="['/projects', project.slug]">
               <div class="project-header">
                 <h2>{{ project.name }}</h2>
                 <span class="project-period">{{ project.period }}</span>
@@ -35,12 +35,12 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
               </div>
               <div class="project-footer">
                 <span class="team-size">Team: {{ project.teamSize }} members</span>
-                <a [routerLink]="['/projects', project.slug]" class="btn-link">
-                  View Case Study
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
+                <span class="btn-pill btn-pill-forward">
+                  <span>View</span>
+                  <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+                </span>
               </div>
-            </div>
+            </a>
           }
         </div>
       </div>
@@ -93,9 +93,12 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       animation: fadeInUp 0.6s var(--ease-out) forwards;
       opacity: 0;
       backdrop-filter: blur(20px);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
     .project-card:hover { 
-      border-color: rgba(200, 245, 66, 0.3);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateY(-8px);
       box-shadow: var(--elevation-4);
     }
@@ -160,7 +163,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       margin-bottom: var(--space-md);
     }
     .tag { 
-      background: rgba(200, 245, 66, 0.1);
+      background: rgba(var(--rgb-success), 0.1);
       color: var(--color-success);
       padding: 4px var(--space-sm);
       border-radius: var(--radius-md);
@@ -171,6 +174,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       margin-top: auto;
       padding-top: var(--space-md);
       border-top: var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .team-size { 
       font-size: var(--text-sm);

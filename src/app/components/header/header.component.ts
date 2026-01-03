@@ -1,4 +1,4 @@
-import { Component, signal, HostListener, inject, PLATFORM_ID } from '@angular/core';
+import { Component, signal, HostListener, inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
@@ -591,11 +591,11 @@ import { RouterModule, Router } from '@angular/router';
       padding: var(--space-xs) var(--space-md);
       min-height: 40px;
       background: var(--color-success);
-      color: #050507;
+      color: #ffffff;
       font-size: var(--text-sm);
       font-weight: 600;
       text-decoration: none;
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-full);
       transition: all 0.2s ease;
       white-space: nowrap;
       flex-shrink: 0;
@@ -615,8 +615,8 @@ import { RouterModule, Router } from '@angular/router';
 
     .cta-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(200, 245, 66, 0.3);
-      color: #050507;
+      box-shadow: 0 4px 20px rgba(var(--rgb-success), 0.3);
+      color: #ffffff;
     }
 
     .cta-btn:focus-visible {
@@ -876,13 +876,35 @@ import { RouterModule, Router } from '@angular/router';
     /* Dark/Light mode adjustments handled by CSS variables */
   `]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
 
   menuOpen = signal(false);
   isScrolled = signal(false);
   isHidden = signal(false);
   isDarkMode = signal(true);
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const savedTheme = localStorage.getItem('theme');
+      const root = document.documentElement;
+
+      if (savedTheme === 'light') {
+        this.isDarkMode.set(false);
+        root.classList.add('light-theme');
+      } else if (savedTheme === 'dark') {
+        this.isDarkMode.set(true);
+        root.classList.add('dark-theme');
+      } else {
+        // Fallback to system preference
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        this.isDarkMode.set(!prefersLight);
+        if (prefersLight) {
+          root.classList.add('light-theme');
+        }
+      }
+    }
+  }
 
   private lastScrollY = 0;
   private scrollThreshold = 100;
@@ -938,56 +960,13 @@ export class HeaderComponent {
     if (isPlatformBrowser(this.platformId)) {
       const root = document.documentElement;
       if (this.isDarkMode()) {
-        // Dark mode
-        root.style.setProperty('--bg-base', '#050507');
-        root.style.setProperty('--bg-elevated', '#0a0a0f');
-        root.style.setProperty('--bg-surface', '#101016');
-        root.style.setProperty('--bg-overlay', 'rgba(16, 16, 22, 0.85)');
-        root.style.setProperty('--bg-glass', 'rgba(16, 16, 22, 0.6)');
-        root.style.setProperty('--color-neutral', '#f8fafc');
-        root.style.setProperty('--color-subtle', '#a1a1aa');
-        root.style.setProperty('--color-muted', '#52525b');
-        root.style.setProperty('--color-success', '#c8f542');
-        root.style.setProperty('--color-creative', '#22d3ee');
-        root.style.setProperty('--border-subtle', '1px solid rgba(255, 255, 255, 0.04)');
-        root.style.setProperty('--border-default', '1px solid rgba(255, 255, 255, 0.08)');
-        root.style.setProperty('--text-primary', '#f8fafc');
-        root.style.setProperty('--text-secondary', '#a1a1aa');
-        root.style.setProperty('--text-tertiary', '#71717a');
-        root.style.setProperty('--elevation-2', '0 4px 24px rgba(0, 0, 0, 0.4)');
-        root.style.setProperty('--elevation-3', '0 8px 32px rgba(0, 0, 0, 0.5)');
-        root.style.setProperty('--gradient-surface', 'linear-gradient(180deg, rgba(5, 5, 7, 0) 0%, rgba(16, 16, 22, 0.5) 100%)');
+        root.classList.remove('light-theme');
+        root.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
       } else {
-        // Light mode - Optimized for readability
-        // Backgrounds: Soft off-white to reduce glare
-        root.style.setProperty('--bg-base', '#f5f5f7');
-        root.style.setProperty('--bg-elevated', '#ffffff');
-        root.style.setProperty('--bg-surface', '#ebebef');
-        root.style.setProperty('--bg-overlay', 'rgba(245, 245, 247, 0.92)');
-        root.style.setProperty('--bg-glass', 'rgba(255, 255, 255, 0.75)');
-
-        // Text: Dark gray instead of pure black for comfort
-        root.style.setProperty('--color-neutral', '#1a1a1f');
-        root.style.setProperty('--color-subtle', '#4a4a52');
-        root.style.setProperty('--color-muted', '#71717a');
-
-        // Accent colors: Desaturated for light mode
-        root.style.setProperty('--color-success', '#6b8c23');
-        root.style.setProperty('--color-creative', '#0891b2');
-
-        // Borders: Subtle shadows for depth hierarchy
-        root.style.setProperty('--border-subtle', '1px solid rgba(0, 0, 0, 0.06)');
-        root.style.setProperty('--border-default', '1px solid rgba(0, 0, 0, 0.1)');
-
-        // Text hierarchy
-        root.style.setProperty('--text-primary', '#1a1a1f');
-        root.style.setProperty('--text-secondary', '#4a4a52');
-        root.style.setProperty('--text-tertiary', '#71717a');
-
-        // Shadows for depth (light mode uses shadows, not lightening)
-        root.style.setProperty('--elevation-2', '0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04)');
-        root.style.setProperty('--elevation-3', '0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06)');
-        root.style.setProperty('--gradient-surface', 'linear-gradient(180deg, rgba(245, 245, 247, 0) 0%, rgba(235, 235, 239, 0.5) 100%)');
+        root.classList.remove('dark-theme');
+        root.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
       }
     }
   }

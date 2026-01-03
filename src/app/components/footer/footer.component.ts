@@ -103,8 +103,8 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
             <p class="cta-text">
               Looking for a technical lead to design resilient, high-performance systems for your organization?
             </p>
-            <a routerLink="/contact" class="btn btn-primary cta-button">
-              <span>Get In Touch</span>
+            <a routerLink="/contact" class="btn btn-primary">
+              <span>Let's Talk</span>
               <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
             </a>
           </div>
@@ -349,7 +349,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       gap: var(--space-md);
       padding: var(--space-lg);
       background: var(--bg-surface);
-      border: 1px solid rgba(200, 245, 66, 0.15);
+      border: 1px solid rgba(var(--rgb-success), 0.15);
       border-radius: var(--radius-xl);
     }
 
@@ -368,32 +368,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       margin: 0;
     }
 
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-md) var(--space-xl);
-      margin-top: var(--space-sm);
-      min-height: var(--touch-target);
+    .footer-cta .btn-primary {
       width: fit-content;
-      background: var(--color-success);
-      color: #050507;
-      font-size: var(--text-sm);
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: var(--radius-md);
-      transition: all 0.2s ease;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(200, 245, 66, 0.3);
-      color: #050507;
-    }
-
-    .cta-button:focus-visible {
-      outline: 3px solid var(--border-focus);
-      outline-offset: 2px;
+      margin-top: var(--space-sm);
     }
 
     /* Footer Bottom */

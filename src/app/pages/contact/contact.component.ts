@@ -11,7 +11,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       <div class="container">
         <h1 class="page-title animate-fade-in">Get In <span class="text-gradient">Touch</span></h1>
         <p class="contact-intro animate-fade-in delay-100">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+          I am always open to discussing new projects, technical consultations, or collaboration opportunities. Let's talk about how I can help you.
         </p>
         <div class="contact-content">
           <div class="contact-info animate-fade-in delay-200">
@@ -50,8 +50,8 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           </div>
           <div class="cta-section animate-fade-in delay-300">
             <div class="cta-card">
-              <h2>Let's Work Together!</h2>
-              <p>Whether you have a project in mind, need technical consultation, or want to explore collaboration opportunities, I'd love to hear from you.</p>
+              <h2>Let's Build Something Great</h2>
+              <p>Whether you need to scale your infrastructure or improve your development process, I am here to help you succeed.</p>
               <a [href]="'mailto:' + portfolioDataService.profile.email" class="btn btn-primary">Send Email</a>
             </div>
           </div>
@@ -110,7 +110,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       backdrop-filter: blur(20px);
     }
     .info-card:hover { 
-      border-color: rgba(200, 245, 66, 0.3);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateY(-5px);
       box-shadow: var(--elevation-3);
     }
@@ -121,7 +121,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       align-items: center;
       justify-content: center;
       margin: 0 auto var(--space-md);
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.15), rgba(34, 211, 238, 0.1));
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.15), rgba(var(--rgb-creative), 0.1));
       border-radius: var(--radius-lg);
     }
     .info-icon .icon {
@@ -151,8 +151,8 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       justify-content: center;
     }
     .cta-card { 
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.08), rgba(34, 211, 238, 0.06));
-      border: 1px solid rgba(200, 245, 66, 0.2);
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.08), rgba(var(--rgb-creative), 0.06));
+      border: 1px solid rgba(var(--rgb-success), 0.2);
       border-radius: var(--radius-2xl);
       padding: var(--space-2xl);
       text-align: center;
@@ -188,7 +188,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     .btn-primary:hover { 
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 0 40px rgba(200, 245, 66, 0.5);
+      box-shadow: 0 0 40px rgba(var(--rgb-success), 0.5);
     }
     .animate-fade-in { 
       animation: fadeInUp 0.6s var(--ease-out) forwards;

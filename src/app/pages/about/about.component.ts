@@ -30,7 +30,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
             </div>
           </div>
           <div class="value-bullets animate-fade-in delay-150">
-            <h2 class="section-subtitle">Core Expertise</h2>
+            <h2 class="section-subtitle">How I Can Help You</h2>
             <div class="bullets-list">
               @for (bullet of portfolioDataService.valueBullets; track bullet.text) {
                 <div class="bullet-item">
@@ -69,7 +69,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           </div>
         </div>
         <div class="journey-section animate-fade-in delay-300">
-          <h2 class="section-subtitle">My Journey</h2>
+          <h2 class="section-subtitle">My Professional Path</h2>
           <div class="timeline">
             @for (step of portfolioDataService.journey; track step.period) {
               <div class="timeline-item">
@@ -93,7 +93,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           </div>
         </div>
         <div class="interests-section animate-fade-in delay-400">
-          <h2 class="section-subtitle">Interests & Focus Areas</h2>
+          <h2 class="section-subtitle">Focus Areas & Passions</h2>
           <div class="interests-grid">
             @for (interest of portfolioDataService.interests; track interest.title) {
               <div class="interest-item">
@@ -220,8 +220,10 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       transition: all var(--duration-normal) var(--ease-out);
     }
     .bullet-item:hover { 
-      border-color: rgba(200, 245, 66, 0.3);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateX(5px);
+      box-shadow: var(--elevation-2), var(--glow-success);
+      background: var(--bg-glass);
     }
     .bullet-icon { 
       display: flex;
@@ -229,7 +231,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       justify-content: center;
       width: 44px;
       height: 44px;
-      background: rgba(200, 245, 66, 0.1);
+      background: rgba(var(--rgb-success), 0.1);
       border-radius: var(--radius-lg);
       flex-shrink: 0;
       color: var(--color-success);
@@ -257,8 +259,10 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       transition: all var(--duration-normal) var(--ease-out);
     }
     .education-item:hover { 
-      border-color: rgba(34, 211, 238, 0.3);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateX(5px);
+      box-shadow: var(--elevation-2), var(--glow-success);
+      background: var(--bg-glass);
     }
     .edu-period { 
       font-size: var(--text-sm);
@@ -320,7 +324,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       transition: all var(--duration-normal) var(--ease-out);
     }
     .timeline-content:hover { 
-      border-color: rgba(200, 245, 66, 0.3);
+      border-color: rgba(var(--rgb-success), 0.3);
+      box-shadow: var(--elevation-2), var(--glow-success);
+      background: var(--bg-glass);
     }
     .timeline-period { 
       font-size: var(--text-sm);
@@ -348,14 +354,16 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       align-items: flex-start;
       gap: var(--space-md);
       background: var(--bg-glass);
-      border: 1px solid rgba(200, 245, 66, 0.15);
+      border: 1px solid rgba(var(--rgb-success), 0.15);
       border-radius: var(--radius-xl);
       padding: var(--space-lg);
       transition: all var(--duration-normal) var(--ease-out);
     }
     .interest-item:hover { 
-      border-color: rgba(200, 245, 66, 0.4);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateY(-3px);
+      box-shadow: var(--elevation-3), var(--glow-success);
+      background: var(--bg-glass);
     }
     .interest-icon { 
       display: flex;
@@ -363,7 +371,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       justify-content: center;
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.15), rgba(34, 211, 238, 0.1));
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.15), rgba(var(--rgb-creative), 0.1));
       border-radius: var(--radius-lg);
       flex-shrink: 0;
     }

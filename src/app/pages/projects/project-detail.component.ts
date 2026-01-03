@@ -12,9 +12,9 @@ import { Meta, Title } from '@angular/platform-browser';
     <article class="project-detail" *ngIf="project">
       <div class="container container-narrow">
         <header class="project-header animate-fade-in">
-          <a routerLink="/projects" class="back-link">
+          <a routerLink="/projects" class="btn-pill btn-pill-back">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Back to Projects
+            <span>Back to Projects</span>
           </a>
           <h1 class="project-title">{{ project.name }}</h1>
           <div class="project-meta">
@@ -32,7 +32,7 @@ import { Meta, Title } from '@angular/platform-browser';
 
         <section class="project-content animate-fade-in delay-100">
           <div class="content-group">
-            <h2>Overview</h2>
+            <h2>Project Overview</h2>
             <p>{{ project.impactSummary }}</p>
           </div>
 
@@ -45,7 +45,7 @@ import { Meta, Title } from '@angular/platform-browser';
             </div>
 
             <div class="content-group" *ngIf="project.solutions?.length">
-              <h2>Solutions implemented</h2>
+              <h2>The Solution</h2>
               <ul>
                 <li *ngFor="let solution of project.solutions">{{ solution }}</li>
               </ul>
@@ -53,7 +53,7 @@ import { Meta, Title } from '@angular/platform-browser';
           </div>
 
           <div class="content-group" *ngIf="project.outcomes?.length">
-            <h2>Measurable Results</h2>
+            <h2>Key Results</h2>
             <div class="outcomes-grid">
               <div class="outcome-card" *ngFor="let outcome of project.outcomes">
                 {{ outcome }}
@@ -95,18 +95,8 @@ import { Meta, Title } from '@angular/platform-browser';
       padding-block: var(--space-4xl) var(--space-section);
       min-height: 100vh;
     }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-      color: var(--color-success);
-      font-weight: 500;
-      margin-bottom: var(--space-xl);
-      font-size: var(--text-sm);
-      transition: transform var(--duration-quick) var(--ease-out);
-    }
-    .back-link:hover {
-      transform: translateX(-4px);
+    .project-header {
+      margin-bottom: var(--space-2xl);
     }
     .project-title {
       font-size: var(--text-5xl);
@@ -172,8 +162,8 @@ import { Meta, Title } from '@angular/platform-browser';
       gap: var(--space-md);
     }
     .outcome-card {
-      background: rgba(200, 245, 66, 0.05);
-      border: 1px solid rgba(200, 245, 66, 0.1);
+      background: rgba(var(--rgb-success), 0.05);
+      border: 1px solid rgba(var(--rgb-success), 0.1);
       padding: var(--space-md);
       border-radius: var(--radius-md);
       color: var(--color-success);

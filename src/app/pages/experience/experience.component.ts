@@ -9,8 +9,8 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   template: `
     <section class="experience">
       <div class="container">
-        <h1 class="page-title animate-fade-in">Work <span class="text-gradient">Experience</span></h1>
-        <p class="page-subtitle animate-fade-in">A decade of building scalable systems, leading teams, and driving engineering excellence</p>
+        <h1 class="page-title animate-fade-in">Professional <span class="text-gradient">Experience</span></h1>
+        <p class="page-subtitle animate-fade-in">I have over 10 years of experience building reliable systems and leading successful engineering teams.</p>
         <div class="experience-list">
           @for (exp of portfolioDataService.experience; track exp.company; let i = $index) {
             <div class="experience-card animate-fade-in" [style.animation-delay.ms]="i * 100">
@@ -131,9 +131,10 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       backdrop-filter: blur(20px);
     }
     .experience-card:hover { 
-      border-color: rgba(200, 245, 66, 0.3);
-      transform: translateY(-5px);
-      box-shadow: var(--elevation-3);
+      border-color: rgba(var(--rgb-success), 0.3);
+      transform: translateY(-4px);
+      box-shadow: var(--elevation-3), var(--glow-success);
+      background: var(--bg-glass);
     }
     .exp-header { 
       display: flex;
@@ -189,7 +190,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     .achievement-card { 
       background: var(--bg-glass);
-      border: 1px solid rgba(200, 245, 66, 0.15);
+      border: 1px solid rgba(var(--rgb-success), 0.15);
       border-radius: var(--radius-xl);
       padding: var(--space-lg);
       text-align: center;
@@ -197,9 +198,10 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       backdrop-filter: blur(20px);
     }
     .achievement-card:hover { 
-      border-color: rgba(200, 245, 66, 0.4);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateY(-5px);
-      box-shadow: var(--elevation-3);
+      box-shadow: var(--elevation-3), var(--glow-success);
+      background: var(--bg-glass);
     }
     .achievement-icon { 
       margin-bottom: var(--space-xs);

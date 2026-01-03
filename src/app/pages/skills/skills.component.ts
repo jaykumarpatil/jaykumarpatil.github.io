@@ -9,8 +9,8 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   template: `
     <section class="skills">
       <div class="container">
-        <h1 class="page-title animate-fade-in">Technical <span class="text-gradient">Skills</span></h1>
-        <p class="page-subtitle animate-fade-in">Full-stack expertise spanning cloud-native development, DevOps automation, and AI-powered solutions</p>
+        <h1 class="page-title animate-fade-in">Technical <span class="text-gradient">Expertise</span></h1>
+        <p class="page-subtitle animate-fade-in">I specialize in cloud-native development, DevOps automation, and building scalable enterprise systems.</p>
         <div class="skills-grid">
           @for (skillGroup of portfolioDataService.skills; track skillGroup.category; let i = $index) {
             <div class="skill-category animate-fade-in" [style.animation-delay.ms]="i * 100">
@@ -32,7 +32,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           }
         </div>
         <div class="certifications-section animate-fade-in">
-          <h2 class="section-subtitle">Certifications & Expertise</h2>
+          <h2 class="section-subtitle">Certifications & Specialized Expertise</h2>
           <div class="cert-grid">
             <div class="cert-card">
               <div class="cert-icon">
@@ -115,7 +115,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       backdrop-filter: blur(20px);
     }
     .skill-category:hover { 
-      border-color: rgba(200, 245, 66, 0.2);
+      border-color: rgba(var(--rgb-success), 0.2);
     }
     .category-title { 
       font-size: var(--text-xl);
@@ -173,7 +173,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     .cert-card { 
       background: var(--bg-glass);
-      border: 1px solid rgba(200, 245, 66, 0.15);
+      border: 1px solid rgba(var(--rgb-success), 0.15);
       border-radius: var(--radius-xl);
       padding: var(--space-lg);
       text-align: center;
@@ -181,9 +181,10 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       backdrop-filter: blur(20px);
     }
     .cert-card:hover { 
-      border-color: rgba(200, 245, 66, 0.4);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateY(-5px);
-      box-shadow: var(--elevation-3);
+      box-shadow: var(--elevation-3), var(--glow-success);
+      background: var(--bg-glass);
     }
     .cert-icon { 
       margin-bottom: var(--space-md);
@@ -221,7 +222,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   `]
 })
 export class SkillsComponent {
-  constructor(public portfolioDataService: PortfolioDataService) {}
+  constructor(public portfolioDataService: PortfolioDataService) { }
 
   getSkillClass(proficiency: number): string {
     if (proficiency >= 85) return 'expert';

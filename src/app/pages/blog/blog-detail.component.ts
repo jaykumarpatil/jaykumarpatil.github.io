@@ -15,12 +15,12 @@ import { Meta } from '@angular/platform-browser';
         <!-- Blog Header -->
         <header class="blog-header">
           <div class="container">
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-              <a routerLink="/blog" class="breadcrumb-link">
-                <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
-                Back to Blog
+            <div class="breadcrumb animate-fade-in">
+              <a routerLink="/blog" class="btn-pill btn-pill-back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span>Back to Blog</span>
               </a>
-            </nav>
+            </div>
 
             <div class="blog-meta-header">
               <time class="blog-date" [attr.datetime]="post.date" itemprop="datePublished">
@@ -174,33 +174,12 @@ import { Meta } from '@angular/platform-browser';
     /* ===== Blog Layout Styles ===== */
     .blog-header {
       padding-block: var(--space-3xl) var(--space-2xl);
-      background: linear-gradient(180deg, rgba(200, 245, 66, 0.03) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(var(--rgb-success), 0.03) 0%, transparent 100%);
       border-bottom: var(--border-subtle);
     }
 
     .breadcrumb {
       margin-bottom: var(--space-xl);
-    }
-
-    .breadcrumb-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-      color: var(--color-success);
-      font-size: var(--text-sm);
-      font-weight: 600;
-      text-decoration: none;
-      padding: 8px 16px;
-      background: rgba(200, 245, 66, 0.05);
-      border: 1px solid rgba(200, 245, 66, 0.1);
-      border-radius: var(--radius-full);
-      transition: all var(--duration-quick) var(--ease-out);
-    }
-
-    .breadcrumb-link:hover {
-      background: rgba(200, 245, 66, 0.1);
-      transform: translateX(-4px);
-      box-shadow: 0 4px 12px rgba(200, 245, 66, 0.1);
     }
 
     .blog-meta-header {
@@ -238,12 +217,12 @@ import { Meta } from '@angular/platform-browser';
 
     .tech-tag {
       padding: 6px var(--space-sm);
-      background: rgba(200, 245, 66, 0.1);
+      background: rgba(var(--rgb-success), 0.1);
       color: var(--color-success);
       font-size: var(--text-sm);
       font-weight: 500;
       border-radius: var(--radius-md);
-      border: 1px solid rgba(200, 245, 66, 0.2);
+      border: 1px solid rgba(var(--rgb-success), 0.2);
     }
 
     .author-info {
@@ -263,7 +242,7 @@ import { Meta } from '@angular/platform-browser';
       justify-content: center;
       width: 48px;
       height: 48px;
-      background: rgba(200, 245, 66, 0.1);
+      background: rgba(var(--rgb-success), 0.1);
       border-radius: var(--radius-full);
       color: var(--color-success);
     }
@@ -333,7 +312,7 @@ import { Meta } from '@angular/platform-browser';
     }
 
     .highlight-info {
-      background: rgba(200, 245, 66, 0.05);
+      background: rgba(var(--rgb-success), 0.05);
       padding: var(--space-lg);
       border-left: 4px solid var(--color-success);
       border-radius: var(--radius-md);
@@ -486,7 +465,7 @@ import { Meta } from '@angular/platform-browser';
     /* ===== Blog Footer ===== */
     .blog-footer {
       padding-block: var(--space-4xl);
-      background: linear-gradient(0deg, rgba(200, 245, 66, 0.03) 0%, transparent 100%);
+      background: linear-gradient(0deg, rgba(var(--rgb-success), 0.03) 0%, transparent 100%);
       border-top: var(--border-subtle);
       margin-top: var(--space-3xl);
     }
@@ -497,7 +476,7 @@ import { Meta } from '@angular/platform-browser';
       margin: 0 auto;
       padding: var(--space-2xl);
       background: var(--bg-surface);
-      border: 1px solid rgba(200, 245, 66, 0.1);
+      border: 1px solid rgba(var(--rgb-success), 0.1);
       border-radius: var(--radius-xl);
       box-shadow: var(--elevation-2);
     }

@@ -46,7 +46,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
               </div>
               <div class="featured-tags" role="list" aria-label="Post tags">
                 @for (tag of featuredPost.tags; track tag) {
-                  <span class="tech-tag" role="listitem">{{ tag }}</span>
+                  <span class="tag" role="listitem">{{ tag }}</span>
                 }
               </div>
             </div>
@@ -82,7 +82,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
               <p class="blog-description">{{ post.description }}</p>
               <div class="blog-tags" role="list" aria-label="Tags">
                 @for (tag of post.tags.slice(0, 3); track tag) {
-                  <span class="tech-tag" role="listitem">{{ tag }}</span>
+                  <span class="tag" role="listitem">{{ tag }}</span>
                 }
               </div>
               <div class="blog-cta" aria-hidden="true">
@@ -168,7 +168,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
 
     .featured-post:hover,
     .featured-post:focus-visible {
-      border-color: rgba(200, 245, 66, 0.3);
+      border-color: rgba(var(--rgb-success), 0.3);
       transform: translateY(-4px);
       box-shadow: var(--elevation-3), var(--glow-success);
     }
@@ -185,7 +185,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
       gap: var(--space-xs);
       width: fit-content;
       padding: 6px var(--space-sm);
-      background: rgba(200, 245, 66, 0.12);
+      background: rgba(var(--rgb-success), 0.12);
       color: var(--color-success);
       font-size: var(--text-xs);
       font-weight: 600;
@@ -241,7 +241,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
     .visual-gradient {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.1), rgba(34, 211, 238, 0.08));
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.1), rgba(var(--rgb-creative), 0.08));
     }
 
     .visual-icon {
@@ -277,7 +277,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
       justify-content: center;
       width: 40px;
       height: 40px;
-      background: rgba(200, 245, 66, 0.08);
+      background: rgba(var(--rgb-success), 0.08);
       border-radius: var(--radius-md);
       color: var(--color-success);
     }
@@ -312,15 +312,6 @@ import { BlogService, BlogPost } from '../../services/blog.service';
       display: flex;
       flex-wrap: wrap;
       gap: var(--space-xs);
-    }
-
-    .tech-tag {
-      padding: 4px var(--space-xs);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--color-subtle);
-      font-size: var(--text-xs);
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .blog-cta {
@@ -375,7 +366,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
     .page-btn:hover, .pagination-btn:hover:not(:disabled) {
       border-color: var(--color-success);
       color: var(--color-success);
-      background: rgba(200, 245, 66, 0.05);
+      background: rgba(var(--rgb-success), 0.05);
     }
 
     .page-btn.active {
@@ -396,8 +387,8 @@ import { BlogService, BlogPost } from '../../services/blog.service';
       justify-content: space-between;
       gap: var(--space-xl);
       padding: var(--space-xl);
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.06), rgba(34, 211, 238, 0.04));
-      border-color: rgba(200, 245, 66, 0.15);
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.06), rgba(var(--rgb-creative), 0.04));
+      border-color: rgba(var(--rgb-success), 0.15);
     }
 
     .cta-content h3 {

@@ -25,8 +25,8 @@ import { SeoService } from '../../services/seo.service';
           </div>
           
           <h1 id="home-heading" class="home-title animate-fade-in-up delay-100">
-            Building <span class="text-gradient">Scalable</span> 
-            <br>Digital Solutions
+            I Build <span class="text-gradient">Scalable Systems</span> 
+            <br>That Power Your Business
           </h1>
           
           <p class="home-description animate-fade-in-up delay-200">
@@ -120,16 +120,16 @@ import { SeoService } from '../../services/seo.service';
               }
             </div>
             
-            <a routerLink="/about" class="link-cta">
-              Learn more about my journey
-              <svg aria-hidden="true" width="18" height="18"><use href="#icon-arrow-right"></use></svg>
-            </a>
+            <a routerLink="/about" class="learn-more-link btn-pill btn-pill-forward">
+            <span>Learn more about my journey</span>
+            <svg aria-hidden="true" width="16" height="16"><use href="#icon-arrow-right"></use></svg>
+          </a>
           </div>
           
           <aside class="about-sidebar animate-fade-in-up delay-200" aria-label="Technical skills">
             <div class="skills-cloud">
               @for (skill of getTopSkills(); track skill) {
-                <span class="skill-tag">{{ skill }}</span>
+                <span class="tag">{{ skill }}</span>
               }
             </div>
           </aside>
@@ -143,9 +143,9 @@ import { SeoService } from '../../services/seo.service';
         <header class="section-header animate-fade-in-up">
           <span class="section-tag">Portfolio</span>
           <h2 id="projects-heading" class="section-title">
-            Featured <span class="text-gradient">Projects</span>
+            Featured <span class="text-gradient">Work</span>
           </h2>
-          <p class="section-description">Enterprise solutions delivering measurable business impact</p>
+          <p class="section-description">Enterprise solutions that drive real results for your business</p>
         </header>
         
         <div class="projects-grid" role="list">
@@ -184,12 +184,12 @@ import { SeoService } from '../../services/seo.service';
                 <p class="project-summary">{{ project.impactSummary }}</p>
                 <div class="project-tags" aria-label="Technologies used">
                   @for (tag of project.tags.slice(0, 3); track tag) {
-                    <span class="tech-tag">{{ tag }}</span>
+                    <span class="tag">{{ tag }}</span>
                   }
                 </div>
               </div>
               <div class="project-hover-cta" aria-hidden="true">
-                <span class="cta-text">View Case Study</span>
+                <span class="cta-text">View</span>
               </div>
             </a>
           }
@@ -210,8 +210,8 @@ import { SeoService } from '../../services/seo.service';
         <div class="cta-card animate-fade-in-up">
           <header class="cta-header">
             <span class="section-tag">Let's Connect</span>
-            <h2 id="cta-heading">Have a project in mind?</h2>
-            <p>I'm always interested in discussing new opportunities and challenges.</p>
+            <h2 id="cta-heading">Ready to scale your next project?</h2>
+            <p>I am always open to discussing new opportunities. Let’s talk about how we can work together.</p>
           </header>
           <a routerLink="/contact" class="btn btn-primary btn-lg">
             Start a Conversation
@@ -250,7 +250,7 @@ import { SeoService } from '../../services/seo.service';
     .orb-primary {
       width: min(50vw, 500px);
       height: min(50vw, 500px);
-      background: radial-gradient(circle, rgba(200, 245, 66, 0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--rgb-success), 0.12) 0%, transparent 70%);
       top: -15%;
       right: -5%;
       animation: float 10s ease-in-out infinite;
@@ -259,7 +259,7 @@ import { SeoService } from '../../services/seo.service';
     .orb-secondary {
       width: min(35vw, 350px);
       height: min(35vw, 350px);
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--rgb-creative), 0.1) 0%, transparent 70%);
       bottom: 10%;
       left: -5%;
       animation: float 12s ease-in-out infinite reverse;
@@ -278,8 +278,8 @@ import { SeoService } from '../../services/seo.service';
       align-items: center;
       gap: var(--space-xs);
       padding: 6px var(--space-sm) 6px 8px;
-      background: rgba(200, 245, 66, 0.08);
-      border: 1px solid rgba(200, 245, 66, 0.15);
+      background: rgba(var(--rgb-success), 0.08);
+      border: 1px solid rgba(var(--rgb-success), 0.15);
       border-radius: var(--radius-full);
       font-size: var(--text-sm);
       color: var(--color-success);
@@ -372,7 +372,7 @@ import { SeoService } from '../../services/seo.service';
     .profile-accent {
       position: absolute;
       inset: -3px;
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.4), transparent 50%, rgba(34, 211, 238, 0.3));
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.4), transparent 50%, rgba(var(--rgb-creative), 0.3));
       border-radius: inherit;
       z-index: -1;
       filter: blur(15px);
@@ -383,14 +383,14 @@ import { SeoService } from '../../services/seo.service';
     .bottom-indicators {
       padding: var(--space-lg) 0 var(--space-2xl);
     }
-
+ 
     .bottom-row {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: var(--space-xl);
     }
-
+ 
     @media (max-width: 1024px) {
       .bottom-row {
         justify-content: flex-end;
@@ -405,7 +405,7 @@ import { SeoService } from '../../services/seo.service';
       padding: 10px var(--space-md);
       background: var(--bg-overlay);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: var(--border-default);
       border-radius: var(--radius-lg);
       font-size: var(--text-sm);
       font-weight: 500;
@@ -420,7 +420,7 @@ import { SeoService } from '../../services/seo.service';
       height: 20px;
       color: var(--color-success);
     }
-
+ 
     .float-icon svg {
       width: 20px;
       height: 20px;
@@ -473,13 +473,13 @@ import { SeoService } from '../../services/seo.service';
       gap: var(--space-md);
       padding: var(--space-lg);
       background: var(--bg-glass);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: var(--border-subtle);
       border-radius: var(--radius-xl);
       transition: all var(--duration-normal) var(--ease-out);
     }
     
     .value-card:hover {
-      border-color: rgba(200, 245, 66, 0.2);
+      border-color: rgba(var(--rgb-success), 0.2);
       transform: translateX(6px);
     }
     
@@ -489,12 +489,12 @@ import { SeoService } from '../../services/seo.service';
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(200, 245, 66, 0.1);
+      background: rgba(var(--rgb-success), 0.1);
       border-radius: var(--radius-lg);
       flex-shrink: 0;
       color: var(--color-success);
     }
-
+ 
     .value-icon svg {
       width: 24px;
       height: 24px;
@@ -528,23 +528,13 @@ import { SeoService } from '../../services/seo.service';
       gap: var(--space-sm);
       padding: var(--space-xl);
       background: var(--bg-glass);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: var(--border-subtle);
       border-radius: var(--radius-2xl);
     }
     
-    .skill-tag {
-      padding: 8px var(--space-md);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-md);
-      font-size: var(--text-sm);
-      color: var(--color-subtle);
-      transition: all var(--duration-quick) var(--ease-out);
-    }
-    
-    .skill-tag:hover {
-      border-color: rgba(200, 245, 66, 0.3);
-      color: var(--color-success);
+    .learn-more-link {
+      display: inline-flex;
+      margin-top: var(--space-xl);
     }
     
     /* ===== Projects Section ===== */
@@ -573,7 +563,7 @@ import { SeoService } from '../../services/seo.service';
     
     .project-card:hover,
     .project-card:focus-visible {
-      border-color: rgba(200, 245, 66, 0.2);
+      border-color: rgba(var(--rgb-success), 0.2);
       transform: translateY(-6px);
       box-shadow: var(--elevation-4);
     }
@@ -583,7 +573,7 @@ import { SeoService } from '../../services/seo.service';
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.04), rgba(34, 211, 238, 0.04));
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.04), rgba(var(--rgb-creative), 0.04));
     }
     
     .project-icon {
@@ -594,7 +584,7 @@ import { SeoService } from '../../services/seo.service';
       opacity: 0.8;
       transition: transform var(--duration-normal) var(--ease-out);
     }
-
+ 
     .project-icon svg {
       width: 56px;
       height: 56px;
@@ -641,21 +631,13 @@ import { SeoService } from '../../services/seo.service';
       gap: var(--space-sm);
     }
     
-    .tech-tag {
-      padding: 4px 10px;
-      background: rgba(200, 245, 66, 0.08);
-      color: var(--color-success);
-      font-size: 0.6875rem;
-      border-radius: var(--radius-full);
-    }
-    
     .project-hover-cta {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(5, 5, 7, 0.9);
+      background: var(--bg-overlay);
       border-radius: var(--radius-2xl);
       opacity: 0;
       pointer-events: none;
@@ -671,11 +653,11 @@ import { SeoService } from '../../services/seo.service';
     .cta-text {
       padding: 12px var(--space-xl);
       background: var(--color-success);
-      color: #050507;
+      color: #ffffff;
       font-size: var(--text-sm);
       font-weight: 600;
       border-radius: var(--radius-full);
-      box-shadow: 0 4px 20px rgba(200, 245, 66, 0.4);
+      box-shadow: 0 4px 20px rgba(var(--rgb-success), 0.4);
     }
     
     .section-footer {
@@ -691,10 +673,11 @@ import { SeoService } from '../../services/seo.service';
     .cta-card {
       text-align: center;
       padding: var(--space-4xl) var(--space-xl);
-      background: linear-gradient(135deg, rgba(200, 245, 66, 0.05), rgba(34, 211, 238, 0.03));
-      border: 1px solid rgba(200, 245, 66, 0.15);
+      background: linear-gradient(135deg, rgba(var(--rgb-success), 0.05), rgba(var(--rgb-creative), 0.03));
+      border: 1px solid rgba(var(--rgb-success), 0.15);
       border-radius: var(--radius-2xl);
     }
+
     
     .cta-header {
       margin-bottom: var(--space-2xl);
