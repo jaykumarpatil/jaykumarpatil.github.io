@@ -10,6 +10,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     <section class="projects">
       <div class="container">
         <h1 class="page-title animate-fade-in">My <span class="text-gradient">Projects</span></h1>
+        <p class="page-subtitle animate-fade-in">Delivering high-impact solutions across enterprise clients with cross-functional teams</p>
         <div class="projects-grid">
           @for (project of portfolioDataService.projects; track project.name; let i = $index) {
             <div class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100">
@@ -58,9 +59,17 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     .page-title { 
       font-size: var(--text-4xl);
       font-weight: 700;
-      margin-bottom: var(--space-2xl);
+      margin-bottom: var(--space-sm);
       text-align: center;
       color: var(--color-neutral);
+    }
+    .page-subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-subtle);
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+      max-width: 600px;
+      margin-inline: auto;
     }
     .text-gradient { 
       background: var(--gradient-home);

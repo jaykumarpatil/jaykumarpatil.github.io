@@ -55,7 +55,7 @@ import { RouterModule } from '@angular/router';
                 </li>
                 <li>
                   <a 
-                    href="mailto:hello@jaykumarpatil.com" 
+                    href="mailto:jaykumarpatil3004@gmail.com" 
                     class="social-link"
                     aria-label="Email Jay Kumar Patil">
                     <svg width="24" height="24" aria-hidden="true"><use href="#icon-mail"></use></svg>

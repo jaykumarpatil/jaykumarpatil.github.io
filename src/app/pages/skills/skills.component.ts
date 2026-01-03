@@ -10,6 +10,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     <section class="skills">
       <div class="container">
         <h1 class="page-title animate-fade-in">Technical <span class="text-gradient">Skills</span></h1>
+        <p class="page-subtitle animate-fade-in">Full-stack expertise spanning cloud-native development, DevOps automation, and AI-powered solutions</p>
         <div class="skills-grid">
           @for (skillGroup of portfolioDataService.skills; track skillGroup.category; let i = $index) {
             <div class="skill-category animate-fade-in" [style.animation-delay.ms]="i * 100">
@@ -34,22 +35,30 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           <h2 class="section-subtitle">Certifications & Expertise</h2>
           <div class="cert-grid">
             <div class="cert-card">
-              <div class="cert-icon">☁️</div>
+              <div class="cert-icon">
+                <svg width="48" height="48"><use href="#icon-cloud"></use></svg>
+              </div>
               <h3>Cloud Platforms</h3>
               <p>AWS, Azure, GCP certified</p>
             </div>
             <div class="cert-card">
-              <div class="cert-icon">🔧</div>
+              <div class="cert-icon">
+                <svg width="48" height="48"><use href="#icon-wrench"></use></svg>
+              </div>
               <h3>DevOps</h3>
               <p>CI/CD, Docker, Kubernetes</p>
             </div>
             <div class="cert-card">
-              <div class="cert-icon">🏗️</div>
+              <div class="cert-icon">
+                <svg width="48" height="48"><use href="#icon-layers"></use></svg>
+              </div>
               <h3>Architecture</h3>
               <p>Microservices, Event-Driven</p>
             </div>
             <div class="cert-card">
-              <div class="cert-icon">🤖</div>
+              <div class="cert-icon">
+                <svg width="48" height="48"><use href="#icon-cpu"></use></svg>
+              </div>
               <h3>AI/ML</h3>
               <p>OpenAI, LangChain, RAG</p>
             </div>
@@ -71,9 +80,17 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     .page-title { 
       font-size: var(--text-4xl);
       font-weight: 700;
-      margin-bottom: var(--space-2xl);
+      margin-bottom: var(--space-sm);
       text-align: center;
       color: var(--color-neutral);
+    }
+    .page-subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-subtle);
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+      max-width: 600px;
+      margin-inline: auto;
     }
     .text-gradient { 
       background: var(--gradient-home);
@@ -169,8 +186,12 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       box-shadow: var(--elevation-3);
     }
     .cert-icon { 
-      font-size: var(--text-4xl);
       margin-bottom: var(--space-md);
+      color: var(--color-success);
+    }
+    .cert-icon svg {
+      width: 48px;
+      height: 48px;
     }
     .cert-card h3 { 
       font-size: var(--text-lg);

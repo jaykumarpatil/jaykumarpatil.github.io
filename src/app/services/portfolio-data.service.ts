@@ -369,22 +369,22 @@ export class PortfolioDataService {
 
   private achievementsSignal = signal<Achievement[]>([
     {
-      icon: '🚀',
+      icon: '#icon-rocket',
       metric: '75%',
       description: 'Faster search response (0.8s → 0.2s)'
     },
     {
-      icon: '📉',
+      icon: '#icon-chart-down',
       metric: '68%',
       description: 'Data size reduction via optimization'
     },
     {
-      icon: '⚡',
+      icon: '#icon-zap',
       metric: 'Millions',
       description: 'Requests per second handled'
     },
     {
-      icon: '⏱️',
+      icon: '#icon-clock',
       metric: '40%',
       description: 'Reduced troubleshooting time'
     }
