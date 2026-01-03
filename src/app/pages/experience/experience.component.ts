@@ -13,7 +13,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
         <p class="page-subtitle animate-fade-in">I have over 10 years of experience building reliable systems and leading successful engineering teams.</p>
         <div class="experience-list">
           @for (exp of portfolioDataService.experience; track exp.company; let i = $index) {
-            <div class="experience-card animate-fade-in" [style.animation-delay.ms]="i * 100">
+            <div class="experience-card hover-card animate-fade-in" [style.animation-delay.ms]="i * 100">
               <div class="exp-header">
                 <div class="exp-company">
                   @if (exp.url) {
@@ -45,7 +45,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           <h2 class="section-subtitle">Key Achievements</h2>
           <div class="achievements-grid">
             @for (achievement of portfolioDataService.achievements; track achievement.metric) {
-              <div class="achievement-card">
+              <div class="achievement-card hover-card">
                 <div class="achievement-icon">
                   <svg width="32" height="32"><use [attr.href]="achievement.icon"></use></svg>
                 </div>
@@ -125,16 +125,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border: var(--border-subtle);
       border-radius: var(--radius-xl);
       padding: var(--space-xl);
-      transition: all var(--duration-normal) var(--ease-out);
       animation: fadeInUp 0.6s var(--ease-out) forwards;
       opacity: 0;
       backdrop-filter: blur(20px);
-    }
-    .experience-card:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateY(-4px);
-      box-shadow: var(--elevation-3), var(--glow-success);
-      background: var(--bg-glass);
     }
     .exp-header { 
       display: flex;
@@ -194,14 +187,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border-radius: var(--radius-xl);
       padding: var(--space-lg);
       text-align: center;
-      transition: all var(--duration-normal) var(--ease-out);
       backdrop-filter: blur(20px);
-    }
-    .achievement-card:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateY(-5px);
-      box-shadow: var(--elevation-3), var(--glow-success);
-      background: var(--bg-glass);
     }
     .achievement-icon { 
       margin-bottom: var(--space-xs);

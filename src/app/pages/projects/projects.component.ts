@@ -14,7 +14,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
         <p class="page-subtitle animate-fade-in">I deliver high-impact solutions for global enterprises through technical leadership and collaboration.</p>
         <div class="projects-grid">
           @for (project of portfolioDataService.projects; track project.slug; let i = $index) {
-            <div class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100">
+            <div class="project-card hover-card animate-fade-in" [style.animation-delay.ms]="i * 100">
               <div class="project-header">
                 <h2>{{ project.name }}</h2>
                 <span class="project-period">{{ project.period }}</span>
@@ -85,15 +85,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       padding: var(--space-xl);
       display: flex;
       flex-direction: column;
-      transition: all var(--duration-normal) var(--ease-out);
       animation: fadeInUp 0.6s var(--ease-out) forwards;
       opacity: 0;
       backdrop-filter: blur(20px);
-    }
-    .project-card:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateY(-8px);
-      box-shadow: var(--elevation-4);
     }
     .project-header { 
       display: flex;

@@ -27,7 +27,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
         @if (featuredPost) {
           <article 
             id="featured-post-{{featuredPost.id}}"
-            class="featured-post card animate-fade-in-up" 
+            class="featured-post hover-card card animate-fade-in-up" 
             tabindex="0"
             [routerLink]="['/blog', featuredPost.id]"
             role="article"
@@ -54,6 +54,9 @@ import { BlogService, BlogPost } from '../../services/blog.service';
               <div class="visual-gradient"></div>
               <svg class="visual-icon" width="80" height="80"><use href="#icon-book"></use></svg>
             </div>
+            <div class="hover-overlay hover-overlay-view" aria-hidden="true">
+              <span class="hover-overlay-cta">Read Article</span>
+            </div>
           </article>
         }
 
@@ -62,7 +65,7 @@ import { BlogService, BlogPost } from '../../services/blog.service';
           @for (post of paginatedPosts; track post.id; let i = $index) {
             <article 
               id="blog-post-{{post.id}}"
-              class="blog-card card card-interactive animate-fade-in-up"
+              class="blog-card card hover-card card-interactive animate-fade-in-up"
               role="listitem"
               tabindex="0"
               [style.animation-delay.ms]="100 + i * 80"
@@ -85,9 +88,8 @@ import { BlogService, BlogPost } from '../../services/blog.service';
                   <span class="tag" role="listitem">{{ tag }}</span>
                 }
               </div>
-              <div class="blog-cta" aria-hidden="true">
-                <span>Read More</span>
-                <svg width="16" height="16"><use href="#icon-arrow-right"></use></svg>
+              <div class="hover-overlay hover-overlay-view" aria-hidden="true">
+                <span class="hover-overlay-cta">Read Article</span>
               </div>
             </article>
           }
@@ -162,15 +164,6 @@ import { BlogService, BlogPost } from '../../services/blog.service';
       gap: var(--space-xl);
       padding: var(--space-xl);
       margin-bottom: var(--space-3xl);
-      cursor: pointer;
-      transition: all var(--duration-normal) var(--ease-out);
-    }
-
-    .featured-post:hover,
-    .featured-post:focus-visible {
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateY(-4px);
-      box-shadow: var(--elevation-3), var(--glow-success);
     }
 
     .featured-content {
@@ -325,10 +318,6 @@ import { BlogService, BlogPost } from '../../services/blog.service';
       padding-top: var(--space-sm);
       border-top: var(--border-subtle);
       transition: gap var(--duration-quick) var(--ease-out);
-    }
-
-    .blog-card:hover .blog-cta {
-      gap: var(--space-sm);
     }
 
     /* ===== Pagination ===== */

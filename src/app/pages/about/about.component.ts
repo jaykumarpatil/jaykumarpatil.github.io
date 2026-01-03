@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <section class="about">
       <div class="container">
@@ -15,15 +16,15 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
             <p class="intro">{{ portfolioDataService.profile.summary }}</p>
             <p class="goal">{{ portfolioDataService.profile.shortGoal }}</p>
             <div class="info-grid">
-              <div class="info-item">
+              <div class="info-item hover-card">
                 <span class="info-label">Location</span>
                 <span class="info-value">{{ portfolioDataService.profile.location }}</span>
               </div>
-              <div class="info-item">
+              <div class="info-item hover-card">
                 <span class="info-label">Email</span>
                 <span class="info-value">{{ portfolioDataService.profile.email }}</span>
               </div>
-              <div class="info-item">
+              <div class="info-item hover-card">
                 <span class="info-label">Experience</span>
                 <span class="info-value">10+ Years</span>
               </div>
@@ -31,14 +32,27 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           </div>
           <div class="value-bullets animate-fade-in delay-150">
             <h2 class="section-subtitle">How I Can Help You</h2>
-            <div class="bullets-list">
+            <div class="value-grid" role="list">
               @for (bullet of portfolioDataService.valueBullets; track bullet.text) {
-                <div class="bullet-item">
-                  <span class="bullet-icon" aria-hidden="true">
+                <a [routerLink]="bullet.url || '/blog'" class="project-card hover-card card-interactive animate-fade-in-up" role="listitem">
+                  <span class="value-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="28" height="28"><use [attr.href]="bullet.icon"></use></svg>
                   </span>
-                  <span class="bullet-text">{{ bullet.text }}</span>
-                </div>
+                  <div class="value-body">
+                    <p>{{ bullet.text }}</p>
+                    <div class="mobile-hover-cta" aria-hidden="true">
+                      <span>Visit Blog</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </div>
+                  </div>
+                  <div class="hover-overlay" aria-hidden="true">
+                    <span class="hover-overlay-title">Want to know how?</span>
+                    <span class="hover-overlay-cta">
+                      Visit Blog
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </span>
+                  </div>
+                </a>
               }
             </div>
           </div>
@@ -46,7 +60,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
             <h2 class="section-subtitle">Education</h2>
             <div class="education-list">
               @for (edu of portfolioDataService.education; track edu.degree) {
-                <div class="education-item">
+                <div class="education-item hover-card">
                   <div class="edu-period">{{ edu.year }}</div>
                   <div class="edu-details">
                     <h3>{{ edu.degree }}</h3>
@@ -74,7 +88,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
             @for (step of portfolioDataService.journey; track step.period) {
               <div class="timeline-item">
                 <div class="timeline-marker"></div>
-                <div class="timeline-content">
+                <div class="timeline-content hover-card">
                   <span class="timeline-period">{{ step.period }}</span>
                   @if (step.url) {
                     <h3>
@@ -96,7 +110,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
           <h2 class="section-subtitle">Focus Areas & Passions</h2>
           <div class="interests-grid">
             @for (interest of portfolioDataService.interests; track interest.title) {
-              <div class="interest-item">
+              <div class="interest-item hover-card">
                 <span class="interest-icon">
                   <svg viewBox="0 0 24 24" width="24" height="24"><use [attr.href]="interest.icon"></use></svg>
                 </span>
@@ -205,27 +219,26 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       color: var(--color-creative);
       margin-bottom: var(--space-lg);
     }
-    .bullets-list { 
+    .value-grid { 
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: var(--space-md);
     }
-    .bullet-item { 
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
+    .project-card { 
       background: var(--bg-glass);
       border: var(--border-subtle);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-xl);
+      text-decoration: none;
+      color: inherit;
+    }
+    .value-grid .project-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-md);
       padding: var(--space-md) var(--space-lg);
-      transition: all var(--duration-normal) var(--ease-out);
     }
-    .bullet-item:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateX(5px);
-      box-shadow: var(--elevation-2), var(--glow-success);
-      background: var(--bg-glass);
-    }
-    .bullet-icon { 
+    .value-icon { 
       display: flex;
       align-items: center;
       justify-content: center;
@@ -236,11 +249,11 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       flex-shrink: 0;
       color: var(--color-success);
     }
-    .bullet-icon svg {
+    .value-icon svg {
       width: 24px;
       height: 24px;
     }
-    .bullet-text { 
+    .value-body p { 
       color: var(--color-neutral);
       font-size: var(--text-base);
     }
@@ -256,13 +269,6 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       background: var(--bg-glass);
       border-radius: var(--radius-lg);
       border: var(--border-subtle);
-      transition: all var(--duration-normal) var(--ease-out);
-    }
-    .education-item:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateX(5px);
-      box-shadow: var(--elevation-2), var(--glow-success);
-      background: var(--bg-glass);
     }
     .edu-period { 
       font-size: var(--text-sm);
@@ -321,12 +327,6 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border: var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: var(--space-lg);
-      transition: all var(--duration-normal) var(--ease-out);
-    }
-    .timeline-content:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      box-shadow: var(--elevation-2), var(--glow-success);
-      background: var(--bg-glass);
     }
     .timeline-period { 
       font-size: var(--text-sm);
@@ -357,13 +357,6 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border: 1px solid rgba(var(--rgb-success), 0.15);
       border-radius: var(--radius-xl);
       padding: var(--space-lg);
-      transition: all var(--duration-normal) var(--ease-out);
-    }
-    .interest-item:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateY(-3px);
-      box-shadow: var(--elevation-3), var(--glow-success);
-      background: var(--bg-glass);
     }
     .interest-icon { 
       display: flex;
@@ -405,6 +398,16 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
     }
     @media (max-width: 600px) {
       .education-item { grid-template-columns: 1fr; gap: var(--space-xs); }
+      
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-grid .project-card {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-xl);
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .animate-fade-in { animation: none; opacity: 1; }

@@ -581,10 +581,23 @@ section {
   transition: all var(--duration-normal) var(--ease-out);
 }
 
-.hover-card:hover {
-  border-color: rgba(var(--rgb-success), 0.4);
-  transform: translateY(-4px);
-  box-shadow: var(--elevation-3), var(--glow-success);
+@media (hover: hover) {
+  .hover-card:hover {
+    border-color: rgba(var(--rgb-success), 0.4);
+    transform: translateY(-4px);
+    box-shadow: var(--elevation-3), var(--glow-success);
+  }
+
+  .hover-card:hover .hover-overlay {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ensure focus-visible still works regardless of hover capability */
+.hover-card:focus-visible .hover-overlay {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Hover Overlay - appears on hover */
@@ -596,6 +609,7 @@ section {
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
+  padding: var(--space-lg);
   background: rgba(var(--rgb-success), 0.95);
   border-radius: inherit;
   opacity: 0;
@@ -603,19 +617,15 @@ section {
   transition: all var(--duration-normal) var(--ease-out);
   pointer-events: none;
   z-index: 10;
-}
-
-.hover-card:hover .hover-overlay,
-.hover-card:focus-visible .hover-overlay {
-  opacity: 1;
-  transform: scale(1);
+  text-align: center;
 }
 
 /* Hover Overlay Text */
 .hover-overlay-title {
-  font-size: var(--text-lg);
+  font-size: clamp(var(--text-base), 4vw, var(--text-lg));
   font-weight: 700;
   color: white;
+  margin-bottom: var(--space-xs);
 }
 
 /* Hover Overlay CTA Button */
@@ -623,7 +633,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  padding: 8px 16px;
+  padding: 8px 20px;
   background: white;
   color: var(--color-success);
   font-size: var(--text-sm);
@@ -631,13 +641,32 @@ section {
   border-radius: var(--radius-full);
   transition: all var(--duration-quick) var(--ease-out);
   text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Mobile-visible CTA for touch devices where hover overlay is hidden */
+.mobile-hover-cta {
+  display: none;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  color: var(--color-success);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+@media (hover: none) {
+  .mobile-hover-cta {
+    display: inline-flex;
+  }
 }
 
 .hover-card:hover .hover-overlay-cta {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.hover-overlay-cta svg {
+.hover-overlay-cta svg,
+.mobile-hover-cta svg {
   width: 14px;
   height: 14px;
   transition: transform var(--duration-quick) var(--ease-out);

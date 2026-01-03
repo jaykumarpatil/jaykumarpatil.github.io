@@ -20,6 +20,7 @@ export interface Profile {
 export interface ValueBullet {
   icon: string;
   text: string;
+  url?: string;
 }
 
 export interface Education {
@@ -110,9 +111,9 @@ export class PortfolioDataService {
   });
 
   private valueBulletsSignal = signal<ValueBullet[]>([
-    { icon: '#icon-wrench', text: 'Streamlining your delivery with DevOps and CI/CD automation.' },
-    { icon: '#icon-cloud', text: 'Building robust, modern applications using AWS and Azure cloud platforms.' },
-    { icon: '#icon-rocket', text: 'Solving complex problems with microservices and real-time data.' }
+    { icon: '#icon-wrench', text: 'Streamlining your delivery with DevOps and CI/CD automation.', url: '/blog' },
+    { icon: '#icon-cloud', text: 'Building robust, modern applications using AWS and Azure cloud platforms.', url: '/blog' },
+    { icon: '#icon-rocket', text: 'Solving complex problems with microservices and real-time data.', url: '/blog' }
   ]);
 
   private educationSignal = signal<Education[]>([

@@ -109,12 +109,16 @@ import { SeoService } from '../../services/seo.service';
             <!-- Value Propositions as Cards -->
             <div class="value-grid" role="list">
               @for (bullet of portfolioDataService.valueBullets; track bullet.text) {
-                <a routerLink="/blog" class="value-card hover-card" role="listitem">
+                <a [routerLink]="bullet.url || '/blog'" class="project-card hover-card card-interactive animate-fade-in-up" role="listitem">
                   <div class="value-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><use [attr.href]="bullet.icon"></use></svg>
                   </div>
                   <div class="value-body">
                     <p>{{ bullet.text }}</p>
+                    <div class="mobile-hover-cta" aria-hidden="true">
+                      <span>Visit Blog</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </div>
                   </div>
                   <div class="hover-overlay" aria-hidden="true">
                     <span class="hover-overlay-title">Want to know how?</span>
@@ -159,7 +163,7 @@ import { SeoService } from '../../services/seo.service';
           @for (project of portfolioDataService.projects.slice(0, 4); track project.slug; let i = $index) {
             <a 
               [routerLink]="['/projects', project.slug]"
-              class="project-card card-interactive animate-fade-in-up" 
+              class="project-card hover-card card-interactive animate-fade-in-up" 
               role="listitem"
               [style.animation-delay.ms]="100 + i * 80"
               [attr.aria-label]="project.name + ' - ' + project.client"
@@ -194,9 +198,13 @@ import { SeoService } from '../../services/seo.service';
                     <span class="tag">{{ tag }}</span>
                   }
                 </div>
+                <div class="mobile-hover-cta" aria-hidden="true">
+                  <span>View Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </div>
               </div>
-              <div class="project-hover-cta" aria-hidden="true">
-                <span class="cta-text">View</span>
+              <div class="hover-overlay hover-overlay-view" aria-hidden="true">
+                <span class="hover-overlay-cta">View Case Study</span>
               </div>
             </a>
           }
@@ -469,32 +477,13 @@ import { SeoService } from '../../services/seo.service';
     
     /* Value Grid */
     .value-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: var(--space-md);
       margin-bottom: var(--space-2xl);
     }
     
-    .value-card {
-      position: relative;
-      display: flex;
-      gap: var(--space-md);
-      padding: var(--space-lg);
-      background: var(--bg-glass);
-      border: var(--border-subtle);
-      border-radius: var(--radius-xl);
-      transition: all var(--duration-normal) var(--ease-out);
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-      overflow: hidden;
-    }
-    
-    .value-card:hover {
-      border-color: rgba(var(--rgb-success), 0.4);
-      transform: translateY(-4px);
-      box-shadow: var(--elevation-3), var(--glow-success);
-    }
+
     
     .value-icon {
       width: 44px;
@@ -517,72 +506,6 @@ import { SeoService } from '../../services/seo.service';
       font-size: var(--text-sm);
       color: var(--color-subtle);
       line-height: 1.6;
-      transition: opacity var(--duration-normal) var(--ease-out);
-    }
-
-    /* Value Card Hover Overlay */
-    .value-hover-cta {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-sm);
-      background: rgba(var(--rgb-success), 0.95);
-      border-radius: var(--radius-xl);
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all var(--duration-normal) var(--ease-out);
-      pointer-events: none;
-    }
-
-    .value-card:hover .value-hover-cta,
-    .value-card:focus-visible .value-hover-cta {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .hover-text {
-      font-size: var(--text-lg);
-      font-weight: 700;
-      color: white;
-    }
-
-    .hover-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-      padding: 8px 16px;
-      background: white;
-      color: var(--color-success);
-      font-size: var(--text-sm);
-      font-weight: 600;
-      border-radius: var(--radius-full);
-      transition: all var(--duration-quick) var(--ease-out);
-    }
-
-    .value-card:hover .hover-link {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .hover-link svg {
-      transition: transform var(--duration-quick) var(--ease-out);
-    }
-
-    .value-card:hover .hover-link svg {
-      transform: translate(2px, -2px);
-    }
-    
-    /* Link CTA */
-    .link-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-      color: var(--color-success);
-      font-weight: 500;
-      font-size: var(--text-sm);
-      transition: gap var(--duration-quick) var(--ease-out);
     }
     
     .link-cta:hover {
@@ -617,25 +540,22 @@ import { SeoService } from '../../services/seo.service';
     }
     
     .project-card {
-      position: relative;
-      display: block;
-      text-decoration: none;
-      color: inherit;
       background: var(--bg-glass);
       border: 1px solid rgba(255, 255, 255, 0.04);
       border-radius: var(--radius-2xl);
-      overflow: hidden;
-      transition: all var(--duration-normal) var(--ease-out);
-      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
     }
-    
-    .project-card:hover,
-    .project-card:focus-visible {
-      border-color: rgba(var(--rgb-success), 0.2);
-      transform: translateY(-6px);
-      box-shadow: var(--elevation-4);
+
+    .value-grid .project-card {
+      flex-direction: row;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      align-items: flex-start;
     }
-    
+
     .project-thumbnail {
       height: 180px;
       display: flex;
@@ -658,8 +578,10 @@ import { SeoService } from '../../services/seo.service';
       height: 56px;
     }
     
-    .project-card:hover .project-icon {
-      transform: scale(1.1);
+    @media (hover: hover) {
+      .project-card:hover .project-icon {
+        transform: scale(1.1);
+      }
     }
     
     .project-body {
@@ -697,35 +619,6 @@ import { SeoService } from '../../services/seo.service';
       display: flex;
       flex-wrap: wrap;
       gap: var(--space-sm);
-    }
-    
-    .project-hover-cta {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-overlay);
-      border-radius: var(--radius-2xl);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--duration-normal) var(--ease-out);
-      z-index: 10;
-    }
-    
-    .project-card:hover .project-hover-cta,
-    .project-card:focus-visible .project-hover-cta {
-      opacity: 1;
-    }
-    
-    .cta-text {
-      padding: 12px var(--space-xl);
-      background: var(--color-success);
-      color: #ffffff;
-      font-size: var(--text-sm);
-      font-weight: 600;
-      border-radius: var(--radius-full);
-      box-shadow: 0 4px 20px rgba(var(--rgb-success), 0.4);
     }
     
     .section-footer {
@@ -779,6 +672,14 @@ import { SeoService } from '../../services/seo.service';
       
       .about-layout { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
+      .value-grid { grid-template-columns: 1fr; }
+      
+      .value-grid .project-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--space-xl);
+      }
     }
     
     @media (max-width: 640px) {

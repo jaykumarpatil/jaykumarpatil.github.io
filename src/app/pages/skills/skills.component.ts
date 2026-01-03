@@ -13,7 +13,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
         <p class="page-subtitle animate-fade-in">I specialize in cloud-native development, DevOps automation, and building scalable enterprise systems.</p>
         <div class="skills-grid">
           @for (skillGroup of portfolioDataService.skills; track skillGroup.category; let i = $index) {
-            <div class="skill-category animate-fade-in" [style.animation-delay.ms]="i * 100">
+            <div class="skill-category hover-card animate-fade-in" [style.animation-delay.ms]="i * 100">
               <h2 class="category-title">{{ skillGroup.category }}</h2>
               <div class="skills-list">
                 @for (skill of skillGroup.items; track skill.name) {
@@ -34,28 +34,28 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
         <div class="certifications-section animate-fade-in">
           <h2 class="section-subtitle">Certifications & Specialized Expertise</h2>
           <div class="cert-grid">
-            <div class="cert-card">
+            <div class="cert-card hover-card">
               <div class="cert-icon">
                 <svg width="48" height="48"><use href="#icon-cloud"></use></svg>
               </div>
               <h3>Cloud Platforms</h3>
               <p>AWS, Azure, GCP certified</p>
             </div>
-            <div class="cert-card">
+            <div class="cert-card hover-card">
               <div class="cert-icon">
                 <svg width="48" height="48"><use href="#icon-wrench"></use></svg>
               </div>
               <h3>DevOps</h3>
               <p>CI/CD, Docker, Kubernetes</p>
             </div>
-            <div class="cert-card">
+            <div class="cert-card hover-card">
               <div class="cert-icon">
                 <svg width="48" height="48"><use href="#icon-layers"></use></svg>
               </div>
               <h3>Architecture</h3>
               <p>Microservices, Event-Driven</p>
             </div>
-            <div class="cert-card">
+            <div class="cert-card hover-card">
               <div class="cert-icon">
                 <svg width="48" height="48"><use href="#icon-cpu"></use></svg>
               </div>
@@ -109,13 +109,9 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border: var(--border-subtle);
       border-radius: var(--radius-xl);
       padding: var(--space-xl);
-      transition: all var(--duration-normal) var(--ease-out);
       animation: fadeInUp 0.6s var(--ease-out) forwards;
       opacity: 0;
       backdrop-filter: blur(20px);
-    }
-    .skill-category:hover { 
-      border-color: rgba(var(--rgb-success), 0.2);
     }
     .category-title { 
       font-size: var(--text-xl);
@@ -177,14 +173,7 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       border-radius: var(--radius-xl);
       padding: var(--space-lg);
       text-align: center;
-      transition: all var(--duration-normal) var(--ease-out);
       backdrop-filter: blur(20px);
-    }
-    .cert-card:hover { 
-      border-color: rgba(var(--rgb-success), 0.3);
-      transform: translateY(-5px);
-      box-shadow: var(--elevation-3), var(--glow-success);
-      background: var(--bg-glass);
     }
     .cert-icon { 
       margin-bottom: var(--space-md);
