@@ -36,7 +36,7 @@ import { RouterModule, Router } from '@angular/router';
           </span>
           <span class="brand-text">
             <span class="brand-name">Jay Kumar</span>
-            <span class="brand-role">AI Engineer</span>
+            <span class="brand-role">Senior Engineering Lead</span>
           </span>
         </a>
 
@@ -93,14 +93,14 @@ import { RouterModule, Router } from '@angular/router';
             <span class="pill-text">Skills</span>
           </a>
           <a 
-            routerLink="/articles" 
+            routerLink="/blog" 
             routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: false}"
             class="nav-pill"
             role="listitem"
-            [attr.aria-current]="isActive('/articles') ? 'page' : null">
-            <svg class="pill-icon" width="20" height="20" aria-hidden="true"><use href="#icon-articles"></use></svg>
-            <span class="pill-text">Articles</span>
+            [attr.aria-current]="isActive('/blog') ? 'page' : null">
+            <svg class="pill-icon" width="20" height="20" aria-hidden="true"><use href="#icon-blog"></use></svg>
+            <span class="pill-text">Blog</span>
           </a>
           <a 
             routerLink="/contact" 
@@ -246,16 +246,16 @@ import { RouterModule, Router } from '@angular/router';
             <svg class="link-arrow" width="20" height="20" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
           </a>
           <a 
-            routerLink="/articles" 
+            routerLink="/blog" 
             routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: false}"
             class="mobile-link"
             style="animation-delay: 250ms"
             (click)="closeMenu()"
-            [attr.aria-current]="isActive('/articles') ? 'page' : null"
+            [attr.aria-current]="isActive('/blog') ? 'page' : null"
             [attr.tabindex]="menuOpen() ? 0 : -1">
-            <svg class="link-icon" width="24" height="24" aria-hidden="true"><use href="#icon-articles"></use></svg>
-            <span class="link-text">Articles</span>
+            <svg class="link-icon" width="24" height="24" aria-hidden="true"><use href="#icon-blog"></use></svg>
+            <span class="link-text">Blog</span>
             <svg class="link-arrow" width="20" height="20" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
           </a>
           <a 
@@ -878,24 +878,24 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class HeaderComponent {
   private platformId = inject(PLATFORM_ID);
-  
+
   menuOpen = signal(false);
   isScrolled = signal(false);
   isHidden = signal(false);
   isDarkMode = signal(true);
-  
+
   private lastScrollY = 0;
   private scrollThreshold = 100;
 
   @HostListener('window:scroll')
   onScroll(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    
+
     const currentScrollY = window.scrollY;
-    
+
     // Update scrolled state
     this.isScrolled.set(currentScrollY > 50);
-    
+
     // Smart hide/show based on scroll direction
     if (currentScrollY > this.scrollThreshold) {
       if (currentScrollY > this.lastScrollY + 10) {
@@ -908,7 +908,7 @@ export class HeaderComponent {
     } else {
       this.isHidden.set(false);
     }
-    
+
     this.lastScrollY = currentScrollY;
   }
 
@@ -965,25 +965,25 @@ export class HeaderComponent {
         root.style.setProperty('--bg-surface', '#ebebef');
         root.style.setProperty('--bg-overlay', 'rgba(245, 245, 247, 0.92)');
         root.style.setProperty('--bg-glass', 'rgba(255, 255, 255, 0.75)');
-        
+
         // Text: Dark gray instead of pure black for comfort
         root.style.setProperty('--color-neutral', '#1a1a1f');
         root.style.setProperty('--color-subtle', '#4a4a52');
         root.style.setProperty('--color-muted', '#71717a');
-        
+
         // Accent colors: Desaturated for light mode
         root.style.setProperty('--color-success', '#6b8c23');
         root.style.setProperty('--color-creative', '#0891b2');
-        
+
         // Borders: Subtle shadows for depth hierarchy
         root.style.setProperty('--border-subtle', '1px solid rgba(0, 0, 0, 0.06)');
         root.style.setProperty('--border-default', '1px solid rgba(0, 0, 0, 0.1)');
-        
+
         // Text hierarchy
         root.style.setProperty('--text-primary', '#1a1a1f');
         root.style.setProperty('--text-secondary', '#4a4a52');
         root.style.setProperty('--text-tertiary', '#71717a');
-        
+
         // Shadows for depth (light mode uses shadows, not lightening)
         root.style.setProperty('--elevation-2', '0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04)');
         root.style.setProperty('--elevation-3', '0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06)');
@@ -993,7 +993,7 @@ export class HeaderComponent {
   }
 
   private router = inject(Router);
-  
+
   isActive(path: string): boolean {
     return this.router.url === path || (path !== '/' && this.router.url.startsWith(path));
   }

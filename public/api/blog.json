@@ -1,0 +1,523 @@
+[
+    {
+        "id": "spring-boot-memory-optimization",
+        "title": "I Reduced Spring Boot Memory Usage by 60% — Without Changing Hardware",
+        "description": "Learn how to optimize Spring Boot applications for better memory efficiency using JVM tuning, dependency optimization, and configuration best practices.",
+        "author": "Jay Kumar Patil",
+        "date": "2024-12-15",
+        "readTime": "12 min read",
+        "tags": [
+            "Spring Boot",
+            "Java",
+            "Performance",
+            "Memory Optimization",
+            "JVM"
+        ],
+        "featured": true,
+        "seoTitle": "Reduce Spring Boot Memory Usage by 60% - Performance Optimization Guide",
+        "seoDescription": "Complete guide to reducing Spring Boot memory consumption through JVM tuning, dependency optimization, and configuration best practices. Achieve 60% memory reduction without hardware changes.",
+        "seoKeywords": "spring boot memory optimization, JVM tuning, java performance, reduce memory usage, spring boot performance",
+        "content": "Learn how to optimize Spring Boot applications for better memory efficiency using JVM tuning, dependency optimization, and configuration best practices.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "The Challenge: Memory Constraints in Production"
+            },
+            {
+                "type": "p",
+                "content": "When running Spring Boot applications in containerized environments, memory consumption becomes a critical concern. I recently faced a situation where our microservices were consuming excessive memory, leading to frequent OOM (Out of Memory) errors and increased infrastructure costs."
+            },
+            {
+                "type": "p",
+                "content": "After extensive analysis and optimization, I managed to reduce memory usage by 60% without changing any hardware specifications. Here's how I did it."
+            },
+            {
+                "type": "h2",
+                "content": "1. JVM Heap Size Optimization"
+            },
+            {
+                "type": "p",
+                "content": "The first step was to properly configure JVM heap sizes. Many developers use default settings or arbitrary values, but understanding your application's actual memory requirements is crucial."
+            },
+            {
+                "type": "info",
+                "content": "Key Insight: The JVM allocates memory beyond just the heap. Understanding the complete memory footprint (heap + metaspace + thread stacks + native memory) is essential."
+            },
+            {
+                "type": "h3",
+                "content": "Optimal JVM Configuration"
+            },
+            {
+                "type": "code",
+                "language": "bash",
+                "code": "JAVA_OPTS=\"-Xms512m -Xmx512m \\\n  -XX:MaxMetaspaceSize=256m \\\n  -XX:MetaspaceSize=128m \\\n  -XX:+UseG1GC \\\n  -XX:MaxGCPauseMillis=200 \\\n  -XX:+UseStringDeduplication\""
+            },
+            {
+                "type": "p",
+                "content": "Why these settings work:"
+            },
+            {
+                "type": "ul",
+                "items": [
+                    "**-Xms and -Xmx set to same value:** Prevents heap resizing overhead and fragmentation",
+                    "**MaxMetaspaceSize:** Limits class metadata memory to prevent unbounded growth",
+                    "**UseG1GC:** Better for applications with large heaps and low-latency requirements",
+                    "**UseStringDeduplication:** Reduces memory footprint by deduplicating String objects"
+                ]
+            },
+            {
+                "type": "h2",
+                "content": "2. Dependency Optimization"
+            },
+            {
+                "type": "p",
+                "content": "Spring Boot's auto-configuration is convenient but can include unnecessary dependencies that consume memory. I performed a thorough audit of our dependencies."
+            },
+            {
+                "type": "h3",
+                "content": "Exclude Unused Auto-Configurations"
+            },
+            {
+                "type": "code",
+                "language": "java",
+                "code": "@SpringBootApplication(exclude = {\n    DataSourceAutoConfiguration.class,\n    HibernateJpaAutoConfiguration.class,\n    JmxAutoConfiguration.class,\n    WebMvcAutoConfiguration.class\n})\npublic class Application {\n    public static void main(String[] args) {\n        SpringApplication.run(Application.class, args);\n    }\n}"
+            },
+            {
+                "type": "h2",
+                "content": "Results: 60% Memory Reduction"
+            },
+            {
+                "type": "stats",
+                "stats": [
+                    {
+                        "label": "Before",
+                        "value": "1.2 GB"
+                    },
+                    {
+                        "label": "After",
+                        "value": "480 MB",
+                        "color": "var(--color-success)"
+                    },
+                    {
+                        "label": "Reduction",
+                        "value": "-60%",
+                        "color": "#22d3ee"
+                    }
+                ]
+            },
+            {
+                "type": "h2",
+                "content": "Conclusion"
+            },
+            {
+                "type": "p",
+                "content": "Memory optimization is an iterative process. Start with JVM tuning, eliminate unnecessary dependencies, optimize configurations, and continuously monitor your applications."
+            }
+        ]
+    },
+    {
+        "id": "kafka-spring-boot-data-pipelines",
+        "title": "Building Scalable Data Pipelines with Apache Kafka and Spring Boot",
+        "description": "A comprehensive guide to designing and implementing high-throughput, fault-tolerant data pipelines for enterprise applications using Apache Kafka integrated with Spring Boot microservices.",
+        "content": "Building Scalable Data Pipelines with Apache Kafka and Spring Boot",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "The Role of Apache Kafka in Modern Architecture"
+            },
+            {
+                "type": "p",
+                "content": "In today's data-driven world, applications need to process millions of events in real-time. Apache Kafka has emerged as the industry standard for distributed event streaming, and when paired with Spring Boot, it becomes a powerhouse for building scalable data pipelines."
+            },
+            {
+                "type": "h2",
+                "content": "Core Concepts: Producers and Consumers"
+            },
+            {
+                "type": "p",
+                "content": "At its heart, Kafka is about producers sending messages to topics and consumers reading those messages. Spring Boot simplifies this with the `KafkaTemplate` and `@KafkaListener` annotation."
+            },
+            {
+                "type": "h3",
+                "content": "Configuring the Producer"
+            },
+            {
+                "type": "code",
+                "language": "java",
+                "code": "@Configuration\npublic class KafkaProducerConfig {\n\n    @Bean\n    public ProducerFactory<String, String> producerFactory() {\n        Map<String, Object> configProps = new HashMap<>();\n        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, \"localhost:9092\");\n        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);\n        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);\n        return new DefaultKafkaProducerFactory<>(configProps);\n    }\n\n    @Bean\n    public KafkaTemplate<String, String> kafkaTemplate() {\n        return new KafkaTemplate<>(producerFactory());\n    }\n}"
+            },
+            {
+                "type": "h3",
+                "content": "Implementing a Fast Consumer"
+            },
+            {
+                "type": "p",
+                "content": "To achieve high throughput, you should configure your consumers to process messages in parallel using concurrency settings."
+            },
+            {
+                "type": "code",
+                "language": "java",
+                "code": "@Service\npublic class KafkaConsumerService {\n\n    @KafkaListener(topics = \"data-pipeline-topic\", groupId = \"pipeline-group\", concurrency = \"3\")\n    public void listen(String message) {\n        // Process the heavy data here\n        System.out.println(\"Received Message: \" + message);\n    }\n}"
+            },
+            {
+                "type": "h2",
+                "content": "Performance Metrics"
+            },
+            {
+                "type": "stats",
+                "stats": [
+                    {
+                        "label": "Throughput",
+                        "value": "1M+ req/s",
+                        "color": "var(--color-success)"
+                    },
+                    {
+                        "label": "Latency",
+                        "value": "< 10ms",
+                        "color": "#22d3ee"
+                    },
+                    {
+                        "label": "Reliability",
+                        "value": "99.99%",
+                        "color": "var(--color-neutral)"
+                    }
+                ]
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-11-28",
+        "readTime": "15 min read",
+        "tags": [
+            "Kafka",
+            "Spring Boot",
+            "Microservices",
+            "Data Engineering",
+            "Event Streaming"
+        ],
+        "featured": false,
+        "seoTitle": "Building Scalable Data Pipelines with Kafka and Spring Boot",
+        "seoDescription": "Learn to design high-throughput, fault-tolerant data pipelines using Apache Kafka and Spring Boot. Complete guide with code examples and best practices.",
+        "seoKeywords": "apache kafka, spring boot, data pipelines, event streaming, microservices, kafka integration"
+    },
+    {
+        "id": "kubernetes-cicd-best-practices",
+        "title": "CI/CD Best Practices for Kubernetes Deployments",
+        "description": "Learn how to set up robust CI/CD pipelines for Kubernetes using Jenkins, GitOps patterns, and Helm charts for automated, reliable deployments.",
+        "author": "Jay Kumar Patil",
+        "date": "2024-10-15",
+        "readTime": "10 min read",
+        "tags": [
+            "Kubernetes",
+            "CI/CD",
+            "DevOps",
+            "Jenkins",
+            "GitOps",
+            "Helm"
+        ],
+        "featured": false,
+        "seoTitle": "Kubernetes CI/CD Best Practices - Jenkins, GitOps & Helm Guide",
+        "seoDescription": "Master CI/CD for Kubernetes with Jenkins, GitOps patterns, and Helm charts. Learn best practices for automated, reliable container deployments.",
+        "seoKeywords": "kubernetes cicd, jenkins kubernetes, gitops, helm charts, kubernetes deployment, devops automation",
+        "content": "Learn how to set up robust CI/CD pipelines for Kubernetes using Jenkins, GitOps patterns, and Helm charts.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "Evolution of CI/CD in Kubernetes"
+            },
+            {
+                "type": "p",
+                "content": "Kubernetes has changed how we think about deployments. We no longer deploy to a specific server; we declare a desired state and let the cluster manage it."
+            },
+            {
+                "type": "h2",
+                "content": "Top 5 Best Practices"
+            },
+            {
+                "type": "ul",
+                "items": [
+                    "Use Helm for Package Management",
+                    "Implement Blue-Green or Canary Deployments",
+                    "Automate Vulnerability Scanning",
+                    "Keep Infrastructure as Code (IaC)",
+                    "Set Proper Resource Quotas"
+                ]
+            },
+            {
+                "type": "info",
+                "content": "Security Tip: Always scan your Docker images for vulnerabilities before pushing them to the registry."
+            },
+            {
+                "type": "code",
+                "language": "yaml",
+                "code": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: my-secure-app\nspec:\n  replicas: 3\n  template:\n    spec:\n      containers:\n      - name: app\n        image: my-registry/app:1.2.3\n        resources:\n          limits:\n            memory: \"256Mi\"\n            cpu: \"500m\""
+            }
+        ]
+    },
+    {
+        "id": "observability-prometheus-grafana",
+        "title": "Observability Stack: Prometheus, Grafana, and Micrometer",
+        "description": "Setting up comprehensive monitoring and observability for Spring Boot microservices with actionable dashboards and alerting strategies.",
+        "content": "Setting up comprehensive monitoring and observability for Spring Boot microservices.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "Why You Need Observability"
+            },
+            {
+                "type": "p",
+                "content": "You can't fix what you can't see. In a microservices environment, observability is key to understanding system health and troubleshooting issues quickly."
+            },
+            {
+                "type": "h3",
+                "content": "The Three Pillars"
+            },
+            {
+                "type": "ul",
+                "items": [
+                    "Metrics: Numerical data representing system state.",
+                    "Logging: Textual records of events.",
+                    "Tracing: The journey of a request across services."
+                ]
+            },
+            {
+                "type": "code",
+                "language": "yaml",
+                "code": "management:\n  endpoints:\n    web:\n      exposure:\n        include: prometheus, health, info\n  metrics:\n    export:\n      prometheus:\n        enabled: true"
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-09-20",
+        "readTime": "11 min read",
+        "tags": [
+            "Observability",
+            "Prometheus",
+            "Grafana",
+            "Micrometer",
+            "Monitoring",
+            "Spring Boot"
+        ],
+        "featured": false,
+        "seoTitle": "Complete Observability Stack with Prometheus, Grafana & Micrometer",
+        "seoDescription": "Build comprehensive monitoring for Spring Boot microservices using Prometheus, Grafana, and Micrometer. Actionable dashboards and alerting included.",
+        "seoKeywords": "prometheus grafana, micrometer, spring boot monitoring, observability, microservices monitoring, metrics"
+    },
+    {
+        "id": "hadoop-ecosystem-deep-dive",
+        "title": "Hadoop Ecosystem: A Deep Dive into Big Data Processing",
+        "description": "Understanding the core components of the Hadoop ecosystem and when to use each tool for your data processing needs in modern big data architectures.",
+        "content": "A deep dive into HDFS, YARN, and the broader Hadoop ecosystem.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "HDFS: The Foundation"
+            },
+            {
+                "type": "p",
+                "content": "Hadoop Distributed File System (HDFS) is designed to store massive datasets across hundreds or thousands of nodes."
+            },
+            {
+                "type": "h3",
+                "content": "Key Components"
+            },
+            {
+                "type": "ul",
+                "items": [
+                    "NameNode: Manages metadata and file structure.",
+                    "DataNode: Stores actual data blocks.",
+                    "Resource Manager: Allocates resources across the cluster."
+                ]
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-08-10",
+        "readTime": "14 min read",
+        "tags": [
+            "Hadoop",
+            "Big Data",
+            "HDFS",
+            "MapReduce",
+            "Hive",
+            "Spark"
+        ],
+        "featured": false,
+        "seoTitle": "Hadoop Ecosystem Deep Dive - Complete Big Data Processing Guide",
+        "seoDescription": "Comprehensive guide to Hadoop ecosystem components including HDFS, MapReduce, Hive, and Spark. Learn when to use each tool for big data processing.",
+        "seoKeywords": "hadoop ecosystem, big data, hdfs, mapreduce, apache hive, apache spark, data processing"
+    },
+    {
+        "id": "docker-container-security",
+        "title": "Docker and Container Security Best Practices",
+        "description": "Essential security practices for containerized applications including image scanning, runtime security, network policies, and secrets management.",
+        "content": "Securing your Docker containers from base image to runtime.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "Container Security Checklist"
+            },
+            {
+                "type": "ul",
+                "items": [
+                    "Use Minimal Base Images (Alpine, Distroless)",
+                    "Never Run as Root",
+                    "Limit Image Layers",
+                    "Use Secret Management for API Keys",
+                    "Scan Images in CI/CD"
+                ]
+            },
+            {
+                "type": "code",
+                "language": "dockerfile",
+                "code": "FROM openjdk:17-slim\n# Create non-root user\nRUN useradd -m myuser\nUSER myuser\nCOPY target/app.jar /app.jar\nENTRYPOINT [\"java\", \"-jar\", \"/app.jar\"]"
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-07-05",
+        "readTime": "9 min read",
+        "tags": [
+            "Docker",
+            "Security",
+            "Containers",
+            "DevSecOps",
+            "Kubernetes"
+        ],
+        "featured": false,
+        "seoTitle": "Docker Container Security Best Practices - Complete Guide",
+        "seoDescription": "Master container security with Docker best practices. Learn image scanning, runtime security, network policies, and secrets management.",
+        "seoKeywords": "docker security, container security, devsecops, kubernetes security, image scanning, runtime security"
+    },
+    {
+        "id": "microservices-event-driven-architecture",
+        "title": "Event-Driven Architecture: Building Resilient Microservices with CQRS and Event Sourcing",
+        "description": "A practical guide to implementing event-driven microservices using CQRS and Event Sourcing patterns with Apache Kafka, achieving eventual consistency and system resilience at scale.",
+        "content": "Mastering CQRS and Event Sourcing patterns for microservices.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "The Promise of Event-Driven Design"
+            },
+            {
+                "type": "p",
+                "content": "Event-driven architecture allows for highly decoupled services that communicate asynchronously, leading to better scalability and fault tolerance."
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-06-18",
+        "readTime": "18 min read",
+        "tags": [
+            "Microservices",
+            "Event-Driven",
+            "CQRS",
+            "Event Sourcing",
+            "Kafka",
+            "Architecture"
+        ],
+        "featured": false,
+        "seoTitle": "Event-Driven Microservices with CQRS and Event Sourcing",
+        "seoDescription": "Master event-driven architecture patterns including CQRS and Event Sourcing. Build resilient, scalable microservices with Apache Kafka.",
+        "seoKeywords": "event driven architecture, cqrs, event sourcing, microservices, kafka, distributed systems"
+    },
+    {
+        "id": "aws-cost-optimization-strategies",
+        "title": "AWS Cost Optimization: Strategies That Saved Us $50K Monthly",
+        "description": "Real-world cost optimization techniques for AWS infrastructure including reserved instances, spot instances, right-sizing, and architectural changes that delivered significant savings.",
+        "content": "Real-world AWS cost optimization strategies.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "Where the Money Goes"
+            },
+            {
+                "type": "p",
+                "content": "Unmanaged cloud costs can quickly spiral out of control. We implemented a multi-pronged approach to regain control of our AWS bill."
+            },
+            {
+                "type": "h3",
+                "content": "Strategy Breakdown"
+            },
+            {
+                "type": "ul",
+                "items": [
+                    "Right-sizing EC2 Instances",
+                    "Aggressive Spot Instance Usage for Batch Jobs",
+                    "Moving to Graviton2 Processors",
+                    "Optimizing Data Transfer Costs",
+                    "Using Reserved Instances for Predictable Loads"
+                ]
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-05-22",
+        "readTime": "13 min read",
+        "tags": [
+            "AWS",
+            "Cloud",
+            "Cost Optimization",
+            "DevOps",
+            "Infrastructure"
+        ],
+        "featured": false,
+        "seoTitle": "AWS Cost Optimization Strategies - Save $50K Monthly",
+        "seoDescription": "Proven AWS cost optimization strategies including reserved instances, spot instances, and architectural changes. Real-world techniques that saved $50K monthly.",
+        "seoKeywords": "aws cost optimization, cloud cost reduction, reserved instances, spot instances, aws savings"
+    },
+    {
+        "id": "redis-caching-strategies-spring-boot",
+        "title": "Redis Caching Strategies: From Basic to Advanced Patterns",
+        "description": "Comprehensive guide to implementing Redis caching in Spring Boot applications, covering cache-aside, write-through, and cache invalidation strategies with real-world performance benchmarks.",
+        "content": "Advanced caching patterns with Redis and Spring Boot.",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "Cache-Aside Pattern"
+            },
+            {
+                "type": "p",
+                "content": "The most common strategy where the application checks the cache first, and if not present, fetches from DB and updates the cache."
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-04-15",
+        "readTime": "14 min read",
+        "tags": [
+            "Redis",
+            "Caching",
+            "Spring Boot",
+            "Performance",
+            "Java"
+        ],
+        "featured": false,
+        "seoTitle": "Redis Caching Strategies for Spring Boot - Complete Guide",
+        "seoDescription": "Master Redis caching in Spring Boot with cache-aside, write-through, and invalidation strategies. Includes performance benchmarks and best practices.",
+        "seoKeywords": "redis caching, spring boot cache, cache strategies, redis spring boot, cache invalidation"
+    },
+    {
+        "id": "api-design-rest-best-practices",
+        "title": "REST API Design: Principles for Building Developer-Friendly APIs",
+        "description": "Best practices for designing intuitive, consistent, and maintainable REST APIs including versioning strategies, error handling, pagination, and documentation with OpenAPI.",
+        "content": "REST API Design: Principles for Building Developer-Friendly APIs",
+        "sections": [
+            {
+                "type": "h2",
+                "content": "Principles of Good API Design"
+            },
+            {
+                "type": "p",
+                "content": "A well-designed API is intuitive and consistent, reducing the learning curve for other developers."
+            }
+        ],
+        "author": "Jay Kumar Patil",
+        "date": "2024-03-08",
+        "readTime": "11 min read",
+        "tags": [
+            "REST API",
+            "API Design",
+            "OpenAPI",
+            "Spring Boot",
+            "Best Practices"
+        ],
+        "featured": false,
+        "seoTitle": "REST API Design Best Practices - Developer-Friendly APIs",
+        "seoDescription": "Learn REST API design principles for building intuitive APIs. Covers versioning, error handling, pagination, and OpenAPI documentation.",
+        "seoKeywords": "rest api design, api best practices, openapi, api versioning, api documentation"
+    }
+]

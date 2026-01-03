@@ -18,12 +18,28 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/projects/projects.component').then(m => m.ProjectsComponent)
   },
   {
+    path: 'projects/:id',
+    loadComponent: () => import('./pages/projects/project-detail.component').then(m => m.ProjectDetailComponent)
+  },
+  {
     path: 'skills',
     loadComponent: () => import('./pages/skills/skills.component').then(m => m.SkillsComponent)
   },
   {
-    path: 'articles',
-    loadComponent: () => import('./pages/articles/articles.component').then(m => m.ArticlesComponent)
+    path: 'blog',
+    loadComponent: () => import('./pages/blog/blog.component').then(m => m.BlogComponent)
+  },
+  {
+    path: 'blog/:id',
+    loadComponent: () => import('./pages/blog/blog-detail.component').then(m => m.BlogDetailComponent)
+  },
+  {
+    path: 'blogs',
+    redirectTo: 'blog'
+  },
+  {
+    path: 'blogs/:id',
+    redirectTo: 'blog/:id'
   },
   {
     path: 'contact',

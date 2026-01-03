@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { PortfolioDataService } from '../../services/portfolio-data.service';
 
 @Component({
   selector: 'app-footer',
@@ -27,40 +28,46 @@ import { RouterModule } from '@angular/router';
               <span class="brand-text">Jay Kumar Patil</span>
             </a>
             <p class="brand-tagline">
-              Principal AI/ML Engineer crafting intelligent systems that transform how businesses operate.
+              Senior Engineering Lead specializing in Cloud-native systems, DevOps automation, and scalable architectures.
             </p>
             
             <!-- Social Links -->
             <nav class="social-nav" aria-label="Social media links">
               <ul class="social-list" role="list">
-                <li>
-                  <a 
-                    href="https://github.com/jaykumarpatil" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="social-link"
-                    aria-label="GitHub Profile">
-                    <svg width="24" height="24" aria-hidden="true"><use href="#icon-github"></use></svg>
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://www.linkedin.com/in/jaykumarpatil3004/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="social-link"
-                    aria-label="LinkedIn Profile">
-                    <svg width="24" height="24" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="mailto:jaykumarpatil3004@gmail.com" 
-                    class="social-link"
-                    aria-label="Email Jay Kumar Patil">
-                    <svg width="24" height="24" aria-hidden="true"><use href="#icon-mail"></use></svg>
-                  </a>
-                </li>
+                @if (portfolioDataService.profile.socialLinks.github) {
+                  <li>
+                    <a 
+                      [href]="portfolioDataService.profile.socialLinks.github" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="social-link"
+                      aria-label="GitHub Profile">
+                      <svg width="24" height="24" aria-hidden="true"><use href="#icon-github"></use></svg>
+                    </a>
+                  </li>
+                }
+                @if (portfolioDataService.profile.socialLinks.linkedin) {
+                  <li>
+                    <a 
+                      [href]="portfolioDataService.profile.socialLinks.linkedin" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="social-link"
+                      aria-label="LinkedIn Profile">
+                      <svg width="24" height="24" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                    </a>
+                  </li>
+                }
+                @if (portfolioDataService.profile.email) {
+                  <li>
+                    <a 
+                      [href]="'mailto:' + portfolioDataService.profile.email" 
+                      class="social-link"
+                      aria-label="Email Jay Kumar Patil">
+                      <svg width="24" height="24" aria-hidden="true"><use href="#icon-mail"></use></svg>
+                    </a>
+                  </li>
+                }
               </ul>
             </nav>
           </div>
@@ -94,7 +101,7 @@ import { RouterModule } from '@angular/router';
           <div class="footer-cta">
             <h3 class="cta-title">Let's Build Something Amazing</h3>
             <p class="cta-text">
-              Looking for an AI engineer to transform your ideas into intelligent solutions?
+              Looking for a technical lead to design resilient, high-performance systems for your organization?
             </p>
             <a routerLink="/contact" class="btn btn-primary cta-button">
               <span>Get In Touch</span>
@@ -469,6 +476,7 @@ import { RouterModule } from '@angular/router';
   `]
 })
 export class FooterComponent {
+  constructor(public portfolioDataService: PortfolioDataService) { }
   currentYear = new Date().getFullYear();
   angularVersion = '21';
 
@@ -478,17 +486,18 @@ export class FooterComponent {
     { path: '/experience', label: 'Experience', icon: 'icon-experience' },
     { path: '/projects', label: 'Projects', icon: 'icon-projects' },
     { path: '/skills', label: 'Skills', icon: 'icon-skills' },
+    { path: '/blog', label: 'Blog', icon: 'icon-blog' },
     { path: '/contact', label: 'Contact', icon: 'icon-contact' }
   ];
 
   expertise = [
-    'Machine Learning',
-    'Deep Learning',
-    'NLP',
-    'Computer Vision',
-    'MLOps',
-    'Python',
-    'TensorFlow',
-    'PyTorch'
+    'Cloud Architecture',
+    'DevOps Automation',
+    'CI/CD Pipelines',
+    'Microservices',
+    'Kubernetes',
+    'AWS / Azure / GCP',
+    'Java / Spring Boot',
+    'System Design'
   ];
 }

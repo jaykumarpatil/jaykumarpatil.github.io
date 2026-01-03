@@ -29,20 +29,24 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
               <h3>Location</h3>
               <p>{{ portfolioDataService.profile.location }}</p>
             </div>
-            <div class="info-card">
-              <div class="info-icon">
-                <svg class="icon"><use href="#icon-linkedin"></use></svg>
+            @if (portfolioDataService.profile.socialLinks.linkedin) {
+              <div class="info-card">
+                <div class="info-icon">
+                  <svg class="icon"><use href="#icon-linkedin"></use></svg>
+                </div>
+                <h3>LinkedIn</h3>
+                <a [href]="portfolioDataService.profile.socialLinks.linkedin" target="_blank" rel="noopener">Connect on LinkedIn</a>
               </div>
-              <h3>LinkedIn</h3>
-              <a [href]="portfolioDataService.profile.socialLinks.linkedin" target="_blank" rel="noopener">Connect on LinkedIn</a>
-            </div>
-            <div class="info-card">
-              <div class="info-icon">
-                <svg class="icon"><use href="#icon-github"></use></svg>
+            }
+            @if (portfolioDataService.profile.socialLinks.github) {
+              <div class="info-card">
+                <div class="info-icon">
+                  <svg class="icon"><use href="#icon-github"></use></svg>
+                </div>
+                <h3>GitHub</h3>
+                <a [href]="portfolioDataService.profile.socialLinks.github" target="_blank" rel="noopener">View GitHub Profile</a>
               </div>
-              <h3>GitHub</h3>
-              <a [href]="portfolioDataService.profile.socialLinks.github" target="_blank" rel="noopener">View GitHub Profile</a>
-            </div>
+            }
           </div>
           <div class="cta-section animate-fade-in delay-300">
             <div class="cta-card">
@@ -204,5 +208,5 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   `]
 })
 export class ContactComponent {
-  constructor(public portfolioDataService: PortfolioDataService) {}
+  constructor(public portfolioDataService: PortfolioDataService) { }
 }

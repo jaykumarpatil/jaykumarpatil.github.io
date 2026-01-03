@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <section class="projects">
       <div class="container">
         <h1 class="page-title animate-fade-in">My <span class="text-gradient">Projects</span></h1>
         <p class="page-subtitle animate-fade-in">Delivering high-impact solutions across enterprise clients with cross-functional teams</p>
         <div class="projects-grid">
-          @for (project of portfolioDataService.projects; track project.name; let i = $index) {
+          @for (project of portfolioDataService.projects; track project.slug; let i = $index) {
             <div class="project-card animate-fade-in" [style.animation-delay.ms]="i * 100">
               <div class="project-header">
                 <h2>{{ project.name }}</h2>
@@ -27,11 +28,6 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
                 <span class="tech-label">Tech Stack:</span>
                 <span class="tech-value">{{ project.technology }}</span>
               </div>
-              <ul class="project-responsibilities">
-                @for (resp of project.responsibilities; track resp) {
-                  <li>{{ resp }}</li>
-                }
-              </ul>
               <div class="project-tags">
                 @for (tag of project.tags; track tag) {
                   <span class="tag">{{ tag }}</span>
@@ -39,6 +35,10 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
               </div>
               <div class="project-footer">
                 <span class="team-size">Team: {{ project.teamSize }} members</span>
+                <a [routerLink]="['/projects', project.slug]" class="btn-link">
+                  View Case Study
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
               </div>
             </div>
           }
@@ -176,6 +176,21 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       font-size: var(--text-sm);
       color: var(--color-muted);
     }
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      color: var(--color-success);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      transition: all var(--duration-quick) var(--ease-out);
+    }
+    .btn-link:hover {
+      gap: var(--space-sm);
+    }
+    .btn-link svg {
+      transition: transform var(--duration-quick) var(--ease-out);
+    }
     .animate-fade-in { 
       animation: fadeInUp 0.6s var(--ease-out) forwards;
       opacity: 0;
@@ -193,5 +208,5 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   `]
 })
 export class ProjectsComponent {
-  constructor(public portfolioDataService: PortfolioDataService) {}
+  constructor(public portfolioDataService: PortfolioDataService) { }
 }

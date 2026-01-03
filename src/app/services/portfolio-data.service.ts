@@ -28,6 +28,7 @@ export interface Education {
   location: string;
   year: string;
   grade: string;
+  url?: string;
 }
 
 export interface Experience {
@@ -36,10 +37,13 @@ export interface Experience {
   location: string;
   period: string;
   achievements: string[];
+  url?: string;
 }
 
 export interface Project {
+  slug: string;
   name: string;
+  role: string;
   client: string;
   organization: string;
   teamSize: number;
@@ -48,6 +52,11 @@ export interface Project {
   impactSummary: string;
   responsibilities: string[];
   tags: string[];
+  liveDemoUrl?: string;
+  githubUrl?: string;
+  challenges?: string[];
+  solutions?: string[];
+  outcomes?: string[];
 }
 
 export interface Skill {
@@ -70,6 +79,7 @@ export interface JourneyStep {
   period: string;
   title: string;
   description: string;
+  url?: string;
 }
 
 export interface Achievement {
@@ -111,14 +121,16 @@ export class PortfolioDataService {
       institution: 'Samrat Ashok Technological Institute',
       location: 'Vidisha, MP',
       year: '2015',
-      grade: 'CGPA 6.73/10'
+      grade: 'CGPA 6.73/10',
+      url: 'https://www.satiengg.in/'
     },
     {
       degree: 'Bachelor of Computer Application',
       institution: 'Yash Computers Technological College',
       location: 'Vidisha, MP',
       year: '2011',
-      grade: '64.7%'
+      grade: '64.7%',
+      url: 'https://www.mcu.ac.in'
     }
   ]);
 
@@ -132,7 +144,8 @@ export class PortfolioDataService {
         'Enhanced search performance by reducing response time from 0.8s to 0.2s, achieving a 75% improvement.',
         'Reduced data size by 68% through compression and optimization techniques.',
         'Established comprehensive monitoring using Micrometer and Grafana, reducing troubleshooting time by 40%.'
-      ]
+      ],
+      url: 'https://www.persistent.com/'
     },
     {
       title: 'Technical Lead',
@@ -144,7 +157,8 @@ export class PortfolioDataService {
         'Architected CI/CD framework for 10+ microservices, enhancing deployment efficiency by 45%.',
         'Led cloud-native microservices development with Spring Boot, Spring Cloud, and Kubernetes.',
         'Integrated Istio Service Mesh for advanced traffic management, security, and observability.'
-      ]
+      ],
+      url: 'https://www.hcltech.com/'
     },
     {
       title: 'Sr. Software Engineer',
@@ -156,7 +170,8 @@ export class PortfolioDataService {
         'Orchestrated large-scale deployments using Docker, Kafka, RabbitMQ, and Redis with zero downtime.',
         'Developed automated CI/CD pipelines with Jenkins, reducing deployment time by 50%.',
         'Implemented application monitoring using Micrometer and Grafana for proactive issue detection.'
-      ]
+      ],
+      url: 'https://www.rws.com/'
     },
     {
       title: 'Software Engineer',
@@ -167,7 +182,8 @@ export class PortfolioDataService {
         'Implemented RESTful APIs with Spring Data and HATEOAS.',
         'Optimized batch processing using Spring Batch, reducing execution time by 25%.',
         'Enhanced security features with Spring Security.'
-      ]
+      ],
+      url: 'https://lumiumdesign.com'
     },
     {
       title: 'Software Engineer',
@@ -184,7 +200,9 @@ export class PortfolioDataService {
 
   private projectsSignal = signal<Project[]>([
     {
+      slug: 'performance-optimization',
       name: 'Performance Optimization Initiative',
+      role: 'Senior Engineering Lead',
       client: 'Chubb & ThermoFisher',
       organization: 'Persistent Systems',
       teamSize: 12,
@@ -197,10 +215,27 @@ export class PortfolioDataService {
         'Migrated 22 applications from Spring Boot to Quarkus.',
         'Developed ETL processes with Kafka for MongoDB integration.'
       ],
-      tags: ['Performance', 'ETL', 'Kafka', 'MongoDB']
+      tags: ['Performance', 'ETL', 'Kafka', 'MongoDB'],
+      challenges: [
+        'High search latency affecting user experience.',
+        'Large data volumes causing storage and processing bottlenecks.',
+        'Legacy systems (Lucid work) difficult to maintain.'
+      ],
+      solutions: [
+        'Implemented Apache Airflow for robust workflow orchestration.',
+        'Introduced data compression and indexing strategies.',
+        'Modernized tech stack by migrating to Quarkus for better resource utilization.'
+      ],
+      outcomes: [
+        '75% reduction in search response time.',
+        '68% reduction in data footprint.',
+        'Improved system reliability and maintainability.'
+      ]
     },
     {
+      slug: 'microservices-transformation',
       name: 'Microservices Transformation Initiative',
+      role: 'Technical Lead',
       client: 'Cisco',
       organization: 'HCL Technologies',
       teamSize: 8,
@@ -213,10 +248,27 @@ export class PortfolioDataService {
         'Large-scale deployments using Kubernetes and Kafka.',
         'CI/CD pipeline automation with Jenkins.'
       ],
-      tags: ['Microservices', 'Kubernetes', 'CI/CD', 'Istio']
+      tags: ['Microservices', 'Kubernetes', 'CI/CD', 'Istio'],
+      challenges: [
+        'Monolithic architecture slowing down feature delivery.',
+        'Inconsistent security implementation across services.',
+        'Manual deployment processes prone to errors.'
+      ],
+      solutions: [
+        'Architected a microservices ecosystem using Spring Cloud.',
+        'Implemented Istio for service mesh capabilities (security, observability).',
+        'Automated the delivery lifecycle with Jenkins and K8s.'
+      ],
+      outcomes: [
+        '45% improvement in deployment frequency.',
+        'Scalable architecture handling millions of requests/sec.',
+        'Standardized security and observability.'
+      ]
     },
     {
+      slug: 'cicd-automation',
       name: 'CI/CD Pipeline Automation',
+      role: 'Sr. Software Engineer',
       client: 'Multi-client',
       organization: 'RWS Moravia',
       teamSize: 4,
@@ -228,10 +280,26 @@ export class PortfolioDataService {
         'Led large-scale deployments using Docker and Redis.',
         'Automated CI/CD pipelines with Jenkins.'
       ],
-      tags: ['DevOps', 'Docker', 'Jenkins', 'CI/CD']
+      tags: ['DevOps', 'Docker', 'Jenkins', 'CI/CD'],
+      challenges: [
+        'Long manual deployment cycles causing delays.',
+        'Downtime during releases affecting global availability.'
+      ],
+      solutions: [
+        'Containerized applications using Docker.',
+        'Build blue-green and canary deployment strategies.',
+        'Fully automated CI/CD pipelines.'
+      ],
+      outcomes: [
+        '50% reduction in deployment time.',
+        'Zero-downtime releases achieved.',
+        'Increased developer productivity.'
+      ]
     },
     {
+      slug: 'avid-secure',
       name: 'Avid Secure – Cloud Security',
+      role: 'Software Engineer',
       client: 'www.avidsecure.io',
       organization: 'Lumium',
       teamSize: 2,
@@ -246,7 +314,9 @@ export class PortfolioDataService {
       tags: ['Security', 'AWS', 'Spring Batch', 'REST']
     },
     {
+      slug: 'cloud-ocular',
       name: 'Cloud Ocular V5.4',
+      role: 'Software Engineer',
       client: 'ITC Infotech',
       organization: 'ITC Infotech',
       teamSize: 15,
@@ -348,22 +418,26 @@ export class PortfolioDataService {
     {
       period: '2023–Present',
       title: 'Senior Engineering Lead',
-      description: 'Persistent – driving performance optimization, data platform, and observability.'
+      description: 'Persistent – driving performance optimization, data platform, and observability.',
+      url: 'https://www.persistent.com/'
     },
     {
       period: '2021–2023',
       title: 'Technical Lead',
-      description: 'HCL – led microservices & CI/CD for large-scale Cisco projects.'
+      description: 'HCL – led microservices & CI/CD for large-scale Cisco projects.',
+      url: 'https://www.hcltech.com/'
     },
     {
       period: '2018–2021',
       title: 'Sr. Software Engineer',
-      description: 'RWS – optimized e-commerce systems and containerized deployments.'
+      description: 'RWS – optimized e-commerce systems and containerized deployments.',
+      url: 'https://www.rws.com/'
     },
     {
       period: '2014–2017',
       title: 'Software Engineer',
-      description: 'Ad Hoc Services, then Lumium – built REST APIs, batch processing, and security.'
+      description: 'Ad Hoc Services, then Lumium – built REST APIs, batch processing, and security.',
+      url: 'https://www.lumium.com/'
     }
   ]);
 

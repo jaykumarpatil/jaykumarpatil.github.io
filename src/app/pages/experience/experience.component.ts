@@ -16,7 +16,16 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
             <div class="experience-card animate-fade-in" [style.animation-delay.ms]="i * 100">
               <div class="exp-header">
                 <div class="exp-company">
-                  <h2>{{ exp.company }}</h2>
+                  @if (exp.url) {
+                    <h2>
+                      <a [href]="exp.url" target="_blank" rel="noopener noreferrer" class="external-link">
+                        {{ exp.company }}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                      </a>
+                    </h2>
+                  } @else {
+                    <h2>{{ exp.company }}</h2>
+                  }
                   <span class="exp-location">{{ exp.location }}</span>
                 </div>
                 <div class="exp-meta">
@@ -85,6 +94,32 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       gap: var(--space-xl);
       margin-bottom: var(--space-3xl);
     }
+
+    .external-link {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--duration-quick) var(--ease-out);
+    }
+
+    .external-link:hover {
+      color: var(--color-success);
+    }
+
+    .link-icon {
+      opacity: 0.5;
+      transform: translate(-1px, 1px);
+      transition: all var(--duration-quick) var(--ease-out);
+    }
+
+    .external-link:hover .link-icon {
+      opacity: 1;
+      transform: translate(0, 0);
+      color: var(--color-success);
+    }
+
     .experience-card { 
       background: var(--bg-glass);
       border: var(--border-subtle);
@@ -206,5 +241,5 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   `]
 })
 export class ExperienceComponent {
-  constructor(public portfolioDataService: PortfolioDataService) {}
+  constructor(public portfolioDataService: PortfolioDataService) { }
 }

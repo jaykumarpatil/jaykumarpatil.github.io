@@ -109,14 +109,14 @@ import { SeoService } from '../../services/seo.service';
             <!-- Value Propositions as Cards -->
             <div class="value-grid" role="list">
               @for (bullet of portfolioDataService.valueBullets; track bullet.text) {
-                <article class="value-card" role="listitem">
+                <div class="value-card" role="listitem">
                   <div class="value-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><use [attr.href]="bullet.icon"></use></svg>
                   </div>
                   <div class="value-body">
                     <p>{{ bullet.text }}</p>
                   </div>
-                </article>
+                </div>
               }
             </div>
             
@@ -149,9 +149,9 @@ import { SeoService } from '../../services/seo.service';
         </header>
         
         <div class="projects-grid" role="list">
-          @for (project of portfolioDataService.projects.slice(0, 4); track project.name; let i = $index) {
+          @for (project of portfolioDataService.projects.slice(0, 4); track project.slug; let i = $index) {
             <a 
-              routerLink="/projects"
+              [routerLink]="['/projects', project.slug]"
               class="project-card card-interactive animate-fade-in-up" 
               role="listitem"
               [style.animation-delay.ms]="100 + i * 80"
@@ -189,7 +189,7 @@ import { SeoService } from '../../services/seo.service';
                 </div>
               </div>
               <div class="project-hover-cta" aria-hidden="true">
-                <span class="cta-text">View Details</span>
+                <span class="cta-text">View Case Study</span>
               </div>
             </a>
           }
@@ -772,7 +772,7 @@ export class HomeComponent implements OnInit {
   constructor(
     public portfolioDataService: PortfolioDataService,
     private seoService: SeoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.seoService.setPageSeo({
@@ -783,7 +783,7 @@ export class HomeComponent implements OnInit {
       jsonLd: this.seoService.getPersonSchema()
     });
   }
-  
+
   getTopSkills(): string[] {
     const allSkills: string[] = [];
     this.portfolioDataService.skills.forEach(category => {

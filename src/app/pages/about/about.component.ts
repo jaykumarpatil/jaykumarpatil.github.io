@@ -50,7 +50,16 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
                   <div class="edu-period">{{ edu.year }}</div>
                   <div class="edu-details">
                     <h3>{{ edu.degree }}</h3>
-                    <p class="edu-institution">{{ edu.institution }}</p>
+                    @if (edu.url) {
+                      <p class="edu-institution">
+                        <a [href]="edu.url" target="_blank" rel="noopener noreferrer" class="external-link">
+                          {{ edu.institution }}
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </a>
+                      </p>
+                    } @else {
+                      <p class="edu-institution">{{ edu.institution }}</p>
+                    }
                     <p class="edu-location">{{ edu.location }}</p>
                     <p class="edu-grade">{{ edu.grade }}</p>
                   </div>
@@ -67,7 +76,16 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                   <span class="timeline-period">{{ step.period }}</span>
-                  <h3>{{ step.title }}</h3>
+                  @if (step.url) {
+                    <h3>
+                      <a [href]="step.url" target="_blank" rel="noopener noreferrer" class="external-link">
+                        {{ step.title }}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                      </a>
+                    </h3>
+                  } @else {
+                    <h3>{{ step.title }}</h3>
+                  }
                   <p>{{ step.description }}</p>
                 </div>
               </div>
@@ -150,6 +168,31 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
       font-size: var(--text-sm);
       color: var(--color-muted);
       margin-bottom: var(--space-xs);
+    }
+
+    .external-link {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all var(--duration-quick) var(--ease-out);
+    }
+
+    .external-link:hover {
+      color: var(--color-success);
+    }
+
+    .link-icon {
+      opacity: 0.5;
+      transform: translate(-1px, 1px);
+      transition: all var(--duration-quick) var(--ease-out);
+    }
+
+    .external-link:hover .link-icon {
+      opacity: 1;
+      transform: translate(0, 0);
+      color: var(--color-success);
     }
     .info-value { 
       font-size: var(--text-lg);
@@ -361,5 +404,5 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   `]
 })
 export class AboutComponent {
-  constructor(public portfolioDataService: PortfolioDataService) {}
+  constructor(public portfolioDataService: PortfolioDataService) { }
 }

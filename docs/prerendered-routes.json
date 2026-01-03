@@ -2,7 +2,7 @@
   "routes": {
     "/": {},
     "/about": {},
-    "/articles": {},
+    "/blog": {},
     "/contact": {},
     "/experience": {},
     "/projects": {},
