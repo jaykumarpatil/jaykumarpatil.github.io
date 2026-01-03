@@ -45,7 +45,7 @@ import { RouterModule } from '@angular/router';
                 </li>
                 <li>
                   <a 
-                    href="https://www.linkedin.com/in/jaykumarpatil/" 
+                    href="https://www.linkedin.com/in/jaykumarpatil3004/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="social-link"
